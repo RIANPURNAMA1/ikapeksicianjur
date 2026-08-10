@@ -1,0 +1,14 @@
+import { Alumni } from "@/types/alumni";
+
+export const alumniList: Alumni[] = [
+  { id: 1, name: "Asep Kurniawan", photo: "https://i.pravatar.cc/300?img=12", program: "Pemagangan Jepang - Manufaktur", year: "2018", field: "Manufaktur", district: "Cianjur Kota", company: "Aichi Seiki Co.", bio: "Kini membuka bengkel las mandiri di Cianjur Kota setelah 3 tahun magang di Aichi." },
+  { id: 2, name: "Rina Marlina", photo: "https://i.pravatar.cc/300?img=32", program: "Pemagangan Jepang - Pertanian", year: "2019", field: "Pertanian", district: "Cilaku", company: "Nagano Agri Farm", bio: "Mengembangkan pertanian hidroponik di Cilaku dengan teknik yang dipelajari di Nagano." },
+  { id: 3, name: "Deden Supriatna", photo: "https://i.pravatar.cc/300?img=51", program: "Pemagangan Jepang - Konstruksi", year: "2017", field: "Konstruksi", district: "Warungkondang", company: "Osaka Kensetsu", bio: "Aktif sebagai instruktur pelatihan konstruksi bagi calon peserta magang baru." },
+  { id: 4, name: "Siti Nur Aisyah", photo: "https://i.pravatar.cc/300?img=45", program: "Pemagangan Jepang - Perikanan", year: "2020", field: "Perikanan", district: "Cugenang", company: "Hokkaido Suisan", bio: "Merintis usaha pengolahan hasil laut skala rumahan di Cugenang." },
+  { id: 5, name: "Ahmad Fauzi", photo: "https://i.pravatar.cc/300?img=14", program: "Pemagangan Jepang - Manufaktur", year: "2016", field: "Manufaktur", district: "Pacet", company: "Toyota Group Supplier", bio: "Ketua bidang kemitraan usaha IKAPEKSI Cianjur periode saat ini." },
+  { id: 6, name: "Yuli Yuliawati", photo: "https://i.pravatar.cc/300?img=47", program: "Pemagangan Jepang - Tekstil", year: "2021", field: "Tekstil", district: "Sukaresmi", company: "Gifu Textile Corp.", bio: "Membuka konveksi kecil yang kini mempekerjakan 6 warga sekitar." },
+  { id: 7, name: "Rudi Hartono", photo: "https://i.pravatar.cc/300?img=15", program: "Pemagangan Jepang - Konstruksi", year: "2019", field: "Konstruksi", district: "Cikalongkulon", company: "Chiba Construction", bio: "Bekerja sebagai supervisor proyek di perusahaan konstruksi nasional." },
+  { id: 8, name: "Neng Sri Wahyuni", photo: "https://i.pravatar.cc/300?img=48", program: "Pemagangan Jepang - Pertanian", year: "2018", field: "Pertanian", district: "Karangtengah", company: "Ibaraki Farm Fresh", bio: "Aktif mendampingi kelompok tani muda di Karangtengah." },
+  { id: 9, name: "Wawan Setiawan", photo: "https://i.pravatar.cc/300?img=18", program: "Pemagangan Jepang - Manufaktur", year: "2022", field: "Manufaktur", district: "Ciranjang", company: "Shizuoka Precision", bio: "Alumni termuda yang kini menjadi pengurus divisi bahasa Jepang." },
+  { id: 10, name: "Lilis Suryani", photo: "https://i.pravatar.cc/300?img=44", program: "Pemagangan Jepang - Perikanan", year: "2017", field: "Perikanan", district: "Sukanagara", company: "Miyagi Suisangyo", bio: "Membina UMKM olahan ikan bersama lima alumni lain di Sukanagara." },
+];

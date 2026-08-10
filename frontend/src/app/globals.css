@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAF7F5;
+  color: #111111;
+  overflow-x: hidden;
+}
+
+@layer components {
+  /* "Visa stamp" eyebrow label — signature motif referencing overseas placement documents */
+  .stamp-label {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary-tint px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-primary;
+  }
+
+  /* Folded-corner card treatment — a document motif used across content cards */
+  .doc-card {
+    @apply relative bg-white border border-paper-line shadow-card;
+    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+  }
+  .doc-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(135deg, transparent 50%, #FAF7F5 50%);
+  }
+
+  .section-heading-underline {
+    @apply relative inline-block;
+  }
+  .section-heading-underline::after {
+    content: "";
+    @apply absolute -bottom-2 left-0 h-[3px] w-14 bg-primary;
+  }
+
+  .btn-focus {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-paper-warm;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,112 @@
+import { Program } from "@/types/program";
+
+export const programs: Program[] = [
+  {
+    id: 1,
+    slug: "pendataan-alumni",
+    title: "Pendataan Alumni",
+    category: "Basis Data",
+    description: "Membangun database alumni pemagangan Jepang & Korea asal Cianjur.",
+    longDescription:
+      "Program ini mendata seluruh alumni pemagangan kerja luar negeri asal Kabupaten Cianjur agar jejaring silaturahmi dan potensi kerja sama antar-alumni dapat terpetakan dengan baik, mulai dari nama, bidang kerja, tahun keberangkatan, hingga lokasi kecamatan asal.",
+    duration: "Berkelanjutan",
+    location: "Kabupaten Cianjur",
+    benefits: [
+      "Alumni tercatat dalam direktori resmi",
+      "Memudahkan koordinasi kegiatan",
+      "Membuka peluang jejaring usaha antar-alumni",
+    ],
+    icon: "database",
+  },
+  {
+    id: 2,
+    slug: "pelatihan-bahasa-jepang",
+    title: "Pelatihan Bahasa Jepang",
+    category: "Pelatihan",
+    description: "Kelas persiapan bahasa Jepang untuk calon peserta magang baru.",
+    longDescription:
+      "Kelas rutin bahasa Jepang dasar hingga menengah yang dibina langsung oleh alumni bersertifikat, disiapkan untuk warga Cianjur yang berminat mengikuti program pemagangan kerja ke Jepang.",
+    duration: "3-6 bulan per angkatan",
+    location: "Sekretariat IKAPEKSI Cianjur",
+    benefits: ["Materi disusun oleh alumni berpengalaman", "Simulasi wawancara", "Biaya terjangkau bagi warga Cianjur"],
+    icon: "language",
+  },
+  {
+    id: 3,
+    slug: "pendampingan-wirausaha",
+    title: "Pendampingan Wirausaha Alumni",
+    category: "Ekonomi",
+    description: "Pendampingan usaha bagi alumni yang telah kembali ke Cianjur.",
+    longDescription:
+      "Membantu alumni yang telah menyelesaikan masa pemagangan untuk merintis usaha mandiri di kampung halaman, melalui pelatihan manajemen sederhana, akses permodalan, dan mentoring dari alumni yang sudah lebih dulu berwirausaha.",
+    duration: "12 bulan pendampingan",
+    location: "Wilayah Kabupaten Cianjur",
+    benefits: ["Mentoring bisnis dari sesama alumni", "Akses informasi permodalan", "Jejaring pemasaran antar-alumni"],
+    icon: "briefcase",
+  },
+  {
+    id: 4,
+    slug: "job-matching-alumni",
+    title: "Job Matching Alumni",
+    category: "Ketenagakerjaan",
+    description: "Menghubungkan alumni dengan perusahaan mitra di dalam negeri.",
+    longDescription:
+      "IKAPEKSI menjembatani alumni yang telah pulang ke Indonesia dengan perusahaan-perusahaan mitra yang membutuhkan tenaga kerja terampil dengan pengalaman kerja di luar negeri, khususnya di sektor manufaktur dan pertanian.",
+    duration: "Berkelanjutan",
+    location: "Cianjur & sekitarnya",
+    benefits: ["Rekomendasi kerja dari organisasi", "Prioritas untuk alumni aktif", "Update lowongan berkala"],
+    icon: "handshake",
+  },
+  {
+    id: 5,
+    slug: "sosialisasi-program-magang",
+    title: "Sosialisasi Program Magang",
+    category: "Edukasi",
+    description: "Edukasi masyarakat tentang prosedur pemagangan kerja yang aman.",
+    longDescription:
+      "Kegiatan sosialisasi ke desa-desa di Kabupaten Cianjur untuk mengedukasi masyarakat mengenai jalur resmi dan aman dalam mengikuti program pemagangan kerja ke luar negeri, guna mencegah praktik calo dan penipuan.",
+    duration: "Rutin bulanan",
+    location: "Desa-desa se-Kabupaten Cianjur",
+    benefits: ["Informasi jalur resmi pemagangan", "Mencegah korban penipuan", "Narasumber langsung dari alumni"],
+    icon: "megaphone",
+  },
+  {
+    id: 6,
+    slug: "beasiswa-anak-alumni",
+    title: "Beasiswa Anak Alumni",
+    category: "Pendidikan",
+    description: "Bantuan pendidikan bagi putra-putri anggota aktif IKAPEKSI.",
+    longDescription:
+      "Program bantuan biaya pendidikan bagi anak-anak anggota aktif IKAPEKSI Cianjur yang berprestasi, sebagai bentuk kepedulian organisasi terhadap keberlangsungan pendidikan generasi penerus alumni.",
+    duration: "Tahunan",
+    location: "Kabupaten Cianjur",
+    benefits: ["Bantuan biaya sekolah", "Diprioritaskan untuk anggota aktif", "Seleksi berdasarkan prestasi"],
+    icon: "graduation-cap",
+  },
+  {
+    id: 7,
+    slug: "kerjasama-lpk",
+    title: "Kerja Sama dengan LPK",
+    category: "Kemitraan",
+    description: "Kolaborasi dengan lembaga pelatihan kerja untuk kurikulum pra-magang.",
+    longDescription:
+      "Menjalin kerja sama dengan lembaga pelatihan kerja di Cianjur untuk menyusun kurikulum pra-keberangkatan yang relevan dengan kebutuhan industri di negara penempatan, berdasarkan pengalaman nyata alumni.",
+    duration: "Berkelanjutan",
+    location: "Cianjur",
+    benefits: ["Kurikulum berbasis pengalaman lapangan", "Alumni sebagai pengajar tamu", "Standar pelatihan lebih relevan"],
+    icon: "building",
+  },
+  {
+    id: 8,
+    slug: "bakti-sosial-alumni",
+    title: "Bakti Sosial Alumni",
+    category: "Sosial",
+    description: "Kegiatan sosial rutin alumni untuk masyarakat Cianjur.",
+    longDescription:
+      "Kegiatan bakti sosial yang digagas dan didanai bersama oleh alumni IKAPEKSI, mulai dari bantuan sembako, khitanan massal, hingga renovasi fasilitas umum di wilayah Kabupaten Cianjur.",
+    duration: "Rutin per triwulan",
+    location: "Bergilir se-Kabupaten Cianjur",
+    benefits: ["Mempererat solidaritas alumni", "Manfaat langsung bagi masyarakat", "Meningkatkan citra organisasi"],
+    icon: "heart-handshake",
+  },
+];
