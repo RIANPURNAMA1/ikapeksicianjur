@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  background-color: #FAF7F5;
+  background-color: #111111;
   color: #111111;
   overflow-x: hidden;
 }
@@ -47,6 +47,27 @@ body {
 
   .btn-focus {
     @apply outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-paper-warm;
+  }
+
+  /* Shiny sweep effect for CTA buttons */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -70%;
+    height: 100%;
+    width: 45%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+    pointer-events: none;
+  }
+  .btn-shine:hover::before {
+    left: 140%;
   }
 }
 

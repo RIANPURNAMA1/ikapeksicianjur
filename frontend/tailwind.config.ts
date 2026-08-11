@@ -29,6 +29,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-jakarta)", "system-ui", "sans-serif"],
+        mona: ["var(--font-mona)", "system-ui", "sans-serif"],
       },
       screens: {
         xs: "390px",

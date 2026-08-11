@@ -2,34 +2,136 @@ import Image from "next/image";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import Reveal from "@/components/ui/Reveal";
 import { SITE } from "@/lib/constants";
+import { ReactNode } from "react";
+
+const CheckIcon = (): ReactNode => (
+  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+    <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+      <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+    </svg>
+  </div>
+);
 
 export default function AboutPreview() {
   return (
-    <section className="py-20">
-      <Container className="grid gap-12 md:grid-cols-2 md:items-center">
-        <div className="doc-card relative aspect-[4/3] w-full overflow-hidden">
-          <Image
-            src="https://picsum.photos/seed/ikapeksi-about/800/600"
-            alt="Kegiatan alumni IKAPEKSI Cianjur"
-            fill
-            sizes="(min-width: 768px) 500px, 90vw"
-            className="object-cover"
-          />
-        </div>
-        <div>
-          <SectionHeading eyebrow="Tentang Kami" title="Rumah Bagi Alumni Pemagangan Kerja Cianjur" />
-          <p className="mt-5 text-base leading-relaxed text-ink-muted">
-            {SITE.fullName} berdiri sejak tahun {SITE.foundedYear} sebagai wadah silaturahmi para alumni
-            pemagangan kerja luar negeri dari seluruh kecamatan di Kabupaten Cianjur. Kami percaya, pengalaman
-            di negeri orang akan lebih bermakna bila dibagikan kembali untuk kampung halaman.
-          </p>
-          <div className="mt-8">
-            <Button href="/tentang" variant="outline">
-              Selengkapnya
-            </Button>
+    <section id="tentang" className="relative scroll-mt-16 overflow-hidden bg-gradient-to-b from-[#000000] via-[#0c0506] to-[#120708] py-20 text-white">
+      <div className="absolute inset-0 bg-stamp-lines opacity-10 mix-blend-overlay" />
+      <div className="pointer-events-none absolute left-0 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
+
+      <Container className="relative z-10 grid gap-12 lg:grid-cols-2 lg:items-start">
+
+        {/* Bento Grid (4 Gambar) */}
+        <Reveal delay={100}>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-4">
+              <div className="group relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-zinc-800">
+                <Image
+                  src="https://i.pinimg.com/736x/42/54/0e/42540e6878e714a67411afcd9595d91e.jpg"
+                  alt="Kegiatan 1"
+                  fill
+                  sizes="(min-width: 768px) 250px, 45vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+              </div>
+              <div className="group relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-800">
+                <Image
+                  src="https://i.pinimg.com/736x/56/b0/ad/56b0adb9b1f74af81806903b1a046fc0.jpg"
+                  alt="Kegiatan 2"
+                  fill
+                  sizes="(min-width: 768px) 250px, 45vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-800">
+                <Image
+                  src="https://i.pinimg.com/736x/5e/90/49/5e9049487ad487349a7b0eb83b922b3b.jpg"
+                  alt="Kegiatan 3"
+                  fill
+                  sizes="(min-width: 768px) 250px, 45vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="group relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-zinc-800">
+                <Image
+                  src="https://i.pinimg.com/736x/67/a9/72/67a972176810f9ec4f754d0b1b1fb86e.jpg"
+                  alt="Kegiatan 4"
+                  fill
+                  sizes="(min-width: 768px) 250px, 45vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+              </div>
+            </div>
           </div>
+        </Reveal>
+
+        {/* Kolom Teks */}
+        <div className="flex flex-col justify-center">
+          <Reveal delay={150}>
+            <SectionHeading
+              eyebrow="Tentang Kami"
+              title="Merajut Alumni, Membangun Cianjur"
+              className="[&_h2]:font-mona [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_span]:!bg-white [&_span]:!text-primary"
+            />
+          </Reveal>
+          <Reveal delay={250}>
+            <p className="mt-5 text-base leading-relaxed text-white/70">
+              Sejak {SITE.foundedYear}, {SITE.fullName} menjadi rumah bersama alumni
+              pemagangan kerja luar negeri asal Kabupaten Cianjur. Bukan sekadar
+              silaturahmi — kami merajut pengalaman lintas kecamatan menjadi satu
+              kekuatan untuk memajukan kampung halaman.
+            </p>
+          </Reveal>
+
+          <div className="mt-8 space-y-3">
+            <Reveal delay={350}>
+              <p className="mb-4 font-medium text-white">Tepat untuk Anda yang:</p>
+            </Reveal>
+
+            <Reveal delay={400}>
+              <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
+                <CheckIcon />
+                <p className="text-sm text-gray-300">
+                  <strong className="text-white">Alumni yang Kembali</strong> — pulang membawa
+                  pengalaman baru dan ingin terus terhubung dengan jaringan lintas kecamatan.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={500}>
+              <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
+                <CheckIcon />
+                <p className="text-sm text-gray-300">
+                  <strong className="text-white">Pencari Peluang Magang</strong> — ingin berangkat
+                  lewat jalur resmi dan aman, terbebas dari praktik calo yang merugikan.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={600}>
+              <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
+                <CheckIcon />
+                <p className="text-sm text-gray-300">
+                  <strong className="text-white">Calon Wirausaha</strong> — berani memulai usaha
+                  dengan dukungan pendampingan dan job matching sesama alumni.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={700}>
+            <div className="mt-10">
+              <Button href="/tentang" variant="outline">
+                Kenali IKAPEKSI
+              </Button>
+            </div>
+          </Reveal>
         </div>
+
       </Container>
     </section>
   );

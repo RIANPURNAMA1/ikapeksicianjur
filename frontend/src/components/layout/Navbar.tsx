@@ -16,16 +16,19 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full border-b transition-all duration-300",
-        scrolled
-          ? "border-paper-line bg-white/95 backdrop-blur shadow-sm"
-          : "border-transparent bg-ink"
-      )}
-    >
+    <>
+      <header
+        className={cn(
+          "sticky top-0 z-50 w-full border-b transition-all duration-300",
+          scrolled
+            ? "border-paper-line bg-white/95 backdrop-blur shadow-sm"
+            : pathname === "/"
+              ? "border-transparent bg-transparent"
+              : "border-transparent bg-ink"
+        )}
+      >
       <Container>
-        <div className="flex h-16 items-center justify-between gap-6">
+        <div className="flex h-16 items-center justify-between gap-4 xl:gap-6">
           {/* =========================
               LOGO / BRAND
           ========================== */}
@@ -40,54 +43,66 @@ export default function Navbar() {
               width={480}
               height={156}
               className={cn(
-                "h-10 w-auto object-contain transition-all duration-300",
+                "h-9 w-auto object-contain transition-all duration-300 xl:h-10",
                 !scrolled && "brightness-0 invert"
               )}
             />
-            {/* Brand */}
-            <div className={cn("leading-tight", scrolled ? "text-ink" : "text-white")}>
-              <div className="text-base font-bold">{SITE.name}</div>
-              {SITE.tagline && (
-                <div className={cn("text-[10px] font-medium uppercase tracking-wider", scrolled ? "text-ink/50" : "text-white/50")}>
-                  {SITE.tagline}
-                </div>
-              )}
-            </div>
           </Link>
 
           {/* =========================
               DESKTOP NAVIGATION
           ========================== */}
-          <nav className="hidden h-full items-center gap-6 lg:flex">
+          <nav className="hidden h-full items-center gap-4 lg:flex xl:gap-6">
             {NAV_LINKS.map((link) => {
               const active =
                 pathname === link.href ||
                 (link.href !== "/" && pathname.startsWith(`${link.href}/`));
 
-              return (
-                <Link
+              const isTentang = link.href === "/tentang";
+
+              return isTentang ? (
+                <a
                   key={link.href}
-                  href={link.href}
+                  href="#tentang"
                   className={cn(
-                    "relative h-full flex items-center text-sm font-medium transition-colors duration-200",
+                    "group relative h-full flex items-center text-[13px] font-medium transition-colors duration-200 xl:text-sm",
+                    scrolled
+                      ? "text-ink/60 group-hover:text-primary"
+                      : "text-white/70 group-hover:text-white"
+                  )}
+                >
+                  {link.label}
+                  <span
+                    className={cn(
+                      "absolute bottom-0 left-0 right-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 ease-out",
+                      "scale-x-0 group-hover:scale-x-100"
+                    )}
+                  />
+                </a>
+              ) : (
+                <span
+                  key={link.href}
+                  className={cn(
+                    "group relative h-full flex items-center text-[13px] font-medium transition-colors duration-200 xl:text-sm",
                     active
                       ? scrolled
                         ? "text-primary"
                         : "text-white"
                       : scrolled
-                        ? "text-ink/60 hover:text-primary"
-                        : "text-white/70 hover:text-white"
+                        ? "text-ink/60 group-hover:text-primary"
+                        : "text-white/70 group-hover:text-white"
                   )}
                 >
                   {link.label}
-                  {/* Active underline */}
                   <span
                     className={cn(
-                      "absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-primary transition-all duration-300",
-                      active ? "scale-x-100" : "scale-x-0"
+                      "absolute bottom-0 left-0 right-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 ease-out",
+                      active
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
                     )}
                   />
-                </Link>
+                </span>
               );
             })}
           </nav>
@@ -96,14 +111,13 @@ export default function Navbar() {
               RIGHT ACTION
           ========================== */}
           <div className="hidden items-center gap-3 lg:flex">
-            <Link
-              href="/kontak"
+            <span
               className={cn(
-                "btn-focus inline-flex items-center justify-center gap-2",
-                "rounded-lg px-5 py-2.5",
-                "bg-primary text-sm font-semibold text-white",
-                "transition-all duration-200",
-                "hover:bg-primary-dark hover:shadow-sm"
+                "btn-shine btn-focus inline-flex items-center justify-center gap-2",
+                "rounded-full px-4 py-2",
+                "bg-primary text-[13px] font-semibold text-white",
+                "transition-all duration-200 xl:px-5 xl:py-2.5 xl:text-sm",
+                "hover:bg-primary-dark hover:shadow-md"
               )}
             >
               <svg
@@ -120,7 +134,7 @@ export default function Navbar() {
                 />
               </svg>
               Gabung Alumni
-            </Link>
+            </span>
           </div>
 
           {/* =========================
@@ -154,12 +168,13 @@ export default function Navbar() {
           </button>
         </div>
       </Container>
+      </header>
 
       {/* Mobile Navigation */}
       <MobileMenu
         isOpen={isOpen}
         onClose={close}
       />
-    </header>
+    </>
   );
 }

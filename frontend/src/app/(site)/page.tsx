@@ -9,25 +9,34 @@ import ActivityPreview from "@/components/home/ActivityPreview";
 import NewsPreview from "@/components/home/NewsPreview";
 import GalleryPreview from "@/components/home/GalleryPreview";
 import Testimonial from "@/components/home/Testimonial";
+import Reveal from "@/components/ui/Reveal";
 import JoinSection from "@/components/home/JoinSection";
-import ContactPreview from "@/components/home/ContactPreview";
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <Statistics />
-      <AboutPreview />
-      <WhyIkapeksi />
-      <VisionMissionPreview />
-      <ProgramPreview />
+      <Reveal>
+        <Hero />
+      </Reveal>
+      {/* <Statistics /> */}
+      <Reveal>
+        <AboutPreview />
+      </Reveal>
+      <Reveal>
+        <WhyIkapeksi />
+      </Reveal>
+      <Reveal>
+        <VisionMissionPreview />
+      </Reveal>
+      <Reveal>
+        <JoinSection />
+      </Reveal>
+      {/* <ProgramPreview />
       <AlumniPreview />
-      <ActivityPreview />
-      <NewsPreview />
+      <ActivityPreview /> */}
+      {/* <NewsPreview />
       <GalleryPreview />
-      <Testimonial />
-      <JoinSection />
-      <ContactPreview />
+      <Testimonial /> */}
     </>
   );
 }

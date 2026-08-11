@@ -6,14 +6,16 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   options: SelectOption[];
   placeholder?: string;
+  variant?: "light" | "dark";
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ label, options, placeholder, className, id, ...props }, ref) => {
+  ({ label, options, placeholder, variant = "light", className, id, ...props }, ref) => {
+    const dark = variant === "dark";
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label htmlFor={id} className="text-sm font-semibold text-ink">
+          <label htmlFor={id} className={cn("text-sm font-semibold", dark ? "text-white" : "text-ink")}>
             {label}
           </label>
         )}
@@ -21,7 +23,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           id={id}
           className={cn(
-            "btn-focus w-full rounded-md border border-paper-line bg-white px-4 py-2.5 text-sm text-ink focus:border-primary",
+            "btn-focus w-full rounded-md border px-4 py-2.5 text-sm focus:border-primary",
+            dark
+              ? "border-white/15 bg-white/10 text-white [&>option]:text-ink"
+              : "border-paper-line bg-white text-ink",
             className
           )}
           {...props}
