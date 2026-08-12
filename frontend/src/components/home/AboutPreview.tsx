@@ -16,7 +16,7 @@ const CheckIcon = (): ReactNode => (
 
 export default function AboutPreview() {
   return (
-    <section id="tentang" className="relative scroll-mt-16 overflow-hidden bg-gradient-to-b from-[#000000] via-[#0c0506] to-[#120708] py-20 text-white">
+    <section id="tentang" className="relative scroll-mt-16 overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_25%,#0c0506_60%,#120708_100%)] py-20 text-white">
       <div className="absolute inset-0 bg-stamp-lines opacity-10 mix-blend-overlay" />
       <div className="pointer-events-none absolute left-0 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
 
@@ -75,7 +75,7 @@ export default function AboutPreview() {
             <SectionHeading
               eyebrow="Tentang Kami"
               title="Merajut Alumni, Membangun Cianjur"
-              className="[&_h2]:font-mona [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_span]:!bg-white [&_span]:!text-primary"
+              className="[&_h2]:font-mona [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:from-55% [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_h2::after]:content-none  [&_span]:!bg-transparent  [&_span]:!border-0  [&_span]:!text-primary"
             />
           </Reveal>
           <Reveal delay={250}>

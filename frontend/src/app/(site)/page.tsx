@@ -11,6 +11,15 @@ import GalleryPreview from "@/components/home/GalleryPreview";
 import Testimonial from "@/components/home/Testimonial";
 import Reveal from "@/components/ui/Reveal";
 import JoinSection from "@/components/home/JoinSection";
+import { SITE } from "@/lib/constants";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: { absolute: `${SITE.name} | ${SITE.tagline}` },
+  description:
+    "Ikatan Alumni Pemagangan Kerja Sistem Indonesia (IKAPEKSI) DPC Cianjur — wadah silaturahmi dan pemberdayaan alumni pemagangan kerja luar negeri asal Kabupaten Cianjur.",
+  path: "/",
+});
 
 export default function HomePage() {
   return (
@@ -31,10 +40,12 @@ export default function HomePage() {
       </Reveal>
       {/* <ProgramPreview />
       <AlumniPreview />
-      <ActivityPreview /> */}
-      {/* <NewsPreview />
+      <ActivityPreview />
       <GalleryPreview />
       <Testimonial /> */}
+      {/* <Reveal>
+        <NewsPreview />
+      </Reveal> */}
     </>
   );
 }

@@ -1,35 +1,56 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  DUMMY_ALUMNI,
-  DUMMY_BERITA,
-  DUMMY_GRAFIK_PENDAFTAR,
-  DUMMY_PENDAFTAR,
-  DUMMY_STATS,
-} from "@/lib/dummy";
-import { formatDate } from "@/lib/utils";
+import { apiFetch } from "@/lib/api";
+import { useToast } from "@/components/ui/Toast";
+import Reveal from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 
-const STATUS_STYLE: Record<string, string> = {
-  "Bekerja": "bg-green-100 text-green-700",
-  "Kembali": "bg-blue-100 text-blue-700",
-  "Wirausaha": "bg-amber-100 text-amber-700",
-  "Cari Kerja": "bg-purple-100 text-purple-700",
-  "Terbit": "bg-green-100 text-green-700",
-  "Draft": "bg-gray-200 text-gray-600",
-  "Baru": "bg-blue-100 text-blue-700",
-  "Diproses": "bg-amber-100 text-amber-700",
-  "Diterima": "bg-green-100 text-green-700",
-  "Ditolak": "bg-red-100 text-red-700",
-};
+type Kategori = "alumni" | "calon-alumni" | "umkm-binaan";
 
-const STAT_CARDS = [
-  { label: "Total Alumni", value: DUMMY_STATS.alumni, trend: "+4,2%", icon: "alumni", color: "bg-primary" },
-  { label: "Alumni Baru", value: DUMMY_STATS.alumniBaru, trend: "bulan ini", icon: "user-plus", color: "bg-blue-600" },
-  { label: "UMKM Binaan", value: DUMMY_STATS.umkm, trend: "+9 UMKM", icon: "umkm", color: "bg-amber-500" },
-  { label: "Berita Terbit", value: DUMMY_STATS.berita, trend: "142 total", icon: "berita", color: "bg-green-600" },
-];
+interface GrafikItem {
+  bulan: string;
+  jumlah: number;
+}
+
+interface PendaftarTerbaru {
+  id: number;
+  kategori: Kategori;
+  nama: string;
+  whatsapp: string;
+  email: string | null;
+  provinsi: string | null;
+  kabupaten: string | null;
+  kecamatan: string | null;
+  desa: string | null;
+  nama_usaha: string | null;
+  created_at: string;
+}
+
+interface DashboardStats {
+  total_pendaftar: number;
+  alumni: number;
+  calon_alumni: number;
+  umkm_binaan: number;
+  pendaftar_bulan_ini: number;
+  pendaftar_hari_ini: number;
+  total_pengguna: number;
+}
+
+const KATEGORI_META: Record<Kategori, { label: string; badge: string; bar: string }> = {
+  alumni: { label: "Alumni", badge: "bg-primary-tint text-primary", bar: "bg-primary" },
+  "calon-alumni": {
+    label: "Calon Alumni",
+    badge: "bg-amber-100 text-amber-700",
+    bar: "bg-amber-500",
+  },
+  "umkm-binaan": {
+    label: "Binaan UMKM",
+    badge: "bg-emerald-100 text-emerald-700",
+    bar: "bg-emerald-500",
+  },
+};
 
 const ICONS: Record<string, React.ReactNode> = {
   alumni: (
@@ -47,31 +68,61 @@ const ICONS: Record<string, React.ReactNode> = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01" />
     </svg>
   ),
-  berita: (
+  calon: (
     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 10h16M4 14h10M4 18h10M14 18h6v-8h-6v8z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" />
     </svg>
   ),
 };
 
 export default function AdminDashboardPage() {
-  const maxGrafik = Math.max(...DUMMY_GRAFIK_PENDAFTAR.map((d) => d.jumlah));
-  const pendaftarBaru = DUMMY_PENDAFTAR.filter((p) => p.status === "Baru").length;
+  const toast = useToast();
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [grafik, setGrafik] = useState<GrafikItem[]>([]);
+  const [terbaru, setTerbaru] = useState<PendaftarTerbaru[]>([]);
+
+  useEffect(() => {
+    apiFetch<{ stats: DashboardStats; grafik: GrafikItem[]; terbaru: PendaftarTerbaru[] }>(
+      "/api/dashboard"
+    )
+      .then((data) => {
+        setStats(data.stats);
+        setGrafik(data.grafik);
+        setTerbaru(data.terbaru);
+      })
+      .catch((err) => {
+        toast.error(err instanceof Error ? err.message : "Gagal memuat dashboard.");
+      });
+  }, [toast]);
+
+  const maxGrafik = Math.max(...grafik.map((d) => d.jumlah), 1);
+  const distribusi = [
+    { key: "alumni" as Kategori, value: stats?.alumni ?? 0 },
+    { key: "calon-alumni" as Kategori, value: stats?.calon_alumni ?? 0 },
+    { key: "umkm-binaan" as Kategori, value: stats?.umkm_binaan ?? 0 },
+  ];
+  const totalKategori = distribusi.reduce((acc, d) => acc + d.value, 0);
+
+  const STAT_CARDS = [
+    { label: "Total Pendaftar", value: stats?.total_pendaftar ?? 0, icon: "user-plus", color: "bg-primary" },
+    { label: "Alumni", value: stats?.alumni ?? 0, icon: "alumni", color: "bg-blue-600" },
+    { label: "Calon Alumni", value: stats?.calon_alumni ?? 0, icon: "calon", color: "bg-amber-500" },
+    { label: "Binaan UMKM", value: stats?.umkm_binaan ?? 0, icon: "umkm", color: "bg-emerald-600" },
+  ];
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-extrabold text-ink">Dashboard</h1>
-          <p className="mt-1 text-sm text-ink-muted">
-            Ringkasan data {new Date().getFullYear()} — IKAPEKSI Cianjur
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
+      <Reveal delay={0}>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-extrabold text-ink">Dashboard</h1>
+            <p className="mt-1 text-sm text-ink-muted">
+              Ringkasan data {new Date().getFullYear()} — IKAPEKSI Cianjur
+            </p>
+          </div>
           <Link
             href="/admin/pendaftaran"
-            className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark"
+            className="btn-focus inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-dark"
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -79,107 +130,73 @@ export default function AdminDashboardPage() {
             Pendaftaran Baru
           </Link>
         </div>
-      </div>
+      </Reveal>
 
-      {/* Stat cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {STAT_CARDS.map((card) => (
-          <div
-            key={card.label}
-            className="rounded-xl border border-paper-line bg-white p-5 shadow-card"
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm font-medium text-ink-muted">{card.label}</p>
-                <p className="mt-1 text-3xl font-extrabold text-ink">
-                  {card.value.toLocaleString("id-ID")}
-                </p>
+        {STAT_CARDS.map((card, i) => (
+          <Reveal key={card.label} delay={100 + i * 100}>
+            <div className="rounded-xl border border-paper-line bg-white p-5 shadow-card">
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="text-sm font-medium text-ink-muted">{card.label}</p>
+                  <p className="mt-1 text-3xl font-extrabold text-ink">
+                    {card.value.toLocaleString("id-ID")}
+                  </p>
+                </div>
+                <div className={cn("flex h-11 w-11 items-center justify-center rounded-lg text-white", card.color)}>
+                  {ICONS[card.icon]}
+                </div>
               </div>
-              <div className={cn("flex h-11 w-11 items-center justify-center rounded-lg text-white", card.color)}>
-                {ICONS[card.icon]}
-              </div>
+              <p className="mt-3 text-xs font-medium text-primary">
+                {stats?.pendaftar_hari_ini ?? 0} pendaftar hari ini
+              </p>
             </div>
-            <p className="mt-3 text-xs font-medium text-primary">{card.trend}</p>
-          </div>
+          </Reveal>
         ))}
       </div>
 
-      {/* Grafik + ringkasan */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
-        <div className="rounded-xl border border-paper-line bg-white p-6 shadow-card xl:col-span-2">
-          <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-ink">Pendaftar per Bulan</h2>
-            <span className="text-xs text-ink-muted">2026</span>
-          </div>
-          <div className="mt-6 flex h-48 items-end gap-3">
-            {DUMMY_GRAFIK_PENDAFTAR.map((d) => (
-              <div key={d.bulan} className="flex flex-1 flex-col items-center gap-2">
-                <span className="text-[11px] font-semibold text-ink-muted">{d.jumlah}</span>
-                <div
-                  className="w-full rounded-t-md bg-primary/80 transition-all hover:bg-primary"
-                  style={{ height: `${(d.jumlah / maxGrafik) * 100}%` }}
-                />
-                <span className="text-[11px] font-medium text-ink-muted">{d.bulan}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-xl border border-paper-line bg-white p-6 shadow-card">
-          <h2 className="text-base font-bold text-ink">Ringkasan</h2>
-          <ul className="mt-4 space-y-4">
-            <RingkasanRow label="Total Pendaftar" value={DUMMY_STATS.pendaftar} color="bg-primary" />
-            <RingkasanRow label="Pendaftar Baru (hari ini)" value={pendaftarBaru} color="bg-blue-500" />
-            <RingkasanRow label="Anggota Aktif" value={DUMMY_STATS.anggotaAktif} color="bg-green-500" />
-            <RingkasanRow label="Berita Bulan Ini" value={12} color="bg-amber-500" />
-          </ul>
-        </div>
-      </div>
-
-      {/* Tabel pendaftar terbaru */}
-      <div className="rounded-xl border border-paper-line bg-white shadow-card">
-        <div className="flex items-center justify-between border-b border-paper-line px-6 py-4">
-          <h2 className="text-base font-bold text-ink">Pendaftar Terbaru</h2>
-          <Link href="/admin/pendaftaran" className="text-sm font-semibold text-primary hover:text-primary-dark">
-            Lihat semua
-          </Link>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="border-b border-paper-line bg-paper-warm text-xs uppercase tracking-wider text-ink-muted">
-                <th className="px-6 py-3 font-semibold">Nama</th>
-                <th className="px-6 py-3 font-semibold">Asal</th>
-                <th className="px-6 py-3 font-semibold">Tujuan</th>
-                <th className="hidden px-6 py-3 font-semibold md:table-cell">Tanggal</th>
-                <th className="px-6 py-3 font-semibold">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {DUMMY_PENDAFTAR.slice(0, 5).map((p) => (
-                <tr key={p.id} className="border-b border-paper-line last:border-0 hover:bg-paper-warm">
-                  <td className="px-6 py-3.5 font-medium text-ink">{p.nama}</td>
-                  <td className="px-6 py-3.5 text-ink-muted">{p.asal}</td>
-                  <td className="px-6 py-3.5 text-ink-muted">{p.tujuan}</td>
-                  <td className="hidden px-6 py-3.5 text-ink-muted md:table-cell">{formatDate(p.tanggal)}</td>
-                  <td className="px-6 py-3.5">
-                    <span className={cn("inline-flex rounded-full px-2.5 py-1 text-xs font-semibold", STATUS_STYLE[p.status])}>
-                      {p.status}
-                    </span>
-                  </td>
-                </tr>
+        <Reveal delay={500} className="xl:col-span-2">
+          <div className="rounded-xl border border-paper-line bg-white p-6 shadow-card">
+            <div className="flex items-center justify-between">
+              <h2 className="text-base font-bold text-ink">Pendaftar per Bulan</h2>
+              <span className="text-xs text-ink-muted">{new Date().getFullYear()}</span>
+            </div>
+            <div className="mt-6 flex h-48 items-stretch gap-2 sm:gap-3">
+              {grafik.map((d, i) => (
+                <div key={d.bulan} className="flex flex-1 flex-col items-center">
+                  <span className="text-[11px] font-semibold text-ink-muted">{d.jumlah ?? 0}</span>
+                  <div className="mt-1 flex w-full flex-1 items-end justify-center">
+                    <div
+                      className="bar-grow w-6 rounded-t-md bg-primary/80 transition-colors hover:bg-primary sm:w-8"
+                      style={{ height: `${(d.jumlah / maxGrafik) * 100}%`, animationDelay: `${i * 60}ms` }}
+                    />
+                  </div>
+                  <span className="mt-1.5 text-[11px] font-medium text-ink-muted">{d.bulan}</span>
+                </div>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={600}>
+          <div className="rounded-xl border border-paper-line bg-white p-6 shadow-card">
+            <h2 className="text-base font-bold text-ink">Ringkasan</h2>
+            <ul className="mt-4 space-y-4">
+              <RingkasanRow label="Total Pendaftar" value={stats?.total_pendaftar ?? 0} color="bg-primary" />
+              <RingkasanRow label="Pendaftar Bulan Ini" value={stats?.pendaftar_bulan_ini ?? 0} color="bg-blue-500" />
+              <RingkasanRow label="Pendaftar Hari Ini" value={stats?.pendaftar_hari_ini ?? 0} color="bg-green-500" />
+              <RingkasanRow label="Pengguna Sistem" value={stats?.total_pengguna ?? 0} color="bg-amber-500" />
+            </ul>
+          </div>
+        </Reveal>
       </div>
 
-      {/* Alumni & berita */}
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <Reveal delay={700}>
         <div className="rounded-xl border border-paper-line bg-white shadow-card">
           <div className="flex items-center justify-between border-b border-paper-line px-6 py-4">
-            <h2 className="text-base font-bold text-ink">Alumni Terbaru</h2>
-            <Link href="/admin/alumni" className="text-sm font-semibold text-primary hover:text-primary-dark">
+            <h2 className="text-base font-bold text-ink">Pendaftar Terbaru</h2>
+            <Link href="/admin/pendaftaran" className="text-sm font-semibold text-primary hover:text-primary-dark">
               Lihat semua
             </Link>
           </div>
@@ -188,62 +205,81 @@ export default function AdminDashboardPage() {
               <thead>
                 <tr className="border-b border-paper-line bg-paper-warm text-xs uppercase tracking-wider text-ink-muted">
                   <th className="px-6 py-3 font-semibold">Nama</th>
-                  <th className="px-6 py-3 font-semibold">Tahun</th>
-                  <th className="hidden px-6 py-3 font-semibold sm:table-cell">Jepang</th>
-                  <th className="px-6 py-3 font-semibold">Status</th>
+                  <th className="px-6 py-3 font-semibold">Kategori</th>
+                  <th className="px-6 py-3 font-semibold">Domisili</th>
+                  <th className="hidden px-6 py-3 font-semibold md:table-cell">Kontak</th>
+                  <th className="px-6 py-3 font-semibold">Tanggal</th>
                 </tr>
               </thead>
               <tbody>
-                {DUMMY_ALUMNI.slice(0, 5).map((a) => (
-                  <tr key={a.id} className="border-b border-paper-line last:border-0 hover:bg-paper-warm">
-                    <td className="px-6 py-3.5 font-medium text-ink">{a.nama}</td>
-                    <td className="px-6 py-3.5 text-ink-muted">{a.tahun}</td>
-                    <td className="hidden px-6 py-3.5 text-ink-muted sm:table-cell">{a.jepang}</td>
-                    <td className="px-6 py-3.5">
-                      <span className={cn("inline-flex rounded-full px-2.5 py-1 text-xs font-semibold", STATUS_STYLE[a.status])}>
-                        {a.status}
-                      </span>
+                {terbaru.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="px-6 py-10 text-center text-ink-muted">
+                      Belum ada data pendaftar.
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  terbaru.map((p) => (
+                    <tr key={p.id} className="border-b border-paper-line last:border-0 hover:bg-paper-warm">
+                      <td className="px-6 py-3.5 font-medium text-ink">
+                        <p>{p.nama}</p>
+                        {p.nama_usaha && <p className="text-xs text-ink-muted">{p.nama_usaha}</p>}
+                      </td>
+                      <td className="px-6 py-3.5">
+                        <span
+                          className={cn(
+                            "inline-flex rounded-full px-2.5 py-1 text-xs font-bold",
+                            KATEGORI_META[p.kategori].badge
+                          )}
+                        >
+                          {KATEGORI_META[p.kategori].label}
+                        </span>
+                      </td>
+                      <td className="px-6 py-3.5 text-ink-muted">
+                        <p>{p.kabupaten || "-"}</p>
+                        {p.provinsi && <p className="text-xs text-ink-muted">{p.provinsi}</p>}
+                      </td>
+                      <td className="hidden px-6 py-3.5 text-ink-muted md:table-cell">
+                        <p>{p.whatsapp}</p>
+                        {p.email && <p className="text-xs">{p.email}</p>}
+                      </td>
+                      <td className="px-6 py-3.5 text-ink-muted">{p.created_at}</td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         </div>
+      </Reveal>
 
-        <div className="rounded-xl border border-paper-line bg-white shadow-card">
-          <div className="flex items-center justify-between border-b border-paper-line px-6 py-4">
-            <h2 className="text-base font-bold text-ink">Berita Terbaru</h2>
-            <Link href="/admin/berita" className="text-sm font-semibold text-primary hover:text-primary-dark">
-              Lihat semua
-            </Link>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-paper-line bg-paper-warm text-xs uppercase tracking-wider text-ink-muted">
-                  <th className="px-6 py-3 font-semibold">Judul</th>
-                  <th className="hidden px-6 py-3 font-semibold md:table-cell">Tanggal</th>
-                  <th className="px-6 py-3 font-semibold">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {DUMMY_BERITA.slice(0, 5).map((b) => (
-                  <tr key={b.id} className="border-b border-paper-line last:border-0 hover:bg-paper-warm">
-                    <td className="max-w-[240px] truncate px-6 py-3.5 font-medium text-ink">{b.judul}</td>
-                    <td className="hidden px-6 py-3.5 text-ink-muted md:table-cell">{formatDate(b.tanggal)}</td>
-                    <td className="px-6 py-3.5">
-                      <span className={cn("inline-flex rounded-full px-2.5 py-1 text-xs font-semibold", STATUS_STYLE[b.status])}>
-                        {b.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <Reveal delay={800}>
+        <div className="rounded-xl border border-paper-line bg-white p-6 shadow-card">
+          <h2 className="text-base font-bold text-ink">Distribusi Kategori</h2>
+          <div className="mt-6 space-y-5">
+            {distribusi.map((d) => {
+              const meta = KATEGORI_META[d.key];
+              const pct = totalKategori > 0 ? Math.round((d.value / totalKategori) * 100) : 0;
+              return (
+                <div key={d.key}>
+                  <div className="mb-1.5 flex items-center justify-between text-sm">
+                    <span className="font-medium text-ink">{meta.label}</span>
+                    <span className="text-ink-muted">
+                      {d.value.toLocaleString("id-ID")} · {pct}%
+                    </span>
+                  </div>
+                  <div className="h-2.5 w-full overflow-hidden rounded-full bg-paper-warm">
+                    <div
+                      className={cn("h-full rounded-full transition-all", meta.bar)}
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

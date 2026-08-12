@@ -4,6 +4,7 @@ import Link from "next/link";
 import Container from "@/components/layout/Container";
 import AlumniProfile from "@/components/alumni/AlumniProfile";
 import { alumniList } from "@/data/alumni";
+import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return alumniList.map((alumni) => ({ id: String(alumni.id) }));
@@ -16,7 +17,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const alumni = alumniList.find((a) => String(a.id) === id);
-  return { title: alumni ? alumni.name : "Profil Alumni" };
+  if (!alumni) {
+    return buildMetadata({ title: "Profil Alumni", path: "/alumni" });
+  }
+  return buildMetadata({
+    title: alumni.name,
+    description: alumni.bio,
+    path: `/alumni/${alumni.id}`,
+  });
 }
 
 export default async function AlumniDetailPage({
@@ -31,6 +39,16 @@ export default async function AlumniDetailPage({
   return (
     <section className="py-20">
       <Container>
+        <JsonLd
+          data={breadcrumbJsonLd({
+            items: [
+              { name: "Beranda", path: "/" },
+              { name: "Alumni", path: "/alumni" },
+              { name: alumni.name, path: `/alumni/${alumni.id}` },
+            ],
+          })}
+        />
+
         <Link href="/alumni" className="btn-focus text-sm font-bold uppercase tracking-wide text-primary">
           &larr; Kembali ke Direktori
         </Link>

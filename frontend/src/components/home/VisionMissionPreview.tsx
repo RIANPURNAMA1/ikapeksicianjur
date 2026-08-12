@@ -33,7 +33,7 @@ export default function VisionMissionPreview() {
           {/* =========================================
               KOLOM KIRI: Visi (Clean Typography)
               ========================================= */}
-          <Reveal delay={100} className="flex h-full flex-col justify-center">
+          <Reveal delay={100} className="flex h-full flex-col items-center justify-center text-center lg:items-start lg:text-left">
             {/* Label "Visi" */}
             <div className="mb-6 flex items-center gap-4">
               <span className="inline-flex items-center  px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#e8555c]">
@@ -48,7 +48,7 @@ export default function VisionMissionPreview() {
             </h2>
             
             {/* Deskripsi opsional untuk memperkuat hirarki (bisa disesuaikan) */}
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-zinc-400">
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-zinc-400 lg:mx-0">
               Membangun ekosistem yang kuat untuk mengoptimalkan potensi setiap alumni dalam menghadapi tantangan ekonomi global.
             </p>
           </Reveal>
@@ -59,7 +59,7 @@ export default function VisionMissionPreview() {
           <Reveal delay={250}>
             <div className="flex flex-col">
               
-              <div className="mb-6 flex items-center gap-4">
+              <div className="mb-6 flex items-center gap-4 justify-center lg:justify-start">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
                   Misi Kami
                 </span>

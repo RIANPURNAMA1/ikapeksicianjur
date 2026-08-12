@@ -5,8 +5,13 @@ import ContactInfo from "@/components/contact/ContactInfo";
 import SocialLinks from "@/components/contact/SocialLinks";
 import ContactForm from "@/components/contact/ContactForm";
 import { SITE } from "@/lib/constants";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Kontak" };
+export const metadata: Metadata = buildMetadata({
+  title: "Kontak",
+  description: `Hubungi DPC IKAPEKSI Cianjur — alamat ${SITE.address}, telepon, WhatsApp, dan email. Kami siap membantu alumni dan calon peserta pemagangan kerja.`,
+  path: "/kontak",
+});
 
 export default function KontakPage() {
   return (

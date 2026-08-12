@@ -6,6 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { apiFetch, clearAuth, getToken, type AdminUser } from "@/lib/api";
+import { ToastProvider } from "@/components/ui/Toast";
+import Swal from "sweetalert2";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin", icon: "dashboard" },
@@ -73,16 +76,54 @@ const ICONS: Record<string, React.ReactNode> = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [authed, setAuthed] = useState<boolean | null>(null);
+  const [authed, setAuthed] = useState(false);
+  const [user, setUser] = useState<AdminUser | null>(null);
+  const [checked, setChecked] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const authed = window.sessionStorage.getItem("ikapeksi_admin") === "true";
-    setAuthed(authed);
-    if (!authed && pathname !== "/admin/login") {
+    const token = getToken();
+    if (!token) {
+      setAuthed(false);
+      setUser(null);
+      setChecked(true);
+      return;
+    }
+
+    let active = true;
+
+    apiFetch<{ user: AdminUser }>("/api/me")
+      .then((data) => {
+        if (!active) return;
+        setUser(data.user);
+        setAuthed(true);
+      })
+      .catch(() => {
+        if (!active) return;
+        clearAuth();
+        setUser(null);
+        setAuthed(false);
+      })
+      .finally(() => {
+        if (active) setChecked(true);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [pathname]);
+
+  const isLoginPage = pathname === "/admin/login";
+
+  useEffect(() => {
+    if (!checked) return;
+    if (!authed && !getToken() && !isLoginPage) {
       router.replace("/admin/login");
     }
-  }, [pathname, router]);
+    if (authed && isLoginPage) {
+      router.replace("/admin");
+    }
+  }, [checked, authed, isLoginPage, router]);
 
   useEffect(() => {
     document.body.style.backgroundColor = "#FAF7F5";
@@ -91,25 +132,54 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     };
   }, []);
 
-  if (authed === null) {
+  if (!checked) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-paper-warm">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-      </div>
+      <ToastProvider>
+        <div className="flex min-h-screen items-center justify-center bg-paper-warm">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        </div>
+      </ToastProvider>
     );
   }
 
   if (!authed) {
-    return null;
+    return (
+      <ToastProvider>
+        {isLoginPage ? (
+          children
+        ) : (
+          <div className="flex min-h-screen items-center justify-center bg-paper-warm">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+          </div>
+        )}
+      </ToastProvider>
+    );
   }
 
   function logout() {
-    window.sessionStorage.removeItem("ikapeksi_admin");
-    router.replace("/admin/login");
+    void Swal.fire({
+      title: "Yakin ingin keluar?",
+      text: "Anda akan kembali ke halaman login.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#C62930",
+      cancelButtonColor: "#6B6764",
+      confirmButtonText: "Ya, Keluar",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    }).then((result) => {
+      if (!result.isConfirmed) return;
+      void apiFetch("/api/logout", { method: "POST" }).catch(() => {});
+      clearAuth();
+      setUser(null);
+      setAuthed(false);
+      router.replace("/admin/login");
+    });
   }
 
   return (
-    <div className="min-h-screen bg-paper-warm">
+    <ToastProvider>
+      <div className="min-h-screen bg-paper-warm">
       {/* Sidebar desktop */}
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col bg-ink lg:flex">
         <SidebarContent
@@ -122,7 +192,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/50 backdrop-blur-md"
             onClick={() => setOpen(false)}
           />
           <aside className="absolute inset-y-0 left-0 flex w-64 flex-col bg-ink">
@@ -157,7 +227,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           />
         </div>
         <div className="hidden text-sm font-semibold text-ink lg:block">
-          Selamat datang, Admin
+          Selamat datang, {user?.name ?? "Admin"}
         </div>
 
         <div className="flex items-center gap-3">
@@ -173,10 +243,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
-              A
+              {user?.name?.charAt(0).toUpperCase() ?? "A"}
             </div>
             <div className="hidden text-sm sm:block">
-              <p className="font-semibold leading-tight text-ink">Admin</p>
+              <p className="font-semibold leading-tight text-ink">{user?.name ?? "Admin"}</p>
               <p className="text-xs text-ink-muted">Super Admin</p>
             </div>
           </div>
@@ -184,9 +254,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       <main className="px-5 py-8 lg:ml-64">
-        <div className="mx-auto max-w-6xl">{children}</div>
+        <div key={pathname} className="animate-enter mx-auto max-w-6xl">{children}</div>
       </main>
     </div>
+    </ToastProvider>
   );
 }
 

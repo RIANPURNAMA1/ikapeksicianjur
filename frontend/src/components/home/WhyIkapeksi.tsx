@@ -26,28 +26,26 @@ export default function WhyIkapeksi() {
       {/* Pattern Latar Belakang */}
       <div className="absolute inset-0 bg-grid-squares bg-[length:24px_24px] opacity-10 mix-blend-overlay pointer-events-none" />
       <Container className="relative z-10">
-        
         {/* =========================================
             HEADER SECTION (Tanpa SectionHeading)
             ========================================= */}
         <div className="mx-auto max-w-3xl text-center mb-16 flex flex-col items-center">
-          
           {/* Eyebrow (Teks kecil di atas) */}
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C62930]">
             Mengapa IKAPEKSI
           </span>
-          
+
           {/* Judul Utama */}
-          <h2 className="mt-4 font-mona text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-4 font-mona text-3xl font-bold tracking-tight sm:text-4xl bg-gradient-to-r from-white from-65% to-[#C62930] bg-clip-text text-transparent">
             Alasan Alumni Memilih Bergabung
           </h2>
-          
+
           {/* Sub-judul / Deskripsi Tambahan (Sesuai Referensi Gambar) */}
           <p className="mt-4 text-base leading-relaxed text-zinc-400 max-w-2xl">
-            4 pilar utama yang menjadi landasan kami — dirancang khusus untuk membangun 
-            ekosistem alumni yang solid dan berdampak nyata bagi masyarakat Cianjur.
+            4 pilar utama yang menjadi landasan kami — dirancang khusus untuk
+            membangun ekosistem alumni yang solid dan berdampak nyata bagi
+            masyarakat Cianjur.
           </p>
-          
         </div>
 
         {/* =========================================
@@ -56,10 +54,7 @@ export default function WhyIkapeksi() {
         <div className="grid gap-6 md:grid-cols-2 lg:gap-8 max-w-5xl mx-auto">
           {reasons.map((reason, idx) => (
             <Reveal key={reason.title} delay={idx * 120} className="h-full">
-              <div 
-                className="doc-card group relative flex h-full flex-col rounded-xl border border-white/10 bg-white/5 p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#C62930]/50 hover:bg-[#111111] hover:shadow-[0_8px_30px_-10px_rgba(198,41,48,0.2)]"
-              >
-                
+              <div className="doc-card group relative flex h-full flex-col rounded-xl border border-white/10 bg-[#111111] p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#C62930]/50 hover:bg-[#111111] hover:shadow-[0_8px_30px_-10px_rgba(198,41,48,0.2)]">
                 {/* Header Kartu: Angka (Kiri) & Label (Kanan) */}
                 <div className="mb-8 flex items-center justify-between">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#C62930]/10 border border-[#C62930]/20 text-sm font-black text-[#C62930] transition-all duration-300 group-hover:bg-[#C62930] group-hover:text-white">
@@ -79,7 +74,6 @@ export default function WhyIkapeksi() {
                     {reason.desc}
                   </p>
                 </div>
-                
               </div>
             </Reveal>
           ))}

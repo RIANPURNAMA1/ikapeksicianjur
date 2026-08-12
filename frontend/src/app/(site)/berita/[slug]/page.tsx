@@ -4,11 +4,14 @@ import Link from "next/link";
 import Container from "@/components/layout/Container";
 import NewsDetail from "@/components/news/NewsDetail";
 import NewsCard from "@/components/news/NewsCard";
-import { newsArticles } from "@/data/news";
-
-export function generateStaticParams() {
-  return newsArticles.map((article) => ({ slug: article.slug }));
-}
+import { apiFetch, resolveAssetUrl } from "@/lib/api";
+import { beritaToNewsArticle, type BeritaCard } from "@/lib/news";
+import {
+  articleJsonLd,
+  breadcrumbJsonLd,
+  buildMetadata,
+  JsonLd,
+} from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -16,8 +19,20 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = newsArticles.find((a) => a.slug === slug);
-  return { title: article ? article.title : "Berita" };
+  try {
+    const data = await apiFetch<{ berita: BeritaCard }>(`/api/berita-publik/${slug}`);
+    const { berita } = data;
+    return buildMetadata({
+      title: berita.judul,
+      description: berita.excerpt ?? berita.judul,
+      path: `/berita/${berita.slug}`,
+      image: berita.gambar ? resolveAssetUrl(berita.gambar) : undefined,
+      type: "article",
+      publishedTime: berita.tanggal_iso,
+    });
+  } catch {
+    return buildMetadata({ title: "Berita", path: "/berita" });
+  }
 }
 
 export default async function BeritaDetailPage({
@@ -26,14 +41,50 @@ export default async function BeritaDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = newsArticles.find((a) => a.slug === slug);
-  if (!article) notFound();
 
-  const related = newsArticles.filter((a) => a.id !== article.id).slice(0, 3);
+  let article;
+  try {
+    const data = await apiFetch<{ berita: BeritaCard }>(`/api/berita-publik/${slug}`);
+    article = beritaToNewsArticle(data.berita);
+  } catch {
+    notFound();
+  }
+
+  let related: ReturnType<typeof beritaToNewsArticle>[] = [];
+  try {
+    const list = await apiFetch<{ berita: BeritaCard[] }>("/api/berita-publik?per_page=6");
+    related = list.berita
+      .map(beritaToNewsArticle)
+      .filter((a) => a.id !== article.id)
+      .slice(0, 3);
+  } catch {
+    related = [];
+  }
 
   return (
     <section className="py-20">
       <Container>
+        <JsonLd
+          data={articleJsonLd({
+            headline: article.title,
+            description: article.excerpt,
+            url: `/berita/${article.slug}`,
+            image: article.image,
+            datePublished: article.date,
+            dateModified: article.date,
+            author: article.author,
+          })}
+        />
+        <JsonLd
+          data={breadcrumbJsonLd({
+            items: [
+              { name: "Beranda", path: "/" },
+              { name: "Berita", path: "/berita" },
+              { name: article.title, path: `/berita/${article.slug}` },
+            ],
+          })}
+        />
+
         <Link href="/berita" className="btn-focus text-sm font-bold uppercase tracking-wide text-primary">
           &larr; Kembali ke Berita
         </Link>

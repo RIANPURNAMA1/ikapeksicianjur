@@ -6,16 +6,19 @@ import Image from "next/image";
 import { DUMMY_ADMIN } from "@/lib/dummy";
 import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { apiFetch, storeAuth } from "@/lib/api";
+import { useToast } from "@/components/ui/Toast";
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const toast = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError("");
 
@@ -25,19 +28,27 @@ export default function AdminLoginPage() {
     }
 
     setLoading(true);
-    setTimeout(() => {
-      if (
-        email.toLowerCase().trim() === DUMMY_ADMIN.email &&
-        password === DUMMY_ADMIN.password
-      ) {
-        window.sessionStorage.setItem("ikapeksi_admin", "true");
-        router.replace("/admin");
-        router.refresh();
-      } else {
-        setLoading(false);
-        setError("Email atau kata sandi salah. Gunakan akun demo: admin@ikapeksicianjur.or.id / admin123");
-      }
-    }, 600);
+    try {
+      const data = await apiFetch<{
+        message: string;
+        token: string;
+        user: { id: number; name: string; email: string };
+      }>("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+      });
+
+      storeAuth(data.token, data.user);
+      toast.success("Login berhasil. Selamat datang, " + data.user.name + "!");
+      router.replace("/admin");
+    } catch (err) {
+      setLoading(false);
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Gagal terhubung ke server. Pastikan backend Laravel berjalan."
+      );
+    }
   }
 
   return (
@@ -51,7 +62,7 @@ export default function AdminLoginPage() {
             height={91}
             className="mx-auto h-12 w-auto object-contain brightness-0 invert"
           />
-          <h1 className="mt-6 text-2xl font-extrabold text-white">Admin Dashboard</h1>
+          <h1 className="mt-6 text-2xl font-extrabold text-white">Sign In Account</h1>
           <p className="mt-1 text-sm text-white/60">
             Masuk untuk mengelola konten {SITE.name}
           </p>
@@ -59,7 +70,7 @@ export default function AdminLoginPage() {
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-2xl border border-white/10 bg-white/5 p-8 shadow-card backdrop-blur"
+          className="  p-8 shadow-card backdrop-blur"
         >
           <div className="flex flex-col gap-1.5">
             <label htmlFor="email" className="text-sm font-semibold text-white">
@@ -126,9 +137,9 @@ export default function AdminLoginPage() {
           </button>
 
           <div className="mt-6 rounded-lg border border-dashed border-white/15 bg-ink/40 px-4 py-3 text-center text-xs text-white/60">
-            Akun demo — email: <span className="text-white/90">admin@ikapeksicianjur.or.id</span>
+            Akun demo — email: <span className="text-white/90">{DUMMY_ADMIN.email}</span>
             <br />
-            kata sandi: <span className="text-white/90">admin123</span>
+            kata sandi: <span className="text-white/90">{DUMMY_ADMIN.password}</span>
           </div>
         </form>
       </div>

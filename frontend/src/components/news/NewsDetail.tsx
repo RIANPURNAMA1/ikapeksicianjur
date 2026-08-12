@@ -14,11 +14,10 @@ export default function NewsDetail({ article }: { article: NewsArticle }) {
       <div className="doc-card relative mt-8 aspect-[16/9] w-full overflow-hidden">
         <Image src={article.image} alt={article.title} fill sizes="(min-width: 1024px) 900px, 100vw" className="object-cover" />
       </div>
-      <div className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-ink-soft">
-        {article.content.map((paragraph, idx) => (
-          <p key={idx}>{paragraph}</p>
-        ))}
-      </div>
+      <div
+        className="prose-news mt-8 max-w-2xl text-base leading-relaxed text-ink-soft"
+        dangerouslySetInnerHTML={{ __html: article.content.join("\n") }}
+      />
     </article>
   );
 }
