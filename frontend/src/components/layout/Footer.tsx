@@ -2,9 +2,21 @@
 
 import type { ReactNode } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { NAV_LINKS, SITE, SOCIAL_LINKS } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n";
 import Container from "./Container";
+
+const NAV_LABEL_KEY: Record<string, string> = {
+  "/": "nav.beranda",
+  "/tentang": "nav.tentang",
+  "/program": "nav.program",
+  "/alumni": "nav.alumni",
+  "/kegiatan": "nav.kegiatan",
+  "/berita": "nav.berita",
+  "/galeri": "nav.galeri",
+  "/kontak": "nav.kontak",
+};
+
 
 const SOCIAL_ICONS: Record<string, ReactNode> = {
   instagram: (
@@ -32,6 +44,7 @@ const SOCIAL_ICONS: Record<string, ReactNode> = {
 };
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className=" bg-ink text-white">
       <Container className="grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
@@ -43,37 +56,33 @@ export default function Footer() {
             height={78}
             className="h-10 w-auto object-contain brightness-0 invert"
           />
-          <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/60">{SITE.description}</p>
+          <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/60">{t("footer.description")}</p>
         </div>
 
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">Navigasi</h4>
+          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">{t("footer.navigasi")}</h4>
           <ul className="mt-4 space-y-2 text-sm text-white/70">
             {NAV_LINKS.slice(0, 4).map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="btn-focus hover:text-white">
-                  {link.label}
-                </Link>
+                <span className="cursor-text">{t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}</span>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">Lainnya</h4>
+          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">{t("footer.lainnya")}</h4>
           <ul className="mt-4 space-y-2 text-sm text-white/70">
             {NAV_LINKS.slice(4).map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="btn-focus hover:text-white">
-                  {link.label}
-                </Link>
+                <span className="cursor-text">{t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}</span>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">Kontak</h4>
+          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">{t("footer.kontak")}</h4>
           <ul className="mt-4 space-y-2 text-sm text-white/70">
             <li>{SITE.address}</li>
             <li>{SITE.phone}</li>
@@ -98,10 +107,11 @@ export default function Footer() {
 
       <div className="border-t border-white/10 py-6">
         <Container className="flex flex-col items-center justify-between gap-2 text-xs text-white/40 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} {SITE.name}. Seluruh hak cipta dilindungi.</p>
-          <p>Didirikan sejak {SITE.foundedYear} &middot; Kabupaten Cianjur, Jawa Barat</p>
+          <p>&copy; {new Date().getFullYear()} {SITE.name}. {t("footer.copyright")}</p>
+          <p>{t("footer.founded", { year: SITE.foundedYear })} &middot; Kabupaten Cianjur, Jawa Barat</p>
         </Container>
       </div>
     </footer>
   );
 }
+

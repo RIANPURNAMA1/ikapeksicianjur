@@ -4,16 +4,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, SITE } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
 import { useScroll } from "@/hooks/useScroll";
 import Container from "./Container";
 import MobileMenu from "./MobileMenu";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { cn } from "@/lib/utils";
+
+const NAV_LABEL_KEY: Record<string, string> = {
+  "/": "nav.beranda",
+  "/tentang": "nav.tentang",
+  "/program": "nav.program",
+  "/alumni": "nav.alumni",
+  "/kegiatan": "nav.kegiatan",
+  "/berita": "nav.berita",
+  "/galeri": "nav.galeri",
+  "/kontak": "nav.kontak",
+};
 
 export default function Navbar() {
   const { isOpen, toggle, close } = useMobileMenu();
   const scrolled = useScroll();
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -59,6 +73,7 @@ export default function Navbar() {
                 (link.href !== "/" && pathname.startsWith(`${link.href}/`));
 
               const isTentang = link.href === "/tentang";
+              const label = t(NAV_LABEL_KEY[link.href] ?? "nav.beranda");
 
               return isTentang ? (
                 <a
@@ -71,7 +86,7 @@ export default function Navbar() {
                       : "text-white/70 group-hover:text-white"
                   )}
                 >
-                  {link.label}
+                  {label}
                   <span
                     className={cn(
                       "absolute bottom-0 left-0 right-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 ease-out",
@@ -80,8 +95,9 @@ export default function Navbar() {
                   />
                 </a>
               ) : (
-                <span
+                <Link
                   key={link.href}
+                  href={link.href}
                   className={cn(
                     "group relative h-full flex items-center text-[13px] font-medium transition-colors duration-200 xl:text-sm",
                     active
@@ -93,7 +109,7 @@ export default function Navbar() {
                         : "text-white/70 group-hover:text-white"
                   )}
                 >
-                  {link.label}
+                  {label}
                   <span
                     className={cn(
                       "absolute bottom-0 left-0 right-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 ease-out",
@@ -102,7 +118,7 @@ export default function Navbar() {
                         : "scale-x-0 group-hover:scale-x-100"
                     )}
                   />
-                </span>
+                </Link>
               );
             })}
           </nav>
@@ -111,7 +127,9 @@ export default function Navbar() {
               RIGHT ACTION
           ========================== */}
           <div className="hidden items-center gap-3 lg:flex">
-            <span
+            <LanguageSwitcher onDark={!scrolled} />
+            <Link
+              href="/pendataan"
               className={cn(
                 "btn-shine btn-focus inline-flex items-center justify-center gap-2",
                 "rounded-full px-4 py-2",
@@ -133,8 +151,8 @@ export default function Navbar() {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
-              Gabung Alumni
-            </span>
+              {t("nav.gabungAlumni")}
+            </Link>
           </div>
 
           {/* =========================
@@ -142,7 +160,7 @@ export default function Navbar() {
           ========================== */}
           <button
             onClick={toggle}
-            aria-label="Buka menu"
+            aria-label={t("nav.bukaMenu")}
             aria-expanded={isOpen}
             className={cn(
               "btn-focus flex h-10 w-10 shrink-0 items-center justify-center",

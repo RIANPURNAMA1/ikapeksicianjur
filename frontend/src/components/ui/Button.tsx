@@ -29,6 +29,8 @@ interface ButtonAsButton extends BaseProps, Omit<ButtonHTMLAttributes<HTMLButton
 }
 interface ButtonAsLink extends BaseProps {
   href: string;
+  target?: string;
+  rel?: string;
 }
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
@@ -43,8 +45,9 @@ export default function Button(props: ButtonProps) {
   );
 
   if ("href" in props && props.href) {
+    const { href, target, rel } = props;
     return (
-      <Link href={props.href} className={classes}>
+      <Link href={href} target={target} rel={rel} className={classes}>
         {children}
       </Link>
     );

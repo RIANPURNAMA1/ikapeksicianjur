@@ -1,15 +1,20 @@
+"use client";
+
 import Container from "@/components/layout/Container";
 import Reveal from "@/components/ui/Reveal";
+import { useLanguage } from "@/lib/i18n";
 
 // Memisahkan data misi ke dalam array agar kode JSX lebih bersih dan mudah diatur
-const missions = [
-  "Menghimpun dan mendata seluruh alumni pemagangan kerja se-Kabupaten Cianjur.",
-  "Menyediakan pelatihan dan pendampingan bagi calon dan mantan peserta magang.",
-  "Membuka akses kerja sama ekonomi dan lapangan kerja bagi alumni.",
-  "Berkontribusi aktif dalam kegiatan sosial kemasyarakatan di Cianjur.",
+const missionKeys = [
+  "mission.m1",
+  "mission.m2",
+  "mission.m3",
+  "mission.m4",
 ];
 
 export default function VisionMissionPreview() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative overflow-hidden py-24 text-white sm:py-32">
       
@@ -37,19 +42,19 @@ export default function VisionMissionPreview() {
             {/* Label "Visi" */}
             <div className="mb-6 flex items-center gap-4">
               <span className="inline-flex items-center  px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#e8555c]">
-                Visi
+                {t("vision.label")}
               </span>
              
             </div>
             
             {/* Teks Visi Utama */}
             <h2 className="text-balance font-mona text-4xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Alumni Cianjur yang Mandiri dan <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C62930] to-[#ff7e84]">Berdaya Saing.</span>
+              {t("vision.title")}
             </h2>
             
             {/* Deskripsi opsional untuk memperkuat hirarki (bisa disesuaikan) */}
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-zinc-400 lg:mx-0">
-              Membangun ekosistem yang kuat untuk mengoptimalkan potensi setiap alumni dalam menghadapi tantangan ekonomi global.
+              {t("vision.desc")}
             </p>
           </Reveal>
 
@@ -61,16 +66,16 @@ export default function VisionMissionPreview() {
               
               <div className="mb-6 flex items-center gap-4 justify-center lg:justify-start">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
-                  Misi Kami
+                  {t("mission.label")}
                 </span>
               
               </div>
               
               {/* Penggunaan <ul> dan <li> untuk standar Semantic HTML */}
               <ul className="flex flex-col">
-                {missions.map((misi, idx) => (
+                {missionKeys.map((key, idx) => (
                   <li 
-                    key={idx}
+                    key={key}
                     className="group relative flex items-start gap-6 border-b border-white/5 py-6 transition-colors duration-300 last:border-0 hover:border-white/10"
                   >
                     {/* Indikator Nomor - Efek modern tanpa harus membuat seluruh area menjadi card */}
@@ -80,7 +85,7 @@ export default function VisionMissionPreview() {
                     
                     {/* Teks Misi */}
                     <p className="mt-2.5 text-base leading-relaxed text-zinc-400 transition-colors duration-300 group-hover:text-zinc-200">
-                      {misi}
+                      {t(key)}
                     </p>
                   </li>
                 ))}

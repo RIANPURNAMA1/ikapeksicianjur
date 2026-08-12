@@ -1,13 +1,27 @@
 "use client";
 
 import type { ReactNode } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { NAV_LINKS, SITE } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const NAV_LABEL_KEY: Record<string, string> = {
+  "/": "nav.beranda",
+  "/tentang": "nav.tentang",
+  "/program": "nav.program",
+  "/alumni": "nav.alumni",
+  "/kegiatan": "nav.kegiatan",
+  "/berita": "nav.berita",
+  "/galeri": "nav.galeri",
+  "/kontak": "nav.kontak",
+};
 
 const MENU_ICONS: Record<string, ReactNode> = {
   "/": (
@@ -56,6 +70,8 @@ const MENU_ICONS: Record<string, ReactNode> = {
 };
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const { t } = useLanguage();
+
   return (
     <div
       className={`fixed inset-0 z-[60] flex flex-col bg-ink transition-all duration-300 md:hidden ${
@@ -73,7 +89,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         />
         <button
           onClick={onClose}
-          aria-label="Tutup menu"
+          aria-label={t("nav.tutupMenu")}
           className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition hover:bg-white/20"
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -83,8 +99,12 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       </div>
 
       <div className="flex flex-1 flex-col justify-center gap-1 px-8 pb-8">
-        {NAV_LINKS.map((link) =>
-          link.href === "/tentang" ? (
+        <div className="mb-4 flex justify-center">
+          <LanguageSwitcher onDark />
+        </div>
+        {NAV_LINKS.map((link) => {
+          const label = t(NAV_LABEL_KEY[link.href] ?? "nav.beranda");
+          return link.href === "/tentang" ? (
             <a
               key={link.href}
               href="#tentang"
@@ -92,18 +112,20 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white transition-colors hover:text-primary-light"
             >
               {MENU_ICONS[link.href]}
-              {link.label}
+              {label}
             </a>
           ) : (
-            <span
+            <Link
               key={link.href}
-              className="flex cursor-pointer items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white transition-colors hover:text-primary-light"
+              href={link.href}
+              onClick={onClose}
+              className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white transition-colors hover:text-primary-light"
             >
               {MENU_ICONS[link.href]}
-              {link.label}
-            </span>
-          )
-        )}
+              {label}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

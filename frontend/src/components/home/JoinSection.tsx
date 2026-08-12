@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
+import { useLanguage } from "@/lib/i18n";
 
 export default function JoinSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-16 sm:py-24">
       <Container>
@@ -34,18 +39,18 @@ export default function JoinSection() {
               <Reveal delay={0}>
                 <div className=" inline-flex items-center gap-2.5  px-1 py-1.5 text-xs font-bold tracking-[0.15em] text-[#e8555c] backdrop-blur-md">
                   
-                  MARI BERGABUNG
+                  {t("join.eyebrow")}
                 </div>
               </Reveal>
               
               {/* Judul Utama dengan Balance Text Property (Native Tailwind / CSS) */}
               <Reveal delay={150}>
                 <h2 className="text-balance font-mona text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl lg:leading-[1.15]">
-                  Alumni Pemagangan Kerja Asal Cianjur? <br className="hidden sm:block" />
+                  {t("join.heading")} <br className="hidden sm:block" />
                 </h2>
                 <h3 className="text-balance font-mona text-3xl font-extrabold">
                   <span className="mt-2 inline-block bg-gradient-to-r  from-[#C62930] to-[#ff7e84] bg-clip-text text-transparent">
-                    Daftarkan Diri Anda.
+                    {t("join.subtitle")}
                   </span>
                 </h3>
               </Reveal>
@@ -53,7 +58,7 @@ export default function JoinSection() {
               {/* Deskripsi */}
               <Reveal delay={300}>
                 <p className="mt-6 max-w-md text-base leading-relaxed text-zinc-400 sm:text-lg">
-                  Perluas jejaring, ikuti kegiatan eksklusif, dan berkontribusi untuk kampung halaman bersama ratusan alumni lainnya dalam satu platform.
+                  {t("join.desc")}
                 </p>
               </Reveal>
 
@@ -65,7 +70,7 @@ export default function JoinSection() {
                   size="lg"
                   className="group btn-shine relative flex w-full items-center justify-center gap-3 overflow-hidden !rounded-full bg-[#C62930] !px-8 py-4 font-semibold text-white shadow-[0_0_30px_rgba(198,41,48,0.25)] transition-all duration-300 hover:bg-[#a52127] hover:shadow-[0_0_40px_rgba(198,41,48,0.4)] sm:w-auto"
                 >
-                  Hubungi Kami Sekarang
+                  {t("join.cta")}
                   <svg
                     className="h-4 w-4 transition-transform duration-300 group-hover:scale-110"
                     fill="currentColor"

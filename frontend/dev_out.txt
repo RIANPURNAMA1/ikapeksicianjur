@@ -1,0 +1,176 @@
+
+> ikapeksi-cianjur-frontend@1.0.0 dev
+> next dev
+
+   ▲ Next.js 15.5.23
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.21:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 13.6s
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 50.5s (709 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /admin 200 in 53339ms
+ GET /admin 200 in 2355ms
+ ○ Compiling / ...
+ ✓ Compiled / in 9.3s (739 modules)
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 8585ms
+ GET / 200 in 16113ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 2.9s (471 modules)
+ GET /icon.png 200 in 5148ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 2299ms
+ ✓ Compiled in 3.1s (739 modules)
+ GET / 200 in 1863ms
+ GET /admin 200 in 631ms
+ ○ Compiling /tentang ...
+ ✓ Compiled /tentang in 3.1s (747 modules)
+ GET /tentang 200 in 5119ms
+ GET / 200 in 446ms
+ ✓ Compiled in 5.1s (761 modules)
+ GET / 200 in 1649ms
+ GET /admin 200 in 392ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 3.7s (761 modules)
+ ⨯ ReferenceError: Link is not defined
+    at eval (src\components\layout\MobileMenu.tsx:117:14)
+    at Array.map (<anonymous>)
+    at MobileMenu (src\components\layout\MobileMenu.tsx:104:20)
+  115 |             </a>
+  116 |           ) : (
+> 117 |             <Link
+      |              ^
+  118 |               key={link.href}
+  119 |               href={link.href}
+  120 |               onClick={onClose} {
+  digest: '2650394362'
+}
+ GET /admin 200 in 5372ms
+ GET / 500 in 7178ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 4.9s (492 modules)
+ GET /icon.png 200 in 6602ms
+ ○ Compiling /admin/pendaftaran ...
+ ✓ Compiled /admin/pendaftaran in 7.3s (785 modules)
+ GET /icon.png 200 in 8576ms
+ GET /admin/pendaftaran 200 in 11529ms
+ GET /icon.png 200 in 715ms
+ GET /admin/pendaftaran 200 in 972ms
+ ○ Compiling /admin/pengaturan ...
+ ✓ Compiled /admin/pengaturan in 3.2s (779 modules)
+ GET /admin/pengaturan 200 in 4563ms
+ GET /icon.png 200 in 482ms
+ GET /icon.png 200 in 69ms
+ GET /icon.png 200 in 81ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 2262ms
+ ○ Compiling /admin/berita ...
+ ✓ Compiled /admin/berita in 11.8s (894 modules)
+ GET /admin/berita 200 in 13703ms
+ ✓ Compiled in 18.8s (886 modules)
+ GET / 200 in 2585ms
+ GET /admin/berita 200 in 738ms
+ ✓ Compiled in 4.9s (886 modules)
+ GET / 200 in 1847ms
+ GET /admin/berita 200 in 881ms
+ ✓ Compiled in 5.3s (886 modules)
+ GET / 200 in 1649ms
+ GET /admin/berita 200 in 403ms
+ ✓ Compiled in 4.4s (886 modules)
+ GET / 200 in 1431ms
+ GET /admin/berita 200 in 355ms
+ ✓ Compiled in 5.5s (886 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 4039ms
+ GET /admin/berita 200 in 3060ms
+ GET / 200 in 3103ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 3.4s (557 modules)
+ GET /icon.png 200 in 4644ms
+ ✓ Compiled in 3.8s (886 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 1412ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 2167ms
+ GET /admin/berita 200 in 812ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 2.3s (557 modules)
+ GET /icon.png 200 in 2904ms
+ ✓ Compiled in 3.5s (903 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 2028ms
+ GET /admin/berita 200 in 1625ms
+ GET / 200 in 1749ms
+ GET /icon.png 200 in 393ms
+ ✓ Compiled in 5.8s (903 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 1109ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET /admin/berita 200 in 2324ms
+ GET / 200 in 2712ms
+ GET /icon.png 200 in 203ms
+ ✓ Compiled in 3s (903 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 1638ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 2670ms
+ GET /admin/berita 200 in 1168ms
+ GET /icon.png 200 in 216ms
+ ⨯ ./src/lib/i18n.tsx
+Error:   [31mx[0m Expected ';', '}' or <eof>
+     ,-[[36;1;4mC:\Users\Admin\Documents\PROJECT\ikapeksi-cianjur-frontend\frontend\src\lib\i18n.tsx[0m:199:1]
+ [2m196[0m | 
+ [2m197[0m | 
+ [2m198[0m |   // ===== FOOTER =====
+ [2m199[0m |   "footer.description":
+     : [35;1m  ^^^^^^^^^^|^^^^^^^^^[0m[33;1m^[0m
+     :             [35;1m`-- [35;1mThis is the expression part of an expression statement[0m[0m
+ [2m200[0m |     "チアンジュール県出身の海外研修同窓生の交流の場であり、その能力を活かします。",
+ [2m201[0m |   "footer.navigasi": "ナビゲーション",
+ [2m202[0m |   "footer.lainnya": "その他",
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/lib/i18n.tsx
+./src/components/home/AboutPreview.tsx
+ ✓ Compiled in 6.7s (886 modules)
+ GET / 200 in 2334ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 1956ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 2.3s (557 modules)
+ GET /icon.png 200 in 3414ms
+ ✓ Compiled in 7.5s (886 modules)
+ GET / 200 in 1366ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 2.1s (557 modules)
+ GET /icon.png 200 in 3393ms
+ GET /icon.png 200 in 144ms
+ GET /icon.png 200 in 69ms
+ GET /icon.png 200 in 80ms
+ ✓ Compiled in 4.4s (903 modules)
+ GET / 200 in 893ms
+ GET /icon.png 200 in 148ms
+ GET /icon.png 200 in 68ms
+ GET /icon.png 200 in 62ms
+ GET /icon.png 200 in 68ms
