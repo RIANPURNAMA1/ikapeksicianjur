@@ -23,13 +23,11 @@ export default function HomePage() {
         <AboutPreview />
       </Reveal>
       <Reveal>
-        <WhyIkapeksi />
-      </Reveal>
-      <Reveal>
-        <VisionMissionPreview />
-      </Reveal>
-      <Reveal>
-        <JoinSection />
+        <div className="bg-[linear-gradient(to_bottom,#120708_0%,#1a0a0d_35%,#200c10_65%,#0a0304_100%)]">
+          <WhyIkapeksi />
+          <VisionMissionPreview />
+          <JoinSection />
+        </div>
       </Reveal>
       {/* <ProgramPreview />
       <AlumniPreview />

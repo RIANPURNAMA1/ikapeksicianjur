@@ -22,7 +22,9 @@ const reasons = [
 
 export default function WhyIkapeksi() {
   return (
-    <section className="bg-gradient-to-b from-[#120708] via-[#160809] to-[#1a0a0d] py-24 text-white">
+    <section className="relative overflow-hidden py-24 text-white">
+      {/* Pattern Latar Belakang */}
+      <div className="absolute inset-0 bg-grid-squares bg-[length:24px_24px] opacity-10 mix-blend-overlay pointer-events-none" />
       <Container className="relative z-10">
         
         {/* =========================================
@@ -82,7 +84,6 @@ export default function WhyIkapeksi() {
             </Reveal>
           ))}
         </div>
-        
       </Container>
     </section>
   );

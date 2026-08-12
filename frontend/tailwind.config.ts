@@ -36,6 +36,7 @@ const config: Config = {
       },
       backgroundImage: {
         "stamp-lines": "repeating-linear-gradient(135deg, rgba(198,41,48,0.06) 0px, rgba(198,41,48,0.06) 1px, transparent 1px, transparent 10px)",
+        "grid-squares": "linear-gradient(rgba(198,41,48,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(198,41,48,0.06) 1px, transparent 1px)",
       },
       boxShadow: {
         card: "0 1px 2px rgba(17,17,17,0.04), 0 8px 24px rgba(17,17,17,0.06)",
