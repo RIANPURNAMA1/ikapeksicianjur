@@ -522,13 +522,71 @@ export default function PendataanForm() {
           <h1 className="mt-5 text-3xl font-extrabold leading-tight sm:text-4xl">
             Registrasi Data Alumni, Calon Alumni & Binaan UMKM
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
+                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
             Lengkapi data sesuai kategori Anda. Formulir akan menyesuaikan kebutuhan data secara
             otomatis setelah memilih kategori di bawah.
           </p>
+
+          {/* Penjelasan & Manfaat Pendataan */}
+          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-sm leading-relaxed text-white/80">
+            <div className="rounded-2xl border border-white/5 bg-white/5 p-6 text-center">
+              <p className="mb-2 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-primary">
+                <span>🇮🇩</span> 🇯🇵 <span>Mari Bersatu</span>
+              </p>
+              <p className="mt-1 text-base font-semibold text-white">
+                dalam Satu Data, Satu Jaringan, dan Satu Semangat Membangun Negeri
+              </p>
+            </div>
+
+            <p className="max-w-2xl text-center">
+              DPc IKAPEKSI menginisiasi{" "}
+              <span className="font-semibold text-white">Pendataan Alumni jepang/Kerja Jepang</span>{" "}
+              sebagai langkah strategis untuk membangun database alumni yang akurat, terintegrasi, dan
+              bermanfaat bagi seluruh alumni di Cianjur. Pendataan ini terbuka untuk seluruh alumni
+              Jepang, baik yang sudah menjadi anggota IKAPEKSI maupun yang belum bergabung.
+            </p>
+
+            <div className="grid gap-3 pt-2 sm:grid-cols-2">
+              {[
+                "Direktori Nasional Alumni Kenshusei",
+                "Business Matching antar alumni",
+                "Peluang kerja sama bisnis & investasi",
+                "Informasi buyer dan peluang ekspor ke Jepang",
+                "Pelatihan, sertifikasi, dan pengembangan SDM",
+                "Informasi lowongan kerja & rekrutmen",
+                "Program pemberdayaan UMKM alumni",
+                "Dasar penyusunan program nasional IKAPEKSI",
+              ].map((manfaat) => (
+                <div
+                  key={manfaat}
+                  className="flex items-start gap-2.5 rounded-lg border border-white/5 bg-white/5 p-3"
+                >
+                  <span className="mt-0.5 text-base" aria-hidden="true">
+                    ✅
+                  </span>
+                  <span>{manfaat}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="flex items-center justify-center gap-2 text-center text-sm">
+              <span aria-label="Estimasi waktu" title="Estimasi waktu">
+                ⏱️
+              </span>
+              <span>
+                <span className="font-semibold text-white">Waktu pengisian hanya sekitar 2 menit.</span>
+              </span>
+            </p>
+
+            <p className="text-center italic">
+              Mari bersama membangun kekuatan jaringan alumni Kenshusei Indonesia melalui satu data
+              yang akurat dan bermanfaat.
+            </p>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-10 space-y-6">
+
           {/* STEP 1: Saya Adalah */}
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
             <div className="mb-6 flex items-center gap-3">

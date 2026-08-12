@@ -48,7 +48,7 @@ export default function VisionMissionPreview() {
             </div>
             
             {/* Teks Visi Utama */}
-            <h2 className="text-balance font-mona text-4xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl">
+                        <h2 className="text-balance font-mona text-4xl font-extrabold leading-[1.15] tracking-tight bg-gradient-to-r from-white via-white to-[#C62930]/55 bg-clip-text text-transparent sm:text-5xl lg:text-6xl">
               {t("vision.title")}
             </h2>
             

@@ -174,3 +174,67 @@ Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
  GET /icon.png 200 in 68ms
  GET /icon.png 200 in 62ms
  GET /icon.png 200 in 68ms
+ ○ Compiling /program ...
+ ✓ Compiled /program in 10.3s (894 modules)
+ GET /program 200 in 13341ms
+ GET /program 200 in 483ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 1056ms (564 modules)
+ GET /icon.png 200 in 2123ms
+ GET /icon.png 200 in 52ms
+ GET /program 200 in 1416ms
+ GET /icon.png 200 in 120ms
+ GET / 200 in 317ms
+ GET / 200 in 226ms
+ ✓ Compiled in 6.6s (876 modules)
+ GET / 200 in 3337ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 1744ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 2.1s (546 modules)
+ GET /icon.png 200 in 3406ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 1262ms
+ GET /icon.png 200 in 82ms
+ GET / 200 in 1135ms
+ GET /icon.png 200 in 134ms
+ ✓ Compiled in 7.9s (876 modules)
+ GET / 200 in 3111ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 1319ms (546 modules)
+ GET /icon.png 200 in 3049ms
+ GET /icon.png 200 in 83ms
+ GET /icon.png 200 in 121ms
+ GET /icon.png 200 in 96ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 2885ms
+ GET /icon.png 200 in 188ms
+ ✓ Compiled in 4.3s (893 modules)
+ GET / 200 in 878ms
+ GET /icon.png 200 in 291ms
+ GET /icon.png 200 in 94ms
+ GET /icon.png 200 in 92ms
+ GET /icon.png 200 in 123ms
+ ✓ Compiled in 8.1s (876 modules)
+ GET / 200 in 3169ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 2.1s (546 modules)
+ GET /icon.png 200 in 3031ms
+ GET /icon.png 200 in 65ms
+ GET /icon.png 200 in 101ms
+ GET /icon.png 200 in 72ms
+ ○ Compiling /pendataan ...
+ ✓ Compiled /pendataan in 3.7s (891 modules)
+ GET /pendataan 200 in 4904ms
+ ✓ Compiled in 16.1s (883 modules)
+ GET /pendataan 200 in 3521ms
+ ✓ Compiled in 20.4s (883 modules)
+ GET /pendataan 200 in 1273ms
+ ✓ Compiled in 2.9s (883 modules)
+ GET /pendataan 200 in 647ms
+ ✓ Compiled in 3.8s (883 modules)
+ GET /pendataan 200 in 1347ms
+ GET / 200 in 237ms
