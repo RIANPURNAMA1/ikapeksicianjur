@@ -28,7 +28,7 @@ export default function JoinSection() {
           <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-end gap-8 px-6 pt-12 sm:px-12 sm:pt-16 lg:grid-cols-2 lg:gap-16 lg:px-16 lg:pt-20">
             
             {/* Kolom Konten Teks */}
-            <div className="order-1 flex flex-col items-center pb-12 text-center lg:order-2 lg:items-start lg:pb-24 lg:text-left">
+            <div className="order-2 flex flex-col items-center pb-12 text-center lg:order-2 lg:items-start lg:pb-24 lg:text-left">
               
               {/* Eyebrow Tag dengan Pulsing Animation */}
               <Reveal delay={0}>
@@ -80,7 +80,7 @@ export default function JoinSection() {
             </div>
 
             {/* Kolom Gambar */}
-            <Reveal delay={600} className="order-2 lg:order-1">
+            <Reveal delay={600} className="order-1 lg:order-1">
               <div className="relative mx-auto w-full max-w-[340px] lg:max-w-none">
                 <div className="relative pt-8 lg:pt-0">
                   <Image
