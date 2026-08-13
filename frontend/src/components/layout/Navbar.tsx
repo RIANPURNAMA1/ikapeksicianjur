@@ -156,34 +156,37 @@ export default function Navbar() {
           </div>
 
           {/* =========================
-              MOBILE MENU BUTTON
+              MOBILE: LANGUAGE SWITCHER + HAMBURGER
           ========================== */}
-          <button
-            onClick={toggle}
-            aria-label={t("nav.bukaMenu")}
-            aria-expanded={isOpen}
-            className={cn(
-              "btn-focus flex h-10 w-10 shrink-0 items-center justify-center",
-              "transition-colors lg:hidden",
-              scrolled
-                ? "text-ink/70 hover:text-ink hover:bg-ink/5"
-                : "text-white/70 hover:text-white hover:bg-white/10"
-            )}
-          >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
+          <div className="flex shrink-0 items-center gap-2 lg:hidden">
+            <LanguageSwitcher onDark={!scrolled} />
+            <button
+              onClick={toggle}
+              aria-label={t("nav.bukaMenu")}
+              aria-expanded={isOpen}
+              className={cn(
+                "btn-focus flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
+                "transition-colors",
+                scrolled
+                  ? "text-ink/70 hover:text-ink hover:bg-ink/5"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              )}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </Container>
       </header>

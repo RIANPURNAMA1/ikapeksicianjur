@@ -34,9 +34,9 @@ const id: TranslationMessages = {
 
   // ===== HERO =====
   "hero.eyebrow": "KOMUNITAS ALUMNI JEPANG KABUPATEN CIANJUR",
-  "hero.line1": "Satu Paspor",
-  "hero.line2": "Pengalaman,",
-  "hero.line3": "Seribu Langkah",
+  "hero.line1": "KOMUNITAS PEJUANG",
+  "hero.line2": "INDONESIA - JEPANG",
+  "hero.line3": "KABUPATEN CIANJUR",
   "hero.supportedBy": "Didukung oleh",
   "hero.description":
     "{name} menghimpun alumni pemagangan kerja luar negeri asal Cianjur untuk terus tumbuh, berbagi ilmu, dan membangun kampung halaman bersama.",
@@ -120,9 +120,9 @@ const ja: TranslationMessages = {
 
   // ===== HERO =====
   "hero.eyebrow": "チアンジュール県 日本研修同窓会コミュニティ",
-  "hero.line1": "一つのパスポート",
-  "hero.line2": "経験、",
-  "hero.line3": "千の一歩",
+  "hero.line1": "インドネシア-日本",
+  "hero.line2": "コミュニティ",
+  "hero.line3": "チアンジュール県",
   "hero.supportedBy": "支援元",
   "hero.description":
     "{name}は、故郷チアンジュール出身の海外研修同窓生を結集し、共に成長し、知識を共有し、故郷を発展させることを目指しています。",
