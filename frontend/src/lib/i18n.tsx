@@ -33,10 +33,10 @@ const id: TranslationMessages = {
   "nav.tutupMenu": "Tutup menu",
 
   // ===== HERO =====
-  "hero.eyebrow": "KOMUNITAS ALUMNI JEPANG KABUPATEN CIANJUR",
-  "hero.line1": "KOMUNITAS PEJUANG",
-  "hero.line2": "INDONESIA - JEPANG",
-  "hero.line3": "KABUPATEN CIANJUR",
+  "hero.eyebrow": "KOMUNITAS PEJUANG INDONESIA - JEPANG KABUPATEN CIANJUR",
+  "hero.line1": "SATU PASPOR",
+  "hero.line2": "PENGALAMAN,",
+  "hero.line3": "SERIBU LANGKAH",
   "hero.supportedBy": "Didukung oleh",
   "hero.description":
     "Ikatan Pengusaha Kenshusei Indonesia - Cianjur menghimpun Alumni, praktisi dan yg mau jadi pejuang indonesia jepang untuk terus tumbuh, berbagi ilmu dan membangun kampung halaman bersama.",
@@ -119,10 +119,10 @@ const ja: TranslationMessages = {
   "nav.tutupMenu": "メニューを閉じる",
 
   // ===== HERO =====
-  "hero.eyebrow": "チアンジュール県 日本研修同窓会コミュニティ",
-  "hero.line1": "インドネシア-日本",
-  "hero.line2": "コミュニティ",
-  "hero.line3": "チアンジュール県",
+  "hero.eyebrow": "チアンジュール県 インドネシア・日本ファイターズコミュニティ",
+  "hero.line1": "ひとつのパスポート",
+  "hero.line2": "体験、",
+  "hero.line3": "千の歩み",
   "hero.supportedBy": "支援元",
   "hero.description":
     "{name}は、故郷チアンジュール出身の海外研修同窓生を結集し、共に成長し、知識を共有し、故郷を発展させることを目指しています。",
