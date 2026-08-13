@@ -64,13 +64,8 @@ export default function Footer() {
           <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">{t("footer.navigasi")}</h4>
           <ul className="mt-4 space-y-2 text-sm text-white/70">
             {NAV_LINKS.slice(0, 4).map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-white/70 transition-colors hover:text-primary-light"
-                >
-                  {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
-                </Link>
+              <li key={link.href} className="text-white/70">
+                {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
               </li>
             ))}
           </ul>
@@ -80,13 +75,8 @@ export default function Footer() {
           <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">{t("footer.lainnya")}</h4>
           <ul className="mt-4 space-y-2 text-sm text-white/70">
             {NAV_LINKS.slice(4).map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-white/70 transition-colors hover:text-primary-light"
-                >
-                  {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
-                </Link>
+              <li key={link.href} className="text-white/70">
+                {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
               </li>
             ))}
           </ul>
