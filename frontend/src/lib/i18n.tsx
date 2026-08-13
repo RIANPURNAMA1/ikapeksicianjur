@@ -39,7 +39,7 @@ const id: TranslationMessages = {
   "hero.line3": "KABUPATEN CIANJUR",
   "hero.supportedBy": "Didukung oleh",
   "hero.description":
-    "{name} menghimpun alumni pemagangan kerja luar negeri asal Cianjur untuk terus tumbuh, berbagi ilmu, dan membangun kampung halaman bersama.",
+    "Ikatan Pengusaha Kenshusei Indonesia - Cianjur menghimpun Alumni, praktisi dan yg mau jadi pejuang indonesia jepang untuk terus tumbuh, berbagi ilmu dan membangun kampung halaman bersama.",
   "hero.daftar": "Daftar Sekarang",
   "hero.konsultasi": "Konsultasi Gratis",
   "hero.slidePrev": "Slide sebelumnya",

@@ -204,3 +204,18 @@ Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
  GET /icon.png 200 in 80ms
  GET /icon.png 200 in 91ms
  GET /icon.png 200 in 87ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 2030ms
+ GET /icon.png 200 in 167ms
+ ✓ Compiled in 18.9s (760 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 4511ms
+Image with src "/images/carausel/talent-cs.webp" is using quality "90" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 200 in 3842ms
+ GET / 200 in 1181ms
+ GET / 200 in 1671ms
+ ○ Compiling /icon.png ...
+ ✓ Compiled /icon.png in 2.6s (491 modules)
+ GET /icon.png 200 in 5709ms
