@@ -81,7 +81,7 @@ export default function AdminLoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@ikapeksicianjur.or.id"
+              placeholder="email ..."
               autoComplete="username"
               className="btn-focus w-full rounded-md border border-white/15 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-primary"
             />
@@ -136,11 +136,7 @@ export default function AdminLoginPage() {
             {loading ? "Memeriksa..." : "Masuk"}
           </button>
 
-          <div className="mt-6 rounded-lg border border-dashed border-white/15 bg-ink/40 px-4 py-3 text-center text-xs text-white/60">
-            Akun demo — email: <span className="text-white/90">{DUMMY_ADMIN.email}</span>
-            <br />
-            kata sandi: <span className="text-white/90">{DUMMY_ADMIN.password}</span>
-          </div>
+         
         </form>
       </div>
     </div>
