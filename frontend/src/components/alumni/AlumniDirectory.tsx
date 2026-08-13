@@ -56,6 +56,7 @@ export default function AlumniDirectory() {
     <section className="py-20">
       <Container>
         <SectionHeading
+          as="h1"
           eyebrow="Direktori Alumni"
           title="Alumni Pemagangan Kerja Asal Cianjur"
           description={`Menampilkan ${filtered.length} dari ${alumniList.length} alumni terdaftar.`}

@@ -76,7 +76,7 @@ export default function BeritaBrowser() {
   return (
     <section className="py-20">
       <Container>
-        <SectionHeading eyebrow="Berita" title="Kabar dan Informasi Terbaru" />
+        <SectionHeading as="h1" eyebrow="Berita" title="Kabar dan Informasi Terbaru" />
         <div className="mt-10 grid gap-4 sm:grid-cols-[2fr_1fr]">
           <Input
             id="news-search"

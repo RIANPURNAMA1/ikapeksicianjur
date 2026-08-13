@@ -8,6 +8,9 @@ import { SITE } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
 
 const HERO_IMAGES = ["/images/carausel/carausel.webp"];
+const HERO_BLUR =
+  "data:image/webp;base64,UklGRhIBAABXRUJQVlA4IAYBAAAQBgCdASogABMAPxFwr1AsJiQisAgBgCIJYwDE3a+YyuOTqZJeCEHn6Tw9g6O002od/QdGX00c78AA/tc6GZ83hej0ct14+vgc8YBW/LarOJ1d7TTQCOJmw9qz483NG3gxGI4kQw3R4tBpedDUlYGzWQiCQx2TLcSg6v9VGgD/XEIerz2w13XQfz8pDHgc15TloS+gqwrIq++zeV76J3AhVvLaKqyUCzfhPaWnMJiWEXhy+C5NaJC4+t+Ib6GQxgUaj/SfZZLq8KakQ4lkAqtbflUxY9uKPGEiloyA2Kq2ue53JVYHEPNPnGcXIqvnG32Dc6WyKGK4xHGYEugmQYYJP/giQAAA";
+
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
@@ -42,10 +45,15 @@ export default function Hero() {
               idx === current ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image
+                                              <Image
               src={src}
               alt={`${SITE.name} hero background ${idx + 1}`}
               fill
+              sizes="100vw"
+              loading={idx === 0 ? "eager" : "lazy"}
+              placeholder="blur"
+              blurDataURL={HERO_BLUR}
+              quality={75}
               className="object-cover"
               priority={idx === 0}
             />

@@ -238,3 +238,10 @@ Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
  ✓ Compiled in 3.8s (883 modules)
  GET /pendataan 200 in 1347ms
  GET / 200 in 237ms
+ ○ Compiling /tentang ...
+ ✓ Compiled /tentang in 11.4s (550 modules)
+ GET /tentang 200 in 15739ms
+ ✓ Compiled in 17.1s (895 modules)
+ ✓ Compiled in 3s (895 modules)
+ ✓ Compiled in 2.3s (895 modules)
+ ✓ Compiled in 1746ms (895 modules)

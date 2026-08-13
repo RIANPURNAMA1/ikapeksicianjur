@@ -4,7 +4,7 @@ import Link from "next/link";
 import Container from "@/components/layout/Container";
 import AlumniProfile from "@/components/alumni/AlumniProfile";
 import { alumniList } from "@/data/alumni";
-import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, JsonLd, profileJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return alumniList.map((alumni) => ({ id: String(alumni.id) }));
@@ -39,6 +39,18 @@ export default async function AlumniDetailPage({
   return (
     <section className="py-20">
       <Container>
+        <JsonLd
+          data={profileJsonLd({
+            name: alumni.name,
+            image: alumni.photo,
+            description: alumni.bio,
+            url: `/alumni/${alumni.id}`,
+            jobTitle: alumni.field,
+            worksFor: alumni.company,
+            alumniOf: alumni.program,
+            addressLocality: `${alumni.district}, Cianjur`,
+          })}
+        />
         <JsonLd
           data={breadcrumbJsonLd({
             items: [

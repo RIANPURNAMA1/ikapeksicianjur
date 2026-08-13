@@ -48,6 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   alumniList.forEach((alumni) => {
     entries.push({
       url: `${base}/alumni/${alumni.id}`,
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.4,
     });

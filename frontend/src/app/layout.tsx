@@ -69,6 +69,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@ikapeksicianjur",
+    creator: "@ikapeksicianjur",
     title: SITE_TITLE,
     description: SITE.description,
     images: [DEFAULT_OG_IMAGE],

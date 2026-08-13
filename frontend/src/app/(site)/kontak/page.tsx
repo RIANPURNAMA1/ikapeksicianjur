@@ -5,10 +5,10 @@ import ContactInfo from "@/components/contact/ContactInfo";
 import SocialLinks from "@/components/contact/SocialLinks";
 import ContactForm from "@/components/contact/ContactForm";
 import { SITE } from "@/lib/constants";
-import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Kontak",
+  title: { absolute: "Kontak IKAPEKSI Cianjur" },
   description: `Hubungi DPC IKAPEKSI Cianjur — alamat ${SITE.address}, telepon, WhatsApp, dan email. Kami siap membantu alumni dan calon peserta pemagangan kerja.`,
   path: "/kontak",
 });
@@ -16,8 +16,16 @@ export const metadata: Metadata = buildMetadata({
 export default function KontakPage() {
   return (
     <section className="py-20">
+      <JsonLd
+        data={breadcrumbJsonLd({
+          items: [
+            { name: "Beranda", path: "/" },
+            { name: "Kontak IKAPEKSI Cianjur", path: "/kontak" },
+          ],
+        })}
+      />
       <Container>
-        <SectionHeading eyebrow="Kontak" title="Hubungi IKAPEKSI Cianjur" />
+        <SectionHeading as="h1" eyebrow="Kontak" title="Hubungi IKAPEKSI Cianjur" />
         <div className="mt-12 grid gap-12 md:grid-cols-2">
           <div>
             <ContactInfo />

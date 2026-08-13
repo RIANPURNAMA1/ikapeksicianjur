@@ -1,14 +1,26 @@
 import type { Metadata } from "next";
 import PendataanForm from "@/components/pendataan/PendataanForm";
-import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Pendataan & Registrasi",
+  title: { absolute: "Pendataan Alumni IKAPEKSI Cianjur" },
   description:
-    "Registrasi data alumni, calon alumni, dan binaan UMKM IKAPEKSI DPC Cianjur. Lengkapi data Anda untuk bergabung dalam program pemberdayaan.",
+    "Registrasi dan pendataan data alumni, calon alumni, dan binaan UMKM IKAPEKSI Cianjur. Lengkapi data Anda untuk bergabung dalam program pemberdayaan alumni pemagangan kerja.",
   path: "/pendataan",
 });
 
 export default function PendataanPage() {
-  return <PendataanForm />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd({
+          items: [
+            { name: "Beranda", path: "/" },
+            { name: "Pendataan Alumni IKAPEKSI Cianjur", path: "/pendataan" },
+          ],
+        })}
+      />
+      <PendataanForm />
+    </>
+  );
 }

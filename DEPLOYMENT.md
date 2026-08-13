@@ -121,9 +121,9 @@ composer --version
 ## 6. Persiapan Direktori Project
 
 ```bash
-sudo mkdir -p /var/www/ikapeksi
-sudo chown -R $USER:$USER /var/www/ikapeksi
-cd /var/www/ikapeksi
+sudo mkdir -p /var/www/ikapeksicianjur
+sudo chown -R $USER:$USER /var/www/ikapeksicianjur
+cd /var/www/ikapeksicianjur
 
 # Clone repository
 git clone <url-repository-anda> .
@@ -194,7 +194,7 @@ Di dalam prompt MySQL:
 
 ```sql
 CREATE DATABASE db_ikapeksi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'ikapeksi_user'@'localhost' IDENTIFIED BY '<password-kuat>';
+CREATE USER 'ikapeksi_user'@'localhost' IDENTIFIED BY 'PasswordKuat123!';
 GRANT ALL PRIVILEGES ON db_ikapeksi.* TO 'ikapeksi_user'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
@@ -230,7 +230,7 @@ php artisan tinker
 use App\Models\User;
 User::updateOrCreate(
     ['email' => 'admin@domain.com'],
-    ['name' => 'Admin', 'password' => bcrypt('password-kuat')]
+    ['name' => 'Admin', 'password' => bcrypt('admin123')]
 );
 ```
 
@@ -330,12 +330,12 @@ curl -I http://localhost:3000
 
 ### 9.1 Virtual Host Backend (`api.domain.com`)
 
-Buat file `/etc/nginx/sites-available/backend`:
+Buat file `/etc/nginx/sites-available/api.ikapeksicianjur`:
 
 ```nginx
 server {
     listen 80;
-    server_name api.domain.com;
+    server_name https://api.ikapeksicianjur.com;
 
     root /var/www/ikapeksi/backend/public;
     index index.php index.html;
@@ -373,23 +373,23 @@ server {
 Aktifkan:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/backend /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/api.ikapeksicianjur /etc/nginx/sites-enabled/
 ```
 
 ### 9.2 Virtual Host Frontend (`domain.com`)
 
-Buat file `/etc/nginx/sites-available/frontend`:
+Buat file `/etc/nginx/sites-available/ikapeksicianjur`:
 
 ```nginx
 server {
     listen 80;
-    server_name domain.com www.domain.com;
+    server_name ikapeksicianjur.com;
 
     access_log /var/log/nginx/ikapeksi-frontend.access.log;
     error_log  /var/log/nginx/ikapeksi-frontend.error.log;
 
     location / {
-        proxy_pass http://127.0.0.1:3000;
+        proxy_pass http://127.0.0.1:3005;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -408,7 +408,7 @@ server {
 Aktifkan dan tes konfigurasi:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/frontend /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/ikapeksicianjur /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -422,7 +422,7 @@ sudo systemctl reload nginx
 sudo apt install -y certbot python3-certbot-nginx
 
 # Generate SSL untuk kedua domain
-sudo certbot --nginx -d domain.com -d api.domain.com
+sudo certbot --nginx -d ikapeksicianjur.com -d api.ikapeksicianjur.com
 ```
 
 Certbot otomatis mengubah konfigurasi Nginx menjadi HTTPS dan menambah redirect.

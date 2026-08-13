@@ -16,7 +16,7 @@ export const KEYWORDS = [
 
 export function siteUrl(): string {
   const env = process.env.NEXT_PUBLIC_SITE_URL;
-  return (env ?? "https://ikapeksicianjur.or.id").replace(/\/+$/, "");
+  return (env ?? "https://ikapeksicianjur.com").replace(/\/+$/, "");
 }
 
 export function absoluteUrl(path = "/"): string {
@@ -184,6 +184,43 @@ export function breadcrumbJsonLd({ items }: BreadcrumbArgs): Record<string, unkn
       name: item.name,
       item: absoluteUrl(item.path),
     })),
+  };
+}
+
+interface ProfileJsonLdArgs {
+  name: string;
+  image?: string | null;
+  description?: string;
+  url: string;
+  jobTitle?: string;
+  worksFor?: string;
+  alumniOf?: string;
+  addressLocality?: string;
+}
+
+export function profileJsonLd({
+  name,
+  image,
+  description,
+  url,
+  jobTitle,
+  worksFor,
+  alumniOf,
+  addressLocality,
+}: ProfileJsonLdArgs): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name,
+    image: image ? absoluteUrl(image) : undefined,
+    description,
+    url: absoluteUrl(url),
+    jobTitle,
+    worksFor: worksFor ? { "@type": "Organization", name: worksFor } : undefined,
+    alumniOf: alumniOf ? { "@type": "EducationalOrganization", name: alumniOf } : undefined,
+    address: addressLocality
+      ? { "@type": "PostalAddress", addressLocality, addressCountry: "ID" }
+      : undefined,
   };
 }
 

@@ -48,7 +48,7 @@ const id: TranslationMessages = {
 
   // ===== ABOUT PREVIEW =====
   "about.eyebrow": "Tentang Kami",
-  "about.title": "Merajut Alumni, Membangun Cianjur",
+ "about.title": "Merajut Potensi, Membangun Cianjur",
   "about.description":
     "Sejak {year}, {name} menjadi rumah bersama alumni pemagangan kerja luar negeri asal Kabupaten Cianjur. Bukan sekadar silaturahmi — kami merajut pengalaman lintas kecamatan menjadi satu kekuatan untuk memajukan kampung halaman.",
   "about.forYou": "Tepat untuk Anda yang:",
@@ -62,7 +62,7 @@ const id: TranslationMessages = {
 
   // ===== WHY IKAPEKSI =====
   "why.eyebrow": "Mengapa IKAPEKSI",
-  "why.title": "Alasan Alumni Memilih Bergabung",
+  "why.title": "Alasan Memilih Bergabung",
   "why.subtitle":
     "4 pilar utama yang menjadi landasan kami — dirancang khusus untuk membangun ekosistem alumni yang solid dan berdampak nyata bagi masyarakat Cianjur.",
   "why.reasonLabel": "Alasan",
@@ -77,7 +77,7 @@ const id: TranslationMessages = {
 
   // ===== VISION & MISSION =====
   "vision.label": "Visi",
-  "vision.title": "Alumni Cianjur yang Mandiri dan Berdaya Saing.",
+  "vision.title": "Masyarakat Cianjur yang Mandiri dan Berdaya Saing.",
   "vision.desc":
     "Membangun ekosistem yang kuat untuk mengoptimalkan potensi setiap alumni dalam menghadapi tantangan ekonomi global.",
   "mission.label": "Misi Kami",

@@ -29,7 +29,13 @@ export default function WhyIkapeksi() {
   return (
     <section className="relative overflow-hidden py-24 text-white">
       {/* Pattern Latar Belakang */}
-      <div className="absolute inset-0 bg-grid-squares bg-[length:24px_24px] opacity-10 mix-blend-overlay pointer-events-none" />
+      <div
+        className="absolute inset-0 bg-grid-squares bg-[length:24px_24px] opacity-20 mix-blend-overlay pointer-events-none"
+        style={{
+          WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 60%, black 100%)",
+          maskImage: "linear-gradient(to bottom, transparent 0%, black 60%, black 100%)",
+        }}
+      />
       <Container className="relative z-10">
         {/* =========================================
             HEADER SECTION (Tanpa SectionHeading)

@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { NAV_LINKS, SITE, SOCIAL_LINKS } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
 import Container from "./Container";
@@ -64,7 +65,12 @@ export default function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-white/70">
             {NAV_LINKS.slice(0, 4).map((link) => (
               <li key={link.href}>
-                <span className="cursor-text">{t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}</span>
+                <Link
+                  href={link.href}
+                  className="text-white/70 transition-colors hover:text-primary-light"
+                >
+                  {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
+                </Link>
               </li>
             ))}
           </ul>
@@ -75,7 +81,12 @@ export default function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-white/70">
             {NAV_LINKS.slice(4).map((link) => (
               <li key={link.href}>
-                <span className="cursor-text">{t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}</span>
+                <Link
+                  href={link.href}
+                  className="text-white/70 transition-colors hover:text-primary-light"
+                >
+                  {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
+                </Link>
               </li>
             ))}
           </ul>
@@ -88,6 +99,12 @@ export default function Footer() {
             <li>{SITE.phone}</li>
             <li>{SITE.email}</li>
           </ul>
+          <Link
+            href="/pendataan"
+            className="btn-shine btn-focus mt-5 inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-primary-dark"
+          >
+            {t("nav.gabungAlumni")}
+          </Link>
           <div className="mt-5 flex gap-3">
             {SOCIAL_LINKS.map((social) => (
               <a

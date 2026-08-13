@@ -34,7 +34,7 @@ export default function AboutPreview() {
               <div className="group relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-zinc-800">
                 <Image
                   src="https://i.pinimg.com/736x/42/54/0e/42540e6878e714a67411afcd9595d91e.jpg"
-                  alt="Kegiatan 1"
+                  alt="Silaturahmi alumni IKAPEKSI Cianjur"
                   fill
                   sizes="(min-width: 768px) 250px, 45vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
@@ -43,7 +43,7 @@ export default function AboutPreview() {
               <div className="group relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-800">
                 <Image
                   src="https://i.pinimg.com/736x/56/b0/ad/56b0adb9b1f74af81806903b1a046fc0.jpg"
-                  alt="Kegiatan 2"
+                  alt="Pelatihan keterampilan alumni IKAPEKSI Cianjur"
                   fill
                   sizes="(min-width: 768px) 250px, 45vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
@@ -55,7 +55,7 @@ export default function AboutPreview() {
               <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-800">
                 <Image
                   src="https://i.pinimg.com/736x/5e/90/49/5e9049487ad487349a7b0eb83b922b3b.jpg"
-                  alt="Kegiatan 3"
+                  alt="Pemberdayaan UMKM binaan IKAPEKSI Cianjur"
                   fill
                   sizes="(min-width: 768px) 250px, 45vw"
                   className="object-cover"
@@ -64,7 +64,7 @@ export default function AboutPreview() {
               <div className="group relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-zinc-800">
                 <Image
                   src="https://i.pinimg.com/736x/67/a9/72/67a972176810f9ec4f754d0b1b1fb86e.jpg"
-                  alt="Kegiatan 4"
+                  alt="Kegiatan sosial komunitas alumni IKAPEKSI Cianjur"
                   fill
                   sizes="(min-width: 768px) 250px, 45vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"

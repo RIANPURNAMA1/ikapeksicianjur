@@ -11,13 +11,12 @@ import GalleryPreview from "@/components/home/GalleryPreview";
 import Testimonial from "@/components/home/Testimonial";
 import Reveal from "@/components/ui/Reveal";
 import JoinSection from "@/components/home/JoinSection";
-import { SITE } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: { absolute: `${SITE.name} | ${SITE.tagline}` },
+  title: { absolute: "IKAPEKSI Cianjur | Merajut Alumni, Membangun Cianjur" },
   description:
-    "Ikatan Alumni Pemagangan Kerja Sistem Indonesia (IKAPEKSI) DPC Cianjur — wadah silaturahmi dan pemberdayaan alumni pemagangan kerja luar negeri asal Kabupaten Cianjur.",
+    "IKAPEKSI Cianjur — Ikatan Alumni Pemagangan Kerja Sistem Indonesia DPC Cianjur. Wadah silaturahmi dan pemberdayaan alumni pemagangan kerja luar negeri asal Kabupaten Cianjur. Daftarkan diri Anda di sini.",
   path: "/",
 });
 
