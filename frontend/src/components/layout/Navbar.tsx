@@ -52,14 +52,11 @@ export default function Navbar() {
           >
             {/* Logo */}
             <Image
-              src="/images/logo/logo.png"
+              src={scrolled ? "/images/logo/logo.png" : "/images/logo/logo2.jpg"}
               alt={`${SITE.name} logo`}
               width={480}
               height={156}
-              className={cn(
-                "h-9 w-auto object-contain transition-all duration-300 xl:h-10",
-                !scrolled && "brightness-0 invert"
-              )}
+              className="h-9 w-auto object-contain transition-all duration-300 xl:h-10"
             />
           </Link>
 

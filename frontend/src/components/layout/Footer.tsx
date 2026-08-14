@@ -51,11 +51,11 @@ export default function Footer() {
       <Container className="grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Image
-            src="/images/logo/logo.png"
+            src="/images/logo/logo2.jpg"
             alt={`${SITE.name} logo`}
             width={240}
             height={78}
-            className="h-10 w-auto object-contain brightness-0 invert"
+            className="h-10 w-auto object-contain"
           />
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/60">{t("footer.description")}</p>
         </div>
