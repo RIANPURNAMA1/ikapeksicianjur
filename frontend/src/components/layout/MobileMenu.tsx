@@ -104,20 +104,21 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
         {NAV_LINKS.map((link) => {
           const label = t(NAV_LABEL_KEY[link.href] ?? "nav.beranda");
-          return link.href === "/tentang" ? (
-            <a
-              key={link.href}
-              href="#tentang"
-              onClick={onClose}
-              className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white transition-colors hover:text-primary-light"
-            >
-              {MENU_ICONS[link.href]}
-              {label}
-            </a>
-          ) : (
+          if (link.href !== "/") {
+            return (
+              <span
+                key={link.href}
+                className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white/50"
+              >
+                {MENU_ICONS[link.href]}
+                {label}
+              </span>
+            );
+          }
+          return (
             <Link
               key={link.href}
-              href={link.href}
+              href="/"
               onClick={onClose}
               className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white transition-colors hover:text-primary-light"
             >

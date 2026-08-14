@@ -8,7 +8,7 @@ export const SITE = {
   phone: "+62 895-3916-85825",
   whatsapp: "62895391685825",
   address: "Sindangasih, Kec. Karangtengah, Kabupaten Cianjur, Jawa Barat 43281",
-  mapEmbedQuery: "Cianjur, Jawa Barat",
+  mapEmbedQuery: "Sindangasih, Kec. Karangtengah, Kabupaten Cianjur, Jawa Barat 43281",
   foundedYear: 2016,
 };
 

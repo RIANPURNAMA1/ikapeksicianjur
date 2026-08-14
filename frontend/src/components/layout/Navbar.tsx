@@ -52,7 +52,7 @@ export default function Navbar() {
           >
             {/* Logo */}
             <Image
-              src={scrolled ? "/images/logo/logo.png" : "/images/logo/logo2.jpg"}
+              src={scrolled ? "/images/logo/logo1.png" : "/images/logo/logo2.jpg"}
               alt={`${SITE.name} logo`}
               width={480}
               height={156}
@@ -65,56 +65,50 @@ export default function Navbar() {
           ========================== */}
           <nav className="hidden h-full items-center gap-4 lg:flex xl:gap-6">
             {NAV_LINKS.map((link) => {
-              const active =
-                pathname === link.href ||
-                (link.href !== "/" && pathname.startsWith(`${link.href}/`));
-
-              const isTentang = link.href === "/tentang";
+              const isActive = pathname === link.href;
               const label = t(NAV_LABEL_KEY[link.href] ?? "nav.beranda");
+              const disabled = link.href !== "/";
 
-              return isTentang ? (
-                <a
-                  key={link.href}
-                  href="#tentang"
+              const baseClasses = cn(
+                "group relative h-full flex items-center text-[13px] font-medium transition-colors duration-200 xl:text-sm",
+                isActive
+                  ? scrolled
+                    ? "text-primary"
+                    : "text-white"
+                  : scrolled
+                    ? "text-ink/60 group-hover:text-primary"
+                    : "text-white/70 group-hover:text-white",
+                disabled && "pointer-events-none"
+              );
+
+              const underline = (
+                <span
                   className={cn(
-                    "group relative h-full flex items-center text-[13px] font-medium transition-colors duration-200 xl:text-sm",
-                    scrolled
-                      ? "text-ink/60 group-hover:text-primary"
-                      : "text-white/70 group-hover:text-white"
+                    "absolute bottom-0 left-0 right-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 ease-out",
+                    isActive
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
                   )}
-                >
-                  {label}
-                  <span
-                    className={cn(
-                      "absolute bottom-0 left-0 right-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 ease-out",
-                      "scale-x-0 group-hover:scale-x-100"
-                    )}
-                  />
-                </a>
-              ) : (
+                />
+              );
+
+              if (disabled) {
+                return (
+                  <span key={link.href} className={baseClasses}>
+                    {label}
+                    {underline}
+                  </span>
+                );
+              }
+
+              return (
                 <Link
                   key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "group relative h-full flex items-center text-[13px] font-medium transition-colors duration-200 xl:text-sm",
-                    active
-                      ? scrolled
-                        ? "text-primary"
-                        : "text-white"
-                      : scrolled
-                        ? "text-ink/60 group-hover:text-primary"
-                        : "text-white/70 group-hover:text-white"
-                  )}
+                  href="/"
+                  className={baseClasses}
                 >
                   {label}
-                  <span
-                    className={cn(
-                      "absolute bottom-0 left-0 right-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 ease-out",
-                      active
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100"
-                    )}
-                  />
+                  {underline}
                 </Link>
               );
             })}
