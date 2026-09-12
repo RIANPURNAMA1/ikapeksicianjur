@@ -183,7 +183,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
           <div className="mt-8 border-t border-white/10 bg-white/[0.03] px-6 py-8">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#e8555c]">
-              Struktur Organisasi
+              {t("about.structure.label")}
             </span>
 
             <div className="relative mt-6">
@@ -191,20 +191,20 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <ol className="space-y-5">
                 <StructureItem
                   type="nasional"
-                  name="DPP IKAPEKSI"
-                  desc="Dewan Pimpinan Pusat — tingkat nasional"
+                  name={t("about.structure.dpp.name")}
+                  desc={t("about.structure.dpp.desc")}
                 />
                 <StructureItem
                   type="provinsi"
-                  name="DPD Jawa Barat"
-                  desc="Dewan Pimpinan Daerah — tingkat provinsi"
+                  name={t("about.structure.dpd.name")}
+                  desc={t("about.structure.dpd.desc")}
                 />
                 <StructureItem
                   type="kabupaten"
-                  name="DPC Kabupaten Cianjur"
-                  desc="Cabang IKAPEKSI — rumah bersama alumni dan para pejuang kerja Jepang di Kabupaten Cianjur"
+                  name={t("about.structure.dpc.name")}
+                  desc={t("about.structure.dpc.desc")}
                   highlight
-                  badge="IKAPEKSI Cianjur"
+                  badge={t("about.structure.dpc.badge")}
                 />
               </ol>
             </div>
@@ -214,7 +214,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#e8555c]">
               {t("about.eyebrow")}
             </span>
-            <h3 className="mt-5 font-mona text-2xl font-extrabold leading-snug text-white">
+            <h3 className="mt-5 font-mona text-2xl font-normal leading-snug text-white">
               {t("about.title")}
             </h3>
             <p className="mt-4 text-sm leading-relaxed text-white/70">

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import AboutHero from "@/components/about/AboutHero";
-import OrganizationStory from "@/components/about/OrganizationStory";
+import AboutPreview from "@/components/home/AboutPreview";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -21,8 +20,7 @@ export default function TentangPage() {
           ],
         })}
       />
-      <AboutHero />
-      <OrganizationStory />
+      <AboutPreview />
     </>
   );
 }

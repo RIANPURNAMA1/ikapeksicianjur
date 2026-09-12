@@ -102,7 +102,7 @@ export default function Hero() {
 
       <div className="relative z-10 flex w-full flex-1">
         {/* Kolom Kiri: Ruang Kosong (Garis Vertikal Kiri) — terhubung ke Navbar & About */}
-        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-r border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+        <div className="border-stripe-r hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
 
         {/* Kolom Kanan: Konten Utama */}
         <div className="flex-1 w-full flex items-center pt-20 lg:pt-24">

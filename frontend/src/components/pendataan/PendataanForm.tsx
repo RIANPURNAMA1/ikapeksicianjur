@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import { apiFetch } from "@/lib/api";
+import { useLanguage } from "@/lib/i18n";
 import type { SelectOption } from "@/types/common";
 
 type Kategori = "alumni" | "calon-alumni" | "umkm-binaan";
@@ -230,6 +231,7 @@ function SectionCard({
 }
 
 export default function PendataanForm() {
+  const { t } = useLanguage();
   const [kategori, setKategori] = useState<Kategori | "">("");
   const [dataDiri, setDataDiri] = useState<DataDiriState>({
     nama: "",
@@ -501,11 +503,8 @@ export default function PendataanForm() {
         <Container className="mx-auto max-w-2xl text-center">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-10">
             <p className="text-4xl">✅</p>
-            <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">Registrasi Berhasil Terkirim!</h1>
-            <p className="mt-3 text-sm leading-relaxed text-white/70">
-              Terima kasih telah mengisi Registrasi IKAPEKSI. Data Anda akan segera diproses oleh
-              tim DPC IKAPEKSI Cianjur.
-            </p>
+            <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">{t("pendataan.successTitle")}</h1>
+            <p className="mt-3 text-sm leading-relaxed text-white/70">{t("pendataan.successDesc")}</p>
           </div>
         </Container>
       </section>
@@ -517,54 +516,42 @@ export default function PendataanForm() {
       <Container className="mx-auto max-w-4xl">
         <div className="text-center">
           <span className="stamp-label border-white/30 bg-white/10 text-white">
-            Registrasi IKAPEKSI
+            {t("pendataan.sectionLabel")}
           </span>
           <h1 className="mt-5 text-3xl font-extrabold leading-tight sm:text-4xl">
-            Registrasi Data Alumni, Calon Alumni & Binaan UMKM
+            {t("pendataan.title")}
           </h1>
                     <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
-            Lengkapi data sesuai kategori Anda. Formulir akan menyesuaikan kebutuhan data secara
-            otomatis setelah memilih kategori di bawah.
+            {t("pendataan.subtitle")}
           </p>
 
           {/* Penjelasan & Manfaat Pendataan */}
           <div className="mx-auto mt-8 max-w-3xl space-y-6 text-sm leading-relaxed text-white/80">
             <div className="rounded-2xl border border-white/5 bg-white/5 p-6 text-center">
               <p className="mb-2 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-primary">
-                <span>🇮🇩</span> 🇯🇵 <span>Mari Bersatu</span>
+               <span>{t("pendataan.uniteLabel")}</span>
               </p>
               <p className="mt-1 text-base font-semibold text-white">
-                dalam Satu Data, Satu Jaringan, dan Satu Semangat Membangun Negeri
+                {t("pendataan.uniteTagline")}
               </p>
             </div>
 
             <p className="max-w-2xl text-center">
-              DPc IKAPEKSI menginisiasi{" "}
-              <span className="font-semibold text-white">Pendataan Alumni jepang/Kerja Jepang</span>{" "}
-              sebagai langkah strategis untuk membangun database alumni yang akurat, terintegrasi, dan
-              bermanfaat bagi seluruh alumni di Cianjur. Pendataan ini terbuka untuk seluruh alumni
-              Jepang, baik yang sudah menjadi anggota IKAPEKSI maupun yang belum bergabung.
+              {t("pendataan.introLead")}{" "}
+              <span className="font-semibold text-white">{t("pendataan.introHighlight")}</span>{" "}
+              {t("pendataan.introTail")}
             </p>
 
             <div className="grid gap-3 pt-2 sm:grid-cols-2">
-              {[
-                "Direktori Nasional Alumni Kenshusei",
-                "Business Matching antar alumni",
-                "Peluang kerja sama bisnis & investasi",
-                "Informasi buyer dan peluang ekspor ke Jepang",
-                "Pelatihan, sertifikasi, dan pengembangan SDM",
-                "Informasi lowongan kerja & rekrutmen",
-                "Program pemberdayaan UMKM alumni",
-                "Dasar penyusunan program nasional IKAPEKSI",
-              ].map((manfaat) => (
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <div
-                  key={manfaat}
-                  className="flex items-start gap-2.5 rounded-lg border border-white/5 bg-white/5 p-3"
+                  key={n}
+                  className="flex items-start gap-2.5 rounded-lg border border-white/5 bg-white/5 p-3 placeholder:text-white/70"
                 >
                   <span className="mt-0.5 text-base" aria-hidden="true">
                     ✅
                   </span>
-                  <span>{manfaat}</span>
+                  <span>{t(`pendataan.benefit${n}`)}</span>
                 </div>
               ))}
             </div>
@@ -574,14 +561,19 @@ export default function PendataanForm() {
                 ⏱️
               </span>
               <span>
-                <span className="font-semibold text-white">Waktu pengisian hanya sekitar 2 menit.</span>
+                <span className="font-semibold text-white">{t("pendataan.estTime")}</span>
               </span>
             </p>
 
-            <p className="text-center italic">
-              Mari bersama membangun kekuatan jaringan alumni Kenshusei Indonesia melalui satu data
-              yang akurat dan bermanfaat.
+            <p className="mx-auto max-w-2xl text-center">
+              {t("pendataan.minuteLead")}{" "}
+              <span className="font-semibold text-white">{t("pendataan.minuteDoc")}</span>,{" "}
+              <span className="font-semibold text-white">{t("pendataan.minuteAcc")}</span>,{" "}
+              <span className="font-semibold text-white">{t("pendataan.minuteBiz")}</span>.{" "}
+              <span className="font-semibold text-[#e8555c]">{t("pendataan.minuteTail")}</span>
             </p>
+
+            <p className="text-center italic">{t("pendataan.closing")}</p>
           </div>
         </div>
 
@@ -594,16 +586,16 @@ export default function PendataanForm() {
                 1
               </span>
               <div>
-                <h2 className="text-lg font-bold leading-tight text-white">Saya Adalah *</h2>
-                <p className="text-xs text-white/50">Pilih kategori Anda untuk menampilkan form yang sesuai.</p>
+                <h2 className="text-lg font-bold leading-tight text-white">{t("pendataan.step1.title")} *</h2>
+                <p className="text-xs text-white/50">{t("pendataan.step1.subtitle")}</p>
               </div>
             </div>
             <div className="grid gap-4">
                 <Select
                   id="kategori"
-                  label="Kategori *"
-                  options={KATEGORI.map((k) => ({ value: k.value, label: k.label }))}
-                  placeholder="-- Pilih Kategori --"
+                  label={t("pendataan.kategoriLabel")}
+                  options={KATEGORI.map((k) => ({ value: k.value, label: t(`pendataan.kategori.${k.value}`) }))}
+                  placeholder={t("pendataan.kategoriPlaceholder")}
                   required
                   variant="dark"
                   value={kategori}
@@ -616,10 +608,10 @@ export default function PendataanForm() {
                     </span>
                     <div>
                       <p className="text-sm font-bold text-white">
-                        {KATEGORI.find((k) => k.value === kategori)?.label}
+                        {t(`pendataan.kategori.${kategori}`)}
                       </p>
                       <p className="text-xs text-white/60">
-                        {KATEGORI.find((k) => k.value === kategori)?.desc}
+                        {t(`pendataan.kategori.${kategori}.desc`)}
                       </p>
                     </div>
                   </div>
@@ -627,6 +619,8 @@ export default function PendataanForm() {
               </div>
           </div>
 
+          {/* Steps 2–8: dimmed & locked until kategori is selected */}
+          <div className={`space-y-6 transition-all duration-500 ${kategori ? "" : "pointer-events-none select-none opacity-40"}`}>
           {/* STEP 2: Data Diri */}
           <SectionCard step="2" title="Data Diri" subtitle="Isi data kontak yang valid untuk keperluan pendataan.">
             <Input
@@ -1128,6 +1122,7 @@ export default function PendataanForm() {
             >
               {submitting ? "Mengirim Data..." : "Daftar Sekarang"}
             </Button>
+          </div>
           </div>
         </form>
       </Container>

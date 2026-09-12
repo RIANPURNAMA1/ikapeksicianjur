@@ -3,6 +3,7 @@ import Statistics from "@/components/home/Statistics";
 import AboutPreview from "@/components/home/AboutPreview";
 import WhyIkapeksi from "@/components/home/WhyIkapeksi";
 import VisionMissionPreview from "@/components/home/VisionMissionPreview";
+import ProgramSection from "@/components/home/ProgramSection";
 import ProgramPreview from "@/components/home/ProgramPreview";
 import AlumniPreview from "@/components/home/AlumniPreview";
 import ActivityPreview from "@/components/home/ActivityPreview";
@@ -31,9 +32,10 @@ export default function HomePage() {
         <AboutPreview />
       </Reveal>
       <Reveal>
-        <div className="bg-[linear-gradient(to_bottom,#120708_0%,#1a0a0d_35%,#200c10_65%,#0a0304_100%)]">
+        <div className="bg-[#070707]">
           <WhyIkapeksi />
           <VisionMissionPreview />
+          <ProgramSection />
           <JoinSection />
         </div>
       </Reveal>

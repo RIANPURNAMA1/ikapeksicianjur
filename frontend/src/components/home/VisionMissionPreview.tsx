@@ -14,7 +14,7 @@ export default function VisionMissionPreview() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden text-white bg-[#070304]">
+    <section className="relative overflow-hidden text-white">
 
       {/* Background Pattern dengan gradasi ke atas & ke bawah */}
       <div
@@ -40,13 +40,13 @@ export default function VisionMissionPreview() {
         GRID UTAMA (3 KOLOM):
         Garis vertikal di sisi kiri dan kanan layar tetap dipertahankan agar menyambung.
       */}
-      <div className="relative z-10 flex w-full border-t border-white/15">
+      <div className="relative z-10 flex w-full border-t border-white/10">
 
         {/* Kolom 1: Ruang Kosong Kiri (Garis Vertikal Kiri) */}
-        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-r border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+        <div className="border-stripe-r hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
 
         {/* Kolom 2: Konten Tengah (Border tengah dihapus dengan menghilangkan divide-x) */}
-        <div className="flex-1 w-full grid lg:grid-cols-2 lg:items-center gap-16 lg:gap-24 py-24 sm:py-32 px-6 sm:px-12 lg:px-16 xl:px-24 bg-white/[0.02] backdrop-blur-sm">
+        <div className="flex-1 w-full grid lg:grid-cols-2 lg:items-center gap-16 lg:gap-24 py-24 sm:py-32 px-6 sm:px-12 lg:px-10 xl:px-24 bg-white/[0.02] backdrop-blur-sm">
 
           {/* KOLOM KIRI: VISI */}
           <Reveal
@@ -59,7 +59,7 @@ export default function VisionMissionPreview() {
               </span>
             </div>
 
-            <h2 className="bg-gradient-to-r from-white via-white to-[#C62930]/55 bg-clip-text text-balance font-mona text-4xl font-extrabold leading-[1.15] tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+            <h2 className="bg-gradient-to-r from-white via-white to-[#C62930]/55 bg-clip-text text-balance font-mona text-4xl font-normal leading-[1.15] tracking-tight text-transparent sm:text-5xl lg:text-6xl">
               {t("vision.title")}
             </h2>
 
@@ -82,7 +82,7 @@ export default function VisionMissionPreview() {
                 {missionKeys.map((key, idx) => (
                   <li
                     key={key}
-                    className="group relative flex items-start gap-6 border-b border-white/5 py-6 transition-colors duration-300 last:border-0 hover:border-white/10"
+                    className="group relative flex items-start gap-6 border-b border-white/10 py-6 transition-colors duration-300 last:border-0 hover:border-white/10"
                   >
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/5 font-mono text-sm font-bold text-zinc-500 transition-all duration-300 group-hover:bg-[#C62930] group-hover:text-white group-hover:shadow-[0_0_20px_rgba(198,41,48,0.4)]">
                       {String(idx + 1).padStart(2, "0")}
@@ -101,7 +101,7 @@ export default function VisionMissionPreview() {
         </div>
 
         {/* Kolom 3: Ruang Kosong Kanan (Garis Vertikal Kanan) */}
-        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-l border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+        <div className="border-stripe-l hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
 
       </div>
     </section>

@@ -60,7 +60,7 @@ function TimelineItem({
         }`}
       >
         <div className="flex flex-wrap items-center gap-2">
-          <p className="font-mona text-base font-extrabold leading-tight text-white">{name}</p>
+          <p className="font-mona text-base font-semibold leading-tight text-white">{name}</p>
           {highlight && badge && (
             <span className="rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-white">
               {badge}
@@ -85,22 +85,22 @@ export default function AboutPreview() {
         GRID UTAMA (3 KOLOM):
         Sama persis seperti section WhyIkapeksi agar garis vertikal sejajar lurus.
       */}
-      <div className="relative z-10 flex w-full border-t border-white/15">
+      <div className="relative z-10 flex w-full border-t border-white/10">
 
         {/* Kolom 1: Ruang Kosong Kiri (Garis Vertikal Kiri) */}
         {/* bg dan backdrop-blur juga diberikan ke bagian kolom kosong agar efek glassmorphism nya nyambung */}
-        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-r border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+        <div className="border-stripe-r hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
 
         {/* Kolom 2: Konten Tengah (Bagi 2 lagi untuk Kiri-Kanan) */}
         <div className="flex-1 w-full grid lg:grid-cols-2 divide-y divide-white/15 lg:divide-y-0 lg:divide-x bg-white/[0.02] backdrop-blur-sm">
 
           {/* Konten Kiri (Struktur Organisasi) */}
           {/* Hapus padding persentase (pl-[10%]), ganti dengan padding fix agar rapi karena margin layar sudah diatasi kolom 1 */}
-          <div className="py-16 px-6 sm:px-12 lg:py-24 lg:px-16 xl:px-24">
+          <div className="order-2 lg:order-1 py-16 px-6 sm:px-12 lg:py-24 lg:px-10 xl:px-24 flex flex-col justify-center">
             <Reveal delay={100}>
               <div className="py-4">
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#e8555c]">
-                  Struktur Organisasi
+                  {t("about.structure.label")}
                 </span>
 
                 <div className="relative mt-7">
@@ -109,20 +109,20 @@ export default function AboutPreview() {
                   <ol className="space-y-6">
                     <TimelineItem
                       icon={<StructureIcon type="nasional" />}
-                      name="DPP IKAPEKSI"
-                      desc="Dewan Pimpinan Pusat — tingkat nasional"
+                      name={t("about.structure.dpp.name")}
+                      desc={t("about.structure.dpp.desc")}
                     />
                     <TimelineItem
                       icon={<StructureIcon type="provinsi" />}
-                      name="DPD Jawa Barat"
-                      desc="Dewan Pimpinan Daerah — tingkat provinsi"
+                      name={t("about.structure.dpd.name")}
+                      desc={t("about.structure.dpd.desc")}
                     />
                     <TimelineItem
                       icon={<StructureIcon type="kabupaten" />}
-                      name="DPC Kabupaten Cianjur"
-                      desc="Cabang IKAPEKSI — rumah bersama alumni dan para pejuang kerja Jepang di Kabupaten Cianjur"
+                      name={t("about.structure.dpc.name")}
+                      desc={t("about.structure.dpc.desc")}
                       highlight
-                      badge="IKAPEKSI Cianjur"
+                      badge={t("about.structure.dpc.badge")}
                     />
                   </ol>
                 </div>
@@ -131,12 +131,12 @@ export default function AboutPreview() {
           </div>
 
           {/* Konten Kanan (Teks Penjelasan) */}
-          <div className="flex flex-col justify-center py-16 px-6 sm:px-12 lg:py-24 lg:px-16 xl:px-24 bg-white/[0.01]">
+          <div className="order-1 lg:order-2 flex flex-col justify-center py-16 px-6 sm:px-12 lg:py-24 lg:px-10 xl:px-24 bg-white/[0.01]">
             <Reveal delay={150}>
               <SectionHeading
                 eyebrow={t("about.eyebrow")}
                 title={t("about.title")}
-                className="[&_h2]:font-mona [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:from-55% [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_h2::after]:content-none  [&_span]:!bg-transparent  [&_span]:!border-0  [&_span]:!text-primary"
+                className="[&_h2]:font-mona [&_h2]:font-normal [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:from-55% [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_h2::after]:content-none  [&_span]:!bg-transparent  [&_span]:!border-0  [&_span]:!text-primary"
               />
             </Reveal>
 
@@ -158,7 +158,7 @@ export default function AboutPreview() {
         </div>
 
         {/* Kolom 3: Ruang Kosong Kanan (Garis Vertikal Kanan) */}
-        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-l border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+        <div className="border-stripe-l hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
 
       </div>
     </section>

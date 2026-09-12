@@ -27,7 +27,7 @@ export default function WhyIkapeksi() {
 
   return (
     // Hapus py-24 di sini agar garis vertikal bisa menyentuh ujung paling atas dan bawah
-    <section className="relative overflow-hidden text-white bg-[#070304]">
+    <section className="relative overflow-hidden text-white">
       {/* Pattern Latar Belakang */}
       <div
         className="absolute inset-0 bg-grid-squares bg-[length:24px_24px] opacity-10 mix-blend-overlay pointer-events-none"
@@ -41,29 +41,25 @@ export default function WhyIkapeksi() {
         GRID UTAMA (3 KOLOM):
         Menciptakan garis pinggir (vertikal) di kiri dan kanan layar yang menyambung.
       */}
-      <div className="relative z-10 flex w-full border-t border-white/15">
+      <div className="relative z-10 flex w-full border-t border-white/10">
         
         {/* Kolom 1: Ruang Kosong Kiri (Garis Vertikal Kiri) */}
         {/* Lebarnya disamakan dengan padding lg:pl-[10%] pada section Tentang */}
-        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] shrink-0" />
+        <div className="border-stripe-r hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
 
-        {/* Kolom 2: Konten Tengah — border kiri sebagai frame, garis kanan dipegang langsung oleh kartu kolom kanan */}
-        <div className="flex-1 w-full flex flex-col md:border-l border-white/15">
+        {/* Kolom 2: Konten Tengah — border kiri & kanan kini dipegang oleh kolom gutter, sama seperti section lain */}
+        <div className="flex-1 w-full flex flex-col">
           
           {/* =========================================
               HEADER SECTION
               ========================================= */}
-          <div className="px-6 py-20 lg:py-24 flex flex-col items-center text-center md:border-r border-white/15">
+          <div className="px-6 py-20 lg:py-24 flex flex-col items-center text-center">
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#C62930]/20 bg-[#C62930]/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#C62930]">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C62930] opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#C62930]"></span>
-                </span>
+              <span className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-[#e8555c]">
                 {t("why.eyebrow")}
               </span>
 
-              <h2 className="mt-6 font-mona text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-br from-white to-white/50 bg-clip-text text-transparent">
+              <h2 className="mt-6 font-mona text-3xl font-normal tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-br from-white to-white/50 bg-clip-text text-transparent">
                 {t("why.title")}
               </h2>
 
@@ -77,15 +73,14 @@ export default function WhyIkapeksi() {
               GRID KARTU ALASAN (2x2)
               ========================================= */}
           {/* Ada border-t pemisah antara Teks Header dan Kartu di bawahnya */}
-          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/15 bg-white/[0.01] backdrop-blur-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/10 bg-white/[0.01] backdrop-blur-sm">
             {reasons.map((reason, idx) => {
               // Logika penempatan garis pembatas (border) agar tidak dobel/tumpang tindih
               const borderClasses = `
-                border-white/15 
+                border-white/10 
                 ${idx === 0 ? "border-b md:border-r" : ""}
-                ${idx === 1 ? "border-b md:border-r" : ""}
+                ${idx === 1 ? "border-b" : ""}
                 ${idx === 2 ? "border-b md:border-b-0 md:border-r" : ""}
-                ${idx === 3 ? "md:border-r" : ""}
               `;
 
               return (
@@ -122,7 +117,7 @@ export default function WhyIkapeksi() {
         </div>
 
         {/* Kolom 3: Ruang Kosong Kanan (Garis Vertikal Kanan) */}
-        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] shrink-0" />
+        <div className="border-stripe-l hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
       
       </div>
     </section>

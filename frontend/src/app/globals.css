@@ -38,6 +38,40 @@ body {
     background: linear-gradient(135deg, transparent 50%, #FAF7F5 50%);
   }
 
+  /* Vertical "garis-garis" (striped) border — replaces the plain 1px separator
+     with a band of diagonal lines aligned to the edge */
+  .border-stripe-l,
+  .border-stripe-r {
+    position: relative;
+  }
+  @media (min-width: 768px) {
+    .border-stripe-l::before,
+    .border-stripe-r::after {
+      content: "";
+      position: absolute;
+      top: 60px;
+      bottom: 60px;
+      width: 9px;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(198, 41, 48, 0.5) 0px,
+        rgba(198, 41, 48, 0.5) 5px,
+        transparent 5px,
+        transparent 13px
+      );
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
+      mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
+    }
+    .border-stripe-l::before {
+      left: -1px;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .border-stripe-r::after {
+      right: -1px;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+
   .section-heading-underline {
     @apply relative inline-block;
   }
