@@ -30,7 +30,7 @@ export default function Hero() {
   }, [next]);
 
   return (
-    <section className="relative -mt-16 flex min-h-screen items-center overflow-hidden bg-ink text-white pt-20 lg:pt-24">
+    <section className="relative -mt-16 flex min-h-screen flex-col overflow-hidden bg-ink text-white">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-stamp-lines opacity-10 mix-blend-overlay" />
       <div className="absolute left-0 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px] pointer-events-none" />
@@ -100,14 +100,20 @@ export default function Hero() {
         ))}
       </div>
 
-      <Container className="relative z-10 grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-8">
+      <div className="relative z-10 flex w-full flex-1">
+        {/* Kolom Kiri: Ruang Kosong (Garis Vertikal Kiri) — terhubung ke Navbar & About */}
+        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-r border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+
+        {/* Kolom Kanan: Konten Utama */}
+        <div className="flex-1 w-full flex items-center pt-20 lg:pt-24">
+          <Container className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-8">
         {/* Kolom Kiri: Tipografi & CTA */}
         <div className="flex flex-col justify-center lg:pr-8">
           <span className="text-sm font-semibold tracking-widest text-white/70 uppercase mb-4">
             {t("hero.eyebrow")}
           </span>
 
-          <h1 className="text-[2.6rem] font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.5rem] uppercase">
+          <h1 className="font-jakarta text-[2.6rem] font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.5rem] uppercase">
             <span className="block">{t("hero.line1")}</span>
             <span className="block">{t("hero.line2")}</span>
             <span className="block text-primary-light mt-2">{t("hero.line3")}</span>
@@ -156,6 +162,8 @@ export default function Hero() {
           <div className="absolute bottom-0 w-[120%] h-[110%] max-w-[800px] -mr-8 lg:-mr-16" />
         </div>
       </Container>
+        </div>
+      </div>
     </section>
   );
 }

@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
-}
-
 html,
 body {
   scroll-behavior: smooth;

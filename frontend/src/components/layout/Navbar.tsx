@@ -37,8 +37,8 @@ export default function Navbar() {
           scrolled
             ? "border-paper-line bg-white/95 backdrop-blur shadow-sm"
             : pathname === "/"
-              ? "border-transparent bg-transparent"
-              : "border-transparent bg-ink"
+              ? "border-white/15 bg-transparent"
+              : "border-white/15 bg-ink"
         )}
       >
       <Container>
@@ -52,7 +52,7 @@ export default function Navbar() {
           >
             {/* Logo */}
             <Image
-              src={scrolled ? "/images/logo/logo1.png" : "/images/logo/logo2.jpg"}
+              src={scrolled ? "/images/logo/logo1.png" : "/images/logo/logo2.png"}
               alt={`${SITE.name} logo`}
               width={480}
               height={156}

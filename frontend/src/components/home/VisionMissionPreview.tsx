@@ -1,6 +1,5 @@
 "use client";
 
-import Container from "@/components/layout/Container";
 import Reveal from "@/components/ui/Reveal";
 import { useLanguage } from "@/lib/i18n";
 
@@ -15,7 +14,7 @@ export default function VisionMissionPreview() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden py-24 text-white sm:py-32">
+    <section className="relative overflow-hidden text-white bg-[#070304]">
 
       {/* Background Pattern dengan gradasi ke atas & ke bawah */}
       <div
@@ -24,7 +23,6 @@ export default function VisionMissionPreview() {
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H24V24H0V0Z' fill='none'/%3E%3Cpath d='M23 1V23H1V1H23ZM24 0H0V24H24V0Z' fill='white'/%3E%3C/svg%3E")`,
           backgroundSize: "12px 12px",
 
-          // Fade dari atas → tengah → bawah
           WebkitMaskImage:
             "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
           maskImage:
@@ -38,8 +36,17 @@ export default function VisionMissionPreview() {
       {/* Ambient Light */}
       <div className="pointer-events-none absolute left-0 top-1/2 z-0 h-[600px] w-[600px] -translate-x-1/3 -translate-y-1/2 rounded-full bg-[#C62930]/10 blur-[130px]" />
 
-      <Container className="relative z-10">
-        <div className="grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
+      {/* 
+        GRID UTAMA (3 KOLOM):
+        Garis vertikal di sisi kiri dan kanan layar tetap dipertahankan agar menyambung.
+      */}
+      <div className="relative z-10 flex w-full border-t border-white/15">
+
+        {/* Kolom 1: Ruang Kosong Kiri (Garis Vertikal Kiri) */}
+        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-r border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+
+        {/* Kolom 2: Konten Tengah (Border tengah dihapus dengan menghilangkan divide-x) */}
+        <div className="flex-1 w-full grid lg:grid-cols-2 lg:items-center gap-16 lg:gap-24 py-24 sm:py-32 px-6 sm:px-12 lg:px-16 xl:px-24 bg-white/[0.02] backdrop-blur-sm">
 
           {/* KOLOM KIRI: VISI */}
           <Reveal
@@ -47,7 +54,7 @@ export default function VisionMissionPreview() {
             className="flex h-full flex-col items-center justify-center text-center lg:items-start lg:text-left"
           >
             <div className="mb-6 flex items-center gap-4">
-              <span className="inline-flex items-center px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#e8555c]">
+              <span className="inline-flex items-center px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#e8555c] rounded-full border border-white/10 bg-white/5">
                 {t("vision.label")}
               </span>
             </div>
@@ -62,11 +69,11 @@ export default function VisionMissionPreview() {
           </Reveal>
 
           {/* KOLOM KANAN: MISI */}
-          <Reveal delay={250}>
+          <Reveal delay={250} className="lg:pl-6 xl:pl-12">
             <div className="flex flex-col">
 
               <div className="mb-6 flex items-center justify-center gap-4 lg:justify-start">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
+                <span className="inline-flex items-center px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 rounded-full border border-white/10 bg-white/5">
                   {t("mission.label")}
                 </span>
               </div>
@@ -92,7 +99,11 @@ export default function VisionMissionPreview() {
           </Reveal>
 
         </div>
-      </Container>
+
+        {/* Kolom 3: Ruang Kosong Kanan (Garis Vertikal Kanan) */}
+        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-l border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+
+      </div>
     </section>
   );
 }

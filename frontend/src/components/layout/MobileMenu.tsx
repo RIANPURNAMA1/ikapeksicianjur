@@ -23,6 +23,56 @@ const NAV_LABEL_KEY: Record<string, string> = {
   "/kontak": "nav.kontak",
 };
 
+const STRUCTURE_PATHS = {
+  nasional: "M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01",
+  provinsi: "M9 20l-5.5-3V4L9 7l6-3 5.5 3v13L15 17l-6 3zm0 0V7m6 10V4",
+  kabupaten: "M3 10.5L12 3l9 7.5M5 10v10h14V10M9.5 20v-6h5v6",
+} as const;
+
+type StructureType = keyof typeof STRUCTURE_PATHS;
+
+interface StructureItemProps {
+  type: StructureType;
+  name: string;
+  desc: string;
+  highlight?: boolean;
+  badge?: string;
+}
+
+function StructureItem({ type, name, desc, highlight = false, badge }: StructureItemProps) {
+  return (
+    <li className="relative pl-12">
+      <span
+        className={`absolute left-0 top-1 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full ${
+          highlight
+            ? "bg-gradient-to-br from-[#C62930] to-[#ff7e84] text-white shadow-[0_0_16px_rgba(198,41,48,0.55)]"
+            : "border border-white/20 bg-[#16080a] text-[#e8555c]"
+        }`}
+      >
+        <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d={STRUCTURE_PATHS[type]} />
+        </svg>
+      </span>
+
+      <div
+        className={`rounded-md border px-4 py-3.5 ${
+          highlight ? "border-primary/50 bg-primary/10" : "border-white/10 bg-white/[0.03]"
+        }`}
+      >
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="font-mona text-sm font-extrabold leading-tight text-white">{name}</p>
+          {highlight && badge && (
+            <span className="rounded-full bg-primary px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-white">
+              {badge}
+            </span>
+          )}
+        </div>
+        <p className="mt-1 text-xs leading-relaxed text-white/60">{desc}</p>
+      </div>
+    </li>
+  );
+}
+
 const MENU_ICONS: Record<string, ReactNode> = {
   "/": (
     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -81,11 +131,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     >
       <div className="flex h-16 items-center justify-between px-5">
         <Image
-          src="/images/logo/logo.png"
+          src="/images/logo/logo2.png"
           alt={`${SITE.name} logo`}
           width={240}
           height={78}
-          className="h-8 w-auto object-contain brightness-0 invert"
+          className="h-8 w-auto object-contain"
         />
         <button
           onClick={onClose}
@@ -98,35 +148,89 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col justify-center gap-1 px-8 pb-8">
-        <div className="mb-4 flex justify-center">
-          <LanguageSwitcher onDark />
-        </div>
-        {NAV_LINKS.map((link) => {
-          const label = t(NAV_LABEL_KEY[link.href] ?? "nav.beranda");
-          if (link.href !== "/") {
-            return (
-              <span
-                key={link.href}
-                className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white/50"
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <div className="flex-1 overflow-y-auto pb-8">
+          <div className="flex flex-col gap-1 px-8 pt-6">
+            <div className="mb-4 flex justify-center">
+              <LanguageSwitcher onDark />
+            </div>
+            {NAV_LINKS.map((link) => {
+              const label = t(NAV_LABEL_KEY[link.href] ?? "nav.beranda");
+              if (link.href !== "/") {
+                return (
+                  <span
+                    key={link.href}
+                    className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white/50"
+                  >
+                    {MENU_ICONS[link.href]}
+                    {label}
+                  </span>
+                );
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href="/"
+                  onClick={onClose}
+                  className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white transition-colors hover:text-primary-light"
+                >
+                  {MENU_ICONS[link.href]}
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 border-t border-white/10 bg-white/[0.03] px-6 py-8">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#e8555c]">
+              Struktur Organisasi
+            </span>
+
+            <div className="relative mt-6">
+              <span className="absolute bottom-3 left-0 top-2 w-px bg-gradient-to-b from-[#C62930]/60 via-white/20 to-[#C62930]/60" />
+              <ol className="space-y-5">
+                <StructureItem
+                  type="nasional"
+                  name="DPP IKAPEKSI"
+                  desc="Dewan Pimpinan Pusat — tingkat nasional"
+                />
+                <StructureItem
+                  type="provinsi"
+                  name="DPD Jawa Barat"
+                  desc="Dewan Pimpinan Daerah — tingkat provinsi"
+                />
+                <StructureItem
+                  type="kabupaten"
+                  name="DPC Kabupaten Cianjur"
+                  desc="Cabang IKAPEKSI — rumah bersama alumni dan para pejuang kerja Jepang di Kabupaten Cianjur"
+                  highlight
+                  badge="IKAPEKSI Cianjur"
+                />
+              </ol>
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 bg-white/[0.03] px-6 py-8">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#e8555c]">
+              {t("about.eyebrow")}
+            </span>
+            <h3 className="mt-5 font-mona text-2xl font-extrabold leading-snug text-white">
+              {t("about.title")}
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-white/70">
+              {t("about.description", { year: SITE.foundedYear, name: SITE.fullName })}
+            </p>
+            <div className="mt-7">
+              <Link
+                href="/tentang"
+                onClick={onClose}
+                className="inline-flex items-center justify-center rounded-full border-2 border-primary px-5 py-2.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-white"
               >
-                {MENU_ICONS[link.href]}
-                {label}
-              </span>
-            );
-          }
-          return (
-            <Link
-              key={link.href}
-              href="/"
-              onClick={onClose}
-              className="flex items-center justify-center gap-3 py-3.5 text-xl font-semibold text-white transition-colors hover:text-primary-light"
-            >
-              {MENU_ICONS[link.href]}
-              {label}
-            </Link>
-          );
-        })}
+                {t("about.kenali")}
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

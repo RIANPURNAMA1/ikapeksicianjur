@@ -23,7 +23,7 @@ const id: TranslationMessages = {
   "nav.beranda": "Beranda",
   "nav.tentang": "Tentang",
   "nav.program": "Program",
-  "nav.alumni": "Alumni",
+  "nav.alumni": "Keanggotaan",
   "nav.kegiatan": "Kegiatan",
   "nav.berita": "Berita",
   "nav.galeri": "Galeri",
@@ -39,7 +39,7 @@ const id: TranslationMessages = {
   "hero.line3": "SERIBU LANGKAH",
   "hero.supportedBy": "Didukung oleh",
   "hero.description":
-    "Ikatan Pengusaha Kenshusei Indonesia - Cianjur menghimpun Alumni, praktisi dan yg mau jadi pejuang indonesia jepang untuk terus tumbuh, berbagi ilmu dan membangun kampung halaman bersama.",
+    "Ikatan Pengusaha Kenshusei Indonesia - kabupaten Cianjur menghimpun Alumni, praktisi dan yg mau jadi pejuang indonesia - jepang untuk terus tumbuh, berbagi ilmu dan membangun kampung halaman bersama.",
   "hero.daftar": "Daftar Sekarang",
   "hero.konsultasi": "Konsultasi Gratis",
   "hero.slidePrev": "Slide sebelumnya",
@@ -48,9 +48,9 @@ const id: TranslationMessages = {
 
   // ===== ABOUT PREVIEW =====
   "about.eyebrow": "Tentang Kami",
- "about.title": "Merajut Potensi, Membangun Cianjur",
+  "about.title": "Rumah bagi para pejuang kerja Jepang asal Cianjur",
   "about.description":
-    "Sejak {year}, {name} menjadi rumah bersama alumni pemagangan kerja luar negeri asal Kabupaten Cianjur. Bukan sekadar silaturahmi — kami merajut pengalaman lintas kecamatan menjadi satu kekuatan untuk memajukan kampung halaman.",
+    "IKAPEKSI menghimpun alumni program magang kerja (kenshusei) Jepang yang pulang membangun usaha sendiri. DPC Cianjur adalah cabang yang baru dibentuk — merangkul alumni dan calon alumni di Kabupaten Cianjur untuk saling menguatkan, berbagi peluang usaha, dan membuka jalan bagi generasi berikutnya yang ingin berangkat. Kami bergerak dalam tiga jalur sekaligus: penguatan jaringan sesama alumni, pendampingan bagi calon peserta magang, dan kemitraan dengan pemerintah daerah di isu ketenagakerjaan.",
   "about.forYou": "Tepat untuk Anda yang:",
   "about.item1.title": "Alumni yang Kembali",
   "about.item1.desc": "pulang membawa pengalaman baru dan ingin terus terhubung dengan jaringan lintas kecamatan.",

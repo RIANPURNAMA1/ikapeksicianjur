@@ -51,7 +51,7 @@ export default function Footer() {
       <Container className="grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Image
-            src="/images/logo/logo2.jpg"
+            src="/images/logo/logo2.png"
             alt={`${SITE.name} logo`}
             width={240}
             height={78}

@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
@@ -9,129 +7,160 @@ import { SITE } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
 import { ReactNode } from "react";
 
-const CheckIcon = (): ReactNode => (
-  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-white">
-    <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
-      <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+const STRUCTURE_PATHS = {
+  nasional: "M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01",
+  provinsi: "M9 20l-5.5-3V4L9 7l6-3 5.5 3v13L15 17l-6 3zm0 0V7m6 10V4",
+  kabupaten: "M3 10.5L12 3l9 7.5M5 10v10h14V10M9.5 20v-6h5v6",
+} as const;
+
+function StructureIcon({ type }: { type: keyof typeof STRUCTURE_PATHS }) {
+  return (
+    <svg 
+      className="h-4 w-4" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth={1.8} 
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d={STRUCTURE_PATHS[type]} />
     </svg>
-  </div>
-);
+  );
+}
+
+function TimelineItem({
+  icon,
+  name,
+  desc,
+  highlight = false,
+  badge,
+}: {
+  icon: ReactNode;
+  name: string;
+  desc: string;
+  highlight?: boolean;
+  badge?: string;
+}) {
+  return (
+    <li className="relative pl-12">
+      <span
+        className={`absolute left-0 top-1 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full transition-all duration-300 ${
+          highlight
+            ? "bg-gradient-to-br from-[#C62930] to-[#ff7e84] text-white shadow-[0_0_16px_rgba(198,41,48,0.55)]"
+            : "border border-white/20 bg-[#16080a] text-[#e8555c]"
+        }`}
+      >
+        {icon}
+      </span>
+
+      <div
+        className={`rounded-md border px-5 py-4 transition-all duration-300 ${
+          highlight
+            ? "border-primary/50 bg-primary/10"
+            : "border-white/10 bg-white/[0.03] hover:border-white/25"
+        }`}
+      >
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="font-mona text-base font-extrabold leading-tight text-white">{name}</p>
+          {highlight && badge && (
+            <span className="rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-white">
+              {badge}
+            </span>
+          )}
+        </div>
+        <p className="mt-1 text-xs leading-relaxed text-white/60">{desc}</p>
+      </div>
+    </li>
+  );
+}
 
 export default function AboutPreview() {
   const { t } = useLanguage();
 
   return (
-    <section id="tentang" className="relative scroll-mt-16 overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_25%,#0c0506_60%,#120708_100%)] py-20 text-white">
+    <section id="tentang" className="relative scroll-mt-16 overflow-hidden bg-[linear-gradient(to_bottom,black_0%,black_25%,#0c0506_60%,#070304_100%)] text-white">
+
       <div className="absolute inset-0 bg-stamp-lines opacity-10 mix-blend-overlay" />
-      <div className="pointer-events-none absolute left-0 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
 
-      <Container className="relative z-10 grid gap-12 lg:grid-cols-2 lg:items-start">
+      {/* 
+        GRID UTAMA (3 KOLOM):
+        Sama persis seperti section WhyIkapeksi agar garis vertikal sejajar lurus.
+      */}
+      <div className="relative z-10 flex w-full border-t border-white/15">
 
-        {/* Bento Grid (4 Gambar) */}
-        <Reveal delay={100}>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-4">
-              <div className="group relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-zinc-800">
-                <Image
-                  src="https://i.pinimg.com/736x/42/54/0e/42540e6878e714a67411afcd9595d91e.jpg"
-                  alt="Silaturahmi alumni IKAPEKSI Cianjur"
-                  fill
-                  sizes="(min-width: 768px) 250px, 45vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-              </div>
-              <div className="group relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-800">
-                <Image
-                  src="https://i.pinimg.com/736x/56/b0/ad/56b0adb9b1f74af81806903b1a046fc0.jpg"
-                  alt="Pelatihan keterampilan alumni IKAPEKSI Cianjur"
-                  fill
-                  sizes="(min-width: 768px) 250px, 45vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-              </div>
-            </div>
+        {/* Kolom 1: Ruang Kosong Kiri (Garis Vertikal Kiri) */}
+        {/* bg dan backdrop-blur juga diberikan ke bagian kolom kosong agar efek glassmorphism nya nyambung */}
+        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-r border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
 
-            <div className="flex flex-col gap-4">
-              <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-800">
-                <Image
-                  src="https://i.pinimg.com/736x/5e/90/49/5e9049487ad487349a7b0eb83b922b3b.jpg"
-                  alt="Pemberdayaan UMKM binaan IKAPEKSI Cianjur"
-                  fill
-                  sizes="(min-width: 768px) 250px, 45vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="group relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-zinc-800">
-                <Image
-                  src="https://i.pinimg.com/736x/67/a9/72/67a972176810f9ec4f754d0b1b1fb86e.jpg"
-                  alt="Kegiatan sosial komunitas alumni IKAPEKSI Cianjur"
-                  fill
-                  sizes="(min-width: 768px) 250px, 45vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-              </div>
-            </div>
-          </div>
-        </Reveal>
+        {/* Kolom 2: Konten Tengah (Bagi 2 lagi untuk Kiri-Kanan) */}
+        <div className="flex-1 w-full grid lg:grid-cols-2 divide-y divide-white/15 lg:divide-y-0 lg:divide-x bg-white/[0.02] backdrop-blur-sm">
 
-        {/* Kolom Teks */}
-        <div className="flex flex-col justify-center">
-          <Reveal delay={150}>
-            <SectionHeading
-              eyebrow={t("about.eyebrow")}
-              title={t("about.title")}
-              className="[&_h2]:font-mona [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:from-55% [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_h2::after]:content-none  [&_span]:!bg-transparent  [&_span]:!border-0  [&_span]:!text-primary"
-            />
-          </Reveal>
-          <Reveal delay={250}>
-            <p className="mt-5 text-base leading-relaxed text-white/70">
-              {t("about.description", { year: SITE.foundedYear, name: SITE.fullName })}
-            </p>
-          </Reveal>
+          {/* Konten Kiri (Struktur Organisasi) */}
+          {/* Hapus padding persentase (pl-[10%]), ganti dengan padding fix agar rapi karena margin layar sudah diatasi kolom 1 */}
+          <div className="py-16 px-6 sm:px-12 lg:py-24 lg:px-16 xl:px-24">
+            <Reveal delay={100}>
+              <div className="py-4">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#e8555c]">
+                  Struktur Organisasi
+                </span>
 
-          <div className="mt-8 space-y-3">
-            <Reveal delay={350}>
-              <p className="mb-4 font-medium text-white">{t("about.forYou")}</p>
-            </Reveal>
+                <div className="relative mt-7">
+                  <span className="absolute bottom-4 left-0 top-2 w-px bg-gradient-to-b from-[#C62930]/60 via-white/20 to-[#C62930]/60" />
 
-            <Reveal delay={400}>
-              <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
-                <CheckIcon />
-                <p className="text-sm text-gray-300">
-                  <strong className="text-white">{t("about.item1.title")}</strong> — {t("about.item1.desc")}
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={500}>
-              <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
-                <CheckIcon />
-                <p className="text-sm text-gray-300">
-                  <strong className="text-white">{t("about.item2.title")}</strong> — {t("about.item2.desc")}
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={600}>
-              <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4">
-                <CheckIcon />
-                <p className="text-sm text-gray-300">
-                  <strong className="text-white">{t("about.item3.title")}</strong> — {t("about.item3.desc")}
-                </p>
+                  <ol className="space-y-6">
+                    <TimelineItem
+                      icon={<StructureIcon type="nasional" />}
+                      name="DPP IKAPEKSI"
+                      desc="Dewan Pimpinan Pusat — tingkat nasional"
+                    />
+                    <TimelineItem
+                      icon={<StructureIcon type="provinsi" />}
+                      name="DPD Jawa Barat"
+                      desc="Dewan Pimpinan Daerah — tingkat provinsi"
+                    />
+                    <TimelineItem
+                      icon={<StructureIcon type="kabupaten" />}
+                      name="DPC Kabupaten Cianjur"
+                      desc="Cabang IKAPEKSI — rumah bersama alumni dan para pejuang kerja Jepang di Kabupaten Cianjur"
+                      highlight
+                      badge="IKAPEKSI Cianjur"
+                    />
+                  </ol>
+                </div>
               </div>
             </Reveal>
           </div>
 
-          <Reveal delay={700}>
-            <div className="mt-10">
-              <Button href="/tentang" variant="outline">
-                {t("about.kenali")}
-              </Button>
-            </div>
-          </Reveal>
+          {/* Konten Kanan (Teks Penjelasan) */}
+          <div className="flex flex-col justify-center py-16 px-6 sm:px-12 lg:py-24 lg:px-16 xl:px-24 bg-white/[0.01]">
+            <Reveal delay={150}>
+              <SectionHeading
+                eyebrow={t("about.eyebrow")}
+                title={t("about.title")}
+                className="[&_h2]:font-mona [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:from-55% [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_h2::after]:content-none  [&_span]:!bg-transparent  [&_span]:!border-0  [&_span]:!text-primary"
+              />
+            </Reveal>
+
+            <Reveal delay={250}>
+              <p className="mt-5 text-base leading-relaxed text-white/70">
+                {t("about.description", { year: SITE.foundedYear, name: SITE.fullName })}
+              </p>
+            </Reveal>
+
+            <Reveal delay={700}>
+              <div className="mt-10">
+                <Button href="/tentang" variant="outline">
+                  {t("about.kenali")}
+                </Button>
+              </div>
+            </Reveal>
+          </div>
+
         </div>
 
-      </Container>
+        {/* Kolom 3: Ruang Kosong Kanan (Garis Vertikal Kanan) */}
+        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-l border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+
+      </div>
     </section>
   );
 }

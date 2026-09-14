@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 import { useLanguage } from "@/lib/i18n";
@@ -10,39 +9,44 @@ export default function JoinSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-16 sm:py-24">
-      <Container>
-        {/* =========================================
-            BACKGROUND PATTERN
-            Fade halus dari atas dan bawah
-            ========================================= */}
-        <div
-          className="pointer-events-none absolute inset-0 z-0 opacity-[0.07]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H24V24H0V0Z' fill='none'/%3E%3Cpath d='M23 1V23H1V1H23ZM24 0H0V24H24V0Z' fill='white'/%3E%3C/svg%3E")`,
-            backgroundSize: "12px 12px",
+    <section className="relative flex min-h-[100svh] flex-col overflow-hidden text-white bg-[#070304]">
+      
+      {/* =========================================
+          BACKGROUND PATTERN
+          ========================================= */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.07]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H24V24H0V0Z' fill='none'/%3E%3Cpath d='M23 1V23H1V1H23ZM24 0H0V24H24V0Z' fill='white'/%3E%3C/svg%3E")`,
+          backgroundSize: "12px 12px",
 
-            // Fade atas → tengah → bawah
-            WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 12%, black 30%, black 70%, rgba(0,0,0,0.35) 88%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 12%, black 30%, black 70%, rgba(0,0,0,0.35) 88%, transparent 100%)",
 
-            maskImage:
-              "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 12%, black 30%, black 70%, rgba(0,0,0,0.35) 88%, transparent 100%)",
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 12%, black 30%, black 70%, rgba(0,0,0,0.35) 88%, transparent 100%)",
 
-            WebkitMaskRepeat: "no-repeat",
-            maskRepeat: "no-repeat",
-          }}
-        />
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+        }}
+      />
 
-        {/* =========================================
-            AMBIENT RED GLOW
-            ========================================= */}
-        <div className="pointer-events-none absolute bottom-0 left-0 z-0 h-[400px] w-[400px] -translate-x-1/2 translate-y-1/2 rounded-full bg-[#C62930]/10 blur-[100px]" />
+      {/* =========================================
+          AMBIENT RED GLOW
+          ========================================= */}
+      <div className="pointer-events-none absolute bottom-0 left-0 z-0 h-[400px] w-[400px] -translate-x-1/2 translate-y-1/2 rounded-full bg-[#C62930]/10 blur-[100px]" />
 
-        {/* =========================================
-            MAIN CONTENT
-            ========================================= */}
-        <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-end gap-8 px-6 pt-12 sm:px-12 sm:pt-16 lg:grid-cols-2 lg:gap-16 lg:px-16 lg:pt-20">
+      {/* =========================================
+          GRID UTAMA (3 KOLOM):
+          Mempertahankan garis vertikal konsisten di sisi kiri dan kanan layar.
+          ========================================= */}
+      <div className="relative z-10 flex w-full flex-1 border-t border-b border-white/15">
+
+        {/* Kolom 1: Ruang Kosong Kiri (Garis Vertikal Kiri) */}
+        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-r border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+
+        {/* Kolom 2: Konten Tengah */}
+        <div className="flex-1 w-full grid grid-cols-1 content-center items-end gap-8 py-16 sm:py-24 px-6 sm:px-12 lg:grid-cols-2 lg:gap-16 lg:px-16 xl:px-24 bg-white/[0.02] backdrop-blur-sm">
 
           {/* =========================================
               KOLOM KONTEN TEKS
@@ -51,14 +55,14 @@ export default function JoinSection() {
 
             {/* Eyebrow */}
             <Reveal delay={0}>
-              <div className="inline-flex items-center gap-2.5 px-1 py-1.5 text-xs font-bold tracking-[0.15em] text-[#e8555c] backdrop-blur-md">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-[#e8555c] rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
                 {t("join.eyebrow")}
               </div>
             </Reveal>
 
             {/* Judul */}
             <Reveal delay={150}>
-              <h2 className="text-balance font-mona text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl lg:leading-[1.15]">
+              <h2 className="text-balance font-mona text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:leading-[1.15]">
                 {t("join.heading")}
                 <br className="hidden sm:block" />
               </h2>
@@ -105,15 +109,12 @@ export default function JoinSection() {
               ========================================= */}
           <Reveal
             delay={600}
-            className="order-1 lg:order-1"
+            className="order-1 lg:order-1 flex justify-center"
           >
-            <div className="relative mx-auto w-full max-w-[340px] lg:max-w-none">
-
+            <div className="relative mx-auto w-full max-w-[340px] lg:max-w-[400px]">
               <div className="relative pt-8 lg:pt-0">
-
-                {/* Talent Image */}
                 <Image
-                  src="/images/carausel/talent-cs.webp"
+                  src="/images/join/tallent2.png"
                   alt="Alumni pemagangan kerja IKAPEKSI"
                   width={996}
                   height={1352}
@@ -128,13 +129,16 @@ export default function JoinSection() {
                       "linear-gradient(to bottom, black 55%, black 65%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.45) 85%, transparent 100%)",
                   }}
                 />
-
               </div>
             </div>
           </Reveal>
 
         </div>
-      </Container>
+
+        {/* Kolom 3: Ruang Kosong Kanan (Garis Vertikal Kanan) */}
+        <div className="hidden md:block w-12 md:w-20 lg:w-[15%] border-l border-white/15 bg-white/[0.02] backdrop-blur-sm shrink-0" />
+
+      </div>
     </section>
   );
 }

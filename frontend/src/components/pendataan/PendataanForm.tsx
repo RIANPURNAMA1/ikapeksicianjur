@@ -598,34 +598,33 @@ export default function PendataanForm() {
                 <p className="text-xs text-white/50">Pilih kategori Anda untuk menampilkan form yang sesuai.</p>
               </div>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {KATEGORI.map((k) => {
-                const active = kategori === k.value;
-                return (
-                  <button
-                    type="button"
-                    key={k.value}
-                    onClick={() => setKategori(k.value)}
-                    aria-pressed={active}
-                    className={`flex flex-col items-start gap-3 rounded-xl border p-5 text-left transition-all ${
-                      active
-                        ? "border-primary bg-primary/15 ring-1 ring-primary"
-                        : "border-white/15 bg-white/5 hover:border-primary/50 hover:bg-white/10"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-                        active ? "bg-primary text-white" : "bg-white/10 text-white/70"
-                      }`}
-                    >
-                      {k.icon}
+            <div className="grid gap-4">
+                <Select
+                  id="kategori"
+                  label="Kategori *"
+                  options={KATEGORI.map((k) => ({ value: k.value, label: k.label }))}
+                  placeholder="-- Pilih Kategori --"
+                  required
+                  variant="dark"
+                  value={kategori}
+                  onChange={(e) => setKategori(e.target.value as Kategori | "")}
+                />
+                {kategori && (
+                  <div className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/10 p-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-white">
+                      {KATEGORI.find((k) => k.value === kategori)?.icon}
                     </span>
-                    <span className="text-sm font-bold text-white">{k.label}</span>
-                    <span className="text-xs leading-snug text-white/50">{k.desc}</span>
-                  </button>
-                );
-              })}
-            </div>
+                    <div>
+                      <p className="text-sm font-bold text-white">
+                        {KATEGORI.find((k) => k.value === kategori)?.label}
+                      </p>
+                      <p className="text-xs text-white/60">
+                        {KATEGORI.find((k) => k.value === kategori)?.desc}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
           </div>
 
           {/* STEP 2: Data Diri */}
