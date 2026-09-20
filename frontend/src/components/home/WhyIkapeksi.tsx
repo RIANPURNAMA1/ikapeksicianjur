@@ -59,7 +59,7 @@ export default function WhyIkapeksi() {
                 {t("why.eyebrow")}
               </span>
 
-              <h2 className="mt-6 font-mona text-3xl font-normal tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-br from-white to-white/50 bg-clip-text text-transparent">
+              <h2 className="mt-6 font-mona text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-br from-white to-white/50 bg-clip-text text-transparent">
                 {t("why.title")}
               </h2>
 

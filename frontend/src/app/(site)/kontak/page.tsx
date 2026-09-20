@@ -32,8 +32,15 @@ export default function KontakPage() {
             <div className="mt-8">
               <SocialLinks />
             </div>
-            <div className="doc-card mt-8 flex aspect-video w-full items-center justify-center bg-paper-warm">
-              <p className="text-sm font-semibold text-ink-muted">Peta lokasi: {SITE.mapEmbedQuery}</p>
+            <div className="mt-8 overflow-hidden rounded-2xl border border-paper-line bg-paper-warm shadow-card">
+              <iframe
+                src={SITE.mapEmbedUrl}
+                title="Peta lokasi Sekretariat IKAPEKSI Cianjur"
+                className="h-[400px] w-full border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
             </div>
           </div>
           <ContactForm />

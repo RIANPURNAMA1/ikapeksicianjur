@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, SITE } from "@/lib/constants";
-import { useLanguage } from "@/lib/i18n";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
 import { useScroll } from "@/hooks/useScroll";
 import Container from "./Container";
@@ -12,125 +11,173 @@ import MobileMenu from "./MobileMenu";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { cn } from "@/lib/utils";
 
-const NAV_LABEL_KEY: Record<string, string> = {
-  "/": "nav.beranda",
-  "/tentang": "nav.tentang",
-  "/program": "nav.program",
-  "/alumni": "nav.alumni",
-  "/kegiatan": "nav.kegiatan",
-  "/berita": "nav.berita",
-  "/galeri": "nav.galeri",
-  "/kontak": "nav.kontak",
-};
-
 export default function Navbar() {
   const { isOpen, toggle, close } = useMobileMenu();
   const scrolled = useScroll();
   const pathname = usePathname();
-  const { t } = useLanguage();
 
   return (
-    <>
-      <header
-        className={cn(
-          "sticky top-0 z-50 w-full border-b transition-all duration-300",
-          scrolled
-            ? "border-paper-line bg-white/95 backdrop-blur shadow-sm"
-            : pathname === "/"
-              ? "border-white/15 bg-transparent"
-              : "border-white/15 bg-ink"
-        )}
-      >
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+
+        scrolled
+          ? "border-b border-black/[0.06] bg-white/95 shadow-sm backdrop-blur-md"
+          : "border-b border-white/[0.05] bg-[#0a0304]/95 backdrop-blur-md"
+      )}
+    >
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4 xl:gap-6">
-          {/* =========================
-              LOGO / BRAND
-          ========================== */}
-          <Link
-            href="/"
-            className="btn-focus flex shrink-0 items-center gap-2.5"
-          >
-            {/* Logo */}
-            <Image
-              src={scrolled ? "/images/logo/logo1.png" : "/images/logo/logo2.png"}
-              alt={`${SITE.name} logo`}
-              width={480}
-              height={156}
-              className="h-9 w-auto object-contain transition-all duration-300 xl:h-10"
-            />
-          </Link>
+        <div className="flex h-[72px] items-center justify-between gap-6">
 
-          {/* =========================
-              DESKTOP NAVIGATION
-          ========================== */}
-          <nav className="hidden h-full items-center gap-4 lg:flex xl:gap-6">
-            {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
-              const label = t(NAV_LABEL_KEY[link.href] ?? "nav.beranda");
-              const disabled = link.href !== "/";
+          {/* =========================================
+              LEFT SECTION
+              LOGO + NAVIGATION
+              ========================================= */}
+          <div className="flex h-full items-center gap-8 lg:gap-12">
 
-              const baseClasses = cn(
-                "group relative h-full flex items-center text-[13px] font-medium transition-colors duration-200 xl:text-sm",
-                isActive
-                  ? scrolled
-                    ? "text-primary"
-                    : "text-white"
-                  : scrolled
-                    ? "text-ink/60 group-hover:text-primary"
-                    : "text-white/70 group-hover:text-white",
-                disabled && "pointer-events-none"
-              );
-
-              const underline = (
-                <span
-                  className={cn(
-                    "absolute bottom-0 left-0 right-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 ease-out",
-                    isActive
-                      ? "scale-x-100"
-                      : "scale-x-0 group-hover:scale-x-100"
-                  )}
-                />
-              );
-
-              if (disabled) {
-                return (
-                  <span key={link.href} className={baseClasses}>
-                    {label}
-                    {underline}
-                  </span>
-                );
-              }
-
-              return (
-                <Link
-                  key={link.href}
-                  href="/"
-                  className={baseClasses}
-                >
-                  {label}
-                  {underline}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* =========================
-              RIGHT ACTION
-          ========================== */}
-          <div className="hidden items-center gap-3 lg:flex">
-            <LanguageSwitcher onDark={!scrolled} />
+            {/* LOGO */}
             <Link
-              href="/pendataan"
+              href="/"
+              className="btn-focus flex shrink-0 items-center"
+            >
+              <Image
+                src="/images/logo/logo1.png"
+                alt={`${SITE.name} logo`}
+                width={160}
+                height={52}
+                className="h-8 w-auto object-contain"
+                priority
+              />
+            </Link>
+
+            {/* =========================================
+                DESKTOP NAVIGATION
+                ========================================= */}
+            <nav className="hidden h-full items-center gap-6 lg:flex">
+              {NAV_LINKS.map((link) => {
+                const active =
+                  pathname === link.href ||
+                  (link.href !== "/" &&
+                    pathname.startsWith(`${link.href}/`));
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      "group relative flex h-full items-center text-[15px] font-medium transition-colors duration-200",
+
+                      active
+                        ? scrolled
+                          ? "text-[#0a0304]"
+                          : "text-white"
+                        : scrolled
+                          ? "text-[#0a0304]/60 hover:text-[#C62930]"
+                          : "text-white/70 hover:text-white"
+                    )}
+                  >
+                    {link.label}
+
+                    {/* Arrow */}
+                    <svg
+                      className={cn(
+                        "ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:rotate-180",
+                        active
+                          ? "opacity-100"
+                          : "opacity-60"
+                      )}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+
+                    {/* Active underline */}
+                    <span
+                      className={cn(
+                        "absolute bottom-0 left-0 right-0 h-[3px] rounded-t-full bg-[#C62930] transition-all duration-300",
+
+                        active
+                          ? "scale-x-100 opacity-100"
+                          : "scale-x-75 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                      )}
+                    />
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* =========================================
+              RIGHT SECTION
+              ========================================= */}
+          <div className="hidden items-center gap-4 lg:flex">
+
+            {/* =====================================
+                LANGUAGE SWITCHER
+                🇮🇩 / 🇯🇵
+                ===================================== */}
+            <LanguageSwitcher onDark={!scrolled} />
+
+            {/* =====================================
+                CTA
+                ===================================== */}
+            <Link
+              href="/kontak"
               className={cn(
-                "btn-shine btn-focus inline-flex items-center justify-center gap-2",
-                "rounded-full px-4 py-2",
-                "bg-primary text-[13px] font-semibold text-white",
-                "transition-all duration-200 xl:px-5 xl:py-2.5 xl:text-sm",
-                "hover:bg-primary-dark hover:shadow-md"
+                "btn-focus inline-flex items-center justify-center gap-2",
+                "rounded-full px-6 py-2.5",
+                "bg-[#C62930] text-sm font-semibold text-white",
+                "transition-all duration-300",
+                "hover:-translate-y-0.5",
+                "hover:bg-[#a52127]",
+                "hover:shadow-lg hover:shadow-[#C62930]/30"
               )}
             >
+              {/* User Icon */}
               <svg
                 className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7-7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+
+              Gabung
+            </Link>
+          </div>
+
+          {/* =========================================
+              MOBILE MENU BUTTON
+              ========================================= */}
+          <button
+            onClick={toggle}
+            aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+            aria-expanded={isOpen}
+            className={cn(
+              "btn-focus flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
+              "transition-all duration-300 lg:hidden",
+
+              scrolled
+                ? "text-[#0a0304]/70 hover:bg-black/5 hover:text-[#0a0304]"
+                : "text-white/70 hover:bg-white/10 hover:text-white"
+            )}
+          >
+            {isOpen ? (
+              <svg
+                className="h-6 w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -139,32 +186,12 @@ export default function Navbar() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  d="M6 6l12 12M6 18L18 6"
                 />
               </svg>
-              {t("nav.gabungAlumni")}
-            </Link>
-          </div>
-
-          {/* =========================
-              MOBILE: LANGUAGE SWITCHER + HAMBURGER
-          ========================== */}
-          <div className="flex shrink-0 items-center gap-2 lg:hidden">
-            <LanguageSwitcher onDark={!scrolled} />
-            <button
-              onClick={toggle}
-              aria-label={t("nav.bukaMenu")}
-              aria-expanded={isOpen}
-              className={cn(
-                "btn-focus flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
-                "transition-colors",
-                scrolled
-                  ? "text-ink/70 hover:text-ink hover:bg-ink/5"
-                  : "text-white/70 hover:text-white hover:bg-white/10"
-              )}
-            >
+            ) : (
               <svg
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -176,17 +203,18 @@ export default function Navbar() {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-            </button>
-          </div>
+            )}
+          </button>
         </div>
       </Container>
-      </header>
 
-      {/* Mobile Navigation */}
+      {/* =========================================
+          MOBILE NAVIGATION
+          ========================================= */}
       <MobileMenu
         isOpen={isOpen}
         onClose={close}
       />
-    </>
+    </header>
   );
 }

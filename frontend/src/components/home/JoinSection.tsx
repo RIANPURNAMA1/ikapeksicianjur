@@ -37,7 +37,7 @@ export default function JoinSection() {
       <div className="pointer-events-none absolute bottom-0 left-0 z-0 h-[400px] w-[400px] -translate-x-1/2 translate-y-1/2 rounded-full bg-[#C62930]/10 blur-[100px]" />
 
       {/* =========================================
-          GRID UTAMA (3 KOLOM):
+g          GRID UTAMA (3 KOLOM):
           Mempertahankan garis vertikal konsisten di sisi kiri dan kanan layar.
           ========================================= */}
       <div className="relative z-10 flex w-full flex-1 border-t border-b border-white/10">
@@ -62,12 +62,12 @@ export default function JoinSection() {
 
             {/* Judul */}
             <Reveal delay={150}>
-              <h2 className="text-balance font-mona text-3xl font-normal leading-tight text-white sm:text-4xl md:text-5xl lg:leading-[1.15]">
+              <h2 className="text-balance font-mona text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl lg:leading-[1.15]">
                 {t("join.heading")}
                 <br className="hidden sm:block" />
               </h2>
 
-              <h3 className="text-balance font-mona text-3xl font-normal">
+              <h3 className="text-balance font-mona text-3xl font-extrabold">
                 <span className="mt-2 inline-block bg-gradient-to-r from-[#C62930] to-[#ff7e84] bg-clip-text text-transparent">
                   {t("join.subtitle")}
                 </span>

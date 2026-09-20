@@ -29,7 +29,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["ui-sans-serif", "system-ui", "Arial", "Helvetica", "sans-serif"],
-        mona: ["ui-sans-serif", "system-ui", "Arial", "Helvetica", "sans-serif"],
+        mona: ["var(--font-mona)", "ui-sans-serif", "system-ui", "Arial", "Helvetica", "sans-serif"],
         jakarta: ["var(--font-jakarta)", "ui-sans-serif", "system-ui", "Arial", "Helvetica", "sans-serif"],
       },
       screens: {

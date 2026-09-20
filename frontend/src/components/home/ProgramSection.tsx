@@ -64,7 +64,7 @@ export default function ProgramSection() {
                 title={t("program.homeTitle")}
                 description={t("program.homeDesc")}
                 align="center"
-                className="[&_h2]:font-mona [&_h2]:font-normal [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:from-55% [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_h2::after]:content-none [&_span]:!bg-transparent [&_span]:!border-0 [&_span]:!text-primary [&_p]:text-white/60"
+                className="[&_h2]:font-mona [&_h2]:font-extrabold [&_h2]:bg-gradient-to-r [&_h2]:from-white [&_h2]:from-55% [&_h2]:to-primary [&_h2]:bg-clip-text [&_h2]:text-transparent [&_h2::after]:content-none [&_span]:!bg-transparent [&_span]:!border-0 [&_span]:!text-primary [&_p]:text-white/60"
               />
             </Reveal>
           </div>
