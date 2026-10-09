@@ -115,7 +115,7 @@ const id: TranslationMessages = {
 
   // ===== JOIN SECTION =====
   "join.eyebrow": "MARI BERGABUNG",
-  "join.heading": "Mari Bergabung Alumni & Pejuang Jepang",
+  "join.heading": "Alumni & Pejuang Jepang",
   "join.subtitle": "Daftarkan diri anda!",
   "join.desc":
     "Perluas jejaring, ikuti kegiatan eksklusif, dan berkontribusi untuk kampung halaman bersama ratusan alumni lainnya dalam satu platform.",
@@ -269,7 +269,7 @@ const ja: TranslationMessages = {
 
   // ===== JOIN SECTION =====
   "join.eyebrow": "一緒に参加しませんか",
-  "join.heading": "同窓生と日本の戦士たち、一緒に参加しよう",
+  "join.heading": "同窓生と日本の戦士たち",
   "join.subtitle": "今すぐお申し込みください！",
   "join.desc":
     "ネットワークを広げ、特別な活動に参加し、数百人の同窓生と一つのプラットフォームで故郷に貢献しましょう。",

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Mona_Sans } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/constants";
+import SmoothScroll from "@/components/layout/SmoothScroll";
 import {
   absoluteUrl,
   DEFAULT_OG_IMAGE,
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
+        <SmoothScroll />
         {children}
       </body>
     </html>
