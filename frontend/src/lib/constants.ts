@@ -4,7 +4,7 @@ export const SITE = {
   tagline: "Merajut Alumni, Membangun Cianjur",
   description:
     "Wadah silaturahmi dan pemberdayaan alumni pemagangan kerja luar negeri asal Kabupaten Cianjur.",
-  email: "info@ikapeksicianjur.or.id",
+  email: "cianjur@ikapeksi.com",
   phone: "+62 895-3916-85825",
   whatsapp: "62895391685825",
   streetAddress: "Perumahan Bumi Marhamah Blok C1, Sindangasih",
