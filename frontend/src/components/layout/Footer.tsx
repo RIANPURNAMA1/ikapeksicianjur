@@ -48,21 +48,21 @@ export default function Footer() {
   const { t } = useLanguage();
   return (
     <footer className=" bg-ink text-white">
-      <Container className="grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <Container className="grid gap-8 py-12 sm:gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Image
             src="/images/logo/logo2.png"
             alt={`${SITE.name} logo`}
             width={240}
             height={78}
-            className="h-10 w-auto object-contain"
+            className="h-9 w-auto object-contain"
           />
-          <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/60">{t("footer.description")}</p>
+          <p className="mt-3 max-w-xs text-xs leading-relaxed text-white/60 sm:text-sm">{t("footer.description")}</p>
         </div>
 
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">{t("footer.navigasi")}</h4>
-          <ul className="mt-4 space-y-2 text-sm text-white/70">
+          <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-light sm:text-xs">{t("footer.navigasi")}</h4>
+          <ul className="mt-3 space-y-1.5 text-xs text-white/70 sm:text-sm">
             {NAV_LINKS.slice(0, 4).map((link) => (
               <li key={link.href} className="text-white/70">
                 {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
@@ -72,8 +72,8 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">{t("footer.lainnya")}</h4>
-          <ul className="mt-4 space-y-2 text-sm text-white/70">
+          <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-light sm:text-xs">{t("footer.lainnya")}</h4>
+          <ul className="mt-3 space-y-1.5 text-xs text-white/70 sm:text-sm">
             {NAV_LINKS.slice(4).map((link) => (
               <li key={link.href} className="text-white/70">
                 {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
@@ -83,19 +83,19 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary-light">{t("footer.kontak")}</h4>
-          <ul className="mt-4 space-y-2 text-sm text-white/70">
+          <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-light sm:text-xs">{t("footer.kontak")}</h4>
+          <ul className="mt-3 space-y-1.5 text-xs text-white/70 sm:text-sm">
             <li>{SITE.address}</li>
             <li>{SITE.phone}</li>
             <li>{SITE.email}</li>
           </ul>
           <Link
             href="/pendataan"
-            className="btn-shine btn-focus mt-5 inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-primary-dark"
+            className="btn-shine btn-focus mt-4 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-[11px] font-bold uppercase tracking-wide text-white transition hover:bg-primary-dark"
           >
             {t("nav.gabungAlumni")}
           </Link>
-          <div className="mt-5 flex gap-3">
+          <div className="mt-4 flex gap-2.5">
             {SOCIAL_LINKS.map((social) => (
               <a
                 key={social.label}
@@ -103,7 +103,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="btn-focus flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white hover:border-primary hover:text-primary-light hover:bg-primary"
+                className="btn-focus flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white hover:border-primary hover:text-primary-light hover:bg-primary"
               >
                 {SOCIAL_ICONS[social.icon]}
               </a>
@@ -112,8 +112,8 @@ export default function Footer() {
         </div>
       </Container>
 
-      <div className="border-t border-white/10 py-6">
-        <Container className="flex flex-col items-center justify-between gap-2 text-xs text-white/40 sm:flex-row">
+      <div className="border-t border-white/10 py-5">
+        <Container className="flex flex-col items-center justify-between gap-2 text-[11px] text-white/40 sm:flex-row sm:text-xs">
           <p>&copy; {new Date().getFullYear()} {SITE.name}. {t("footer.copyright")}</p>
           <p>{t("footer.founded", { year: SITE.foundedYear })} &middot; Kabupaten Cianjur, Jawa Barat</p>
         </Container>

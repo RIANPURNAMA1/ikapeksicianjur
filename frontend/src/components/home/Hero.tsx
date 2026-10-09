@@ -105,31 +105,31 @@ export default function Hero() {
         <div className="border-stripe-r hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
 
         {/* Kolom Kanan: Konten Utama */}
-        <div className="flex-1 w-full flex items-center pt-20 lg:pt-24">
-          <Container className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-8">
+        <div className="flex-1 w-full flex items-center pt-20 pb-20 lg:pt-24 lg:pb-28">
+          <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-8">
         {/* Kolom Kiri: Tipografi & CTA */}
         <div className="flex flex-col justify-center lg:pr-8">
-          <span className="text-sm font-semibold tracking-widest text-white/70 uppercase mb-4">
+          <span className="text-xs font-semibold tracking-widest text-white/70 uppercase mb-3 sm:text-sm sm:mb-4">
             {t("hero.eyebrow")}
           </span>
 
-          <h1 className="font-jakarta text-[2.6rem] font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.5rem] uppercase">
+          <h1 className="font-jakarta text-[2rem] font-black leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] uppercase">
             <span className="block">{t("hero.line1")}</span>
             <span className="block">{t("hero.line2")}</span>
-            <span className="block text-primary-light mt-2">{t("hero.line3")}</span>
+            <span className="block text-primary-light mt-1.5">{t("hero.line3")}</span>
           </h1>
 
-          <div className="mt-6 flex items-center gap-3">
-            <span className="text-sm text-white/60">{t("hero.supportedBy")}</span>
-            <div className="text-xl font-bold italic tracking-tighter text-white">IKAPEKSI</div>
+          <div className="mt-5 flex items-center gap-3">
+            <span className="text-xs text-white/60 sm:text-sm">{t("hero.supportedBy")}</span>
+            <div className="text-lg font-bold italic tracking-tighter text-white sm:text-xl">IKAPEKSI</div>
           </div>
 
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-white/80">
+          <p className="mt-5 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base">
             {t("hero.description", { name: SITE.fullName })}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10">
-            <Button href="/pendataan" size="lg" className="btn-shine !rounded-full px-8 font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40">
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <Button href="/pendataan" size="lg" className="btn-shine !rounded-full !px-7 py-3.5 text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 sm:text-base">
               {t("hero.daftar")}
             </Button>
             <Button
@@ -138,7 +138,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               variant="outline"
               size="lg"
-              className="group relative overflow-hidden !rounded-full border-white/40 text-white hover:border-[#25D366] hover:text-white px-8 font-semibold"
+              className="group relative overflow-hidden !rounded-full border-white/40 text-white hover:border-[#25D366] hover:text-white !px-7 py-3.5 text-sm font-semibold sm:text-base"
             >
               <span
                 aria-hidden="true"

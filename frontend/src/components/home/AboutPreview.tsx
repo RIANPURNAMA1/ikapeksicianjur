@@ -41,9 +41,9 @@ function TimelineItem({
   badge?: string;
 }) {
   return (
-    <li className="relative pl-12">
+    <li className="relative pl-11">
       <span
-        className={`absolute left-0 top-1 flex h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full transition-all duration-300 ${
+        className={`absolute left-0 top-1 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full transition-all duration-300 ${
           highlight
             ? "bg-gradient-to-br from-[#C62930] to-[#ff7e84] text-white shadow-[0_0_16px_rgba(198,41,48,0.55)]"
             : "border border-white/20 bg-[#16080a] text-[#e8555c]"
@@ -53,14 +53,14 @@ function TimelineItem({
       </span>
 
       <div
-        className={`rounded-md border px-5 py-4 transition-all duration-300 ${
+        className={`rounded-md border px-4 py-3 transition-all duration-300 ${
           highlight
             ? "border-primary/50 bg-primary/10"
             : "border-white/10 bg-white/[0.03] hover:border-white/25"
         }`}
       >
         <div className="flex flex-wrap items-center gap-2">
-          <p className="font-mona text-base font-semibold leading-tight text-white">{name}</p>
+          <p className="font-mona text-sm font-semibold leading-tight text-white sm:text-base">{name}</p>
           {highlight && badge && (
             <span className="rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-white">
               {badge}
@@ -96,17 +96,17 @@ export default function AboutPreview() {
 
           {/* Konten Kiri (Struktur Organisasi) */}
           {/* Hapus padding persentase (pl-[10%]), ganti dengan padding fix agar rapi karena margin layar sudah diatasi kolom 1 */}
-          <div className="order-2 lg:order-1 py-16 px-6 sm:px-12 lg:py-24 lg:px-10 xl:px-24 flex flex-col justify-center">
+          <div className="order-2 lg:order-1 py-12 sm:py-16 lg:py-20 px-6 sm:px-10 lg:px-10 xl:px-20 flex flex-col justify-center">
             <Reveal delay={100}>
-              <div className="py-4">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#e8555c]">
+              <div className="py-2">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-[#e8555c] sm:text-[11px]">
                   {t("about.structure.label")}
                 </span>
 
-                <div className="relative mt-7">
+                <div className="relative mt-6">
                   <span className="absolute bottom-4 left-0 top-2 w-px bg-gradient-to-b from-[#C62930]/60 via-white/20 to-[#C62930]/60" />
 
-                  <ol className="space-y-6">
+                  <ol className="space-y-4 sm:space-y-5">
                     <TimelineItem
                       icon={<StructureIcon type="nasional" />}
                       name={t("about.structure.dpp.name")}
@@ -131,7 +131,7 @@ export default function AboutPreview() {
           </div>
 
           {/* Konten Kanan (Teks Penjelasan) */}
-          <div className="order-1 lg:order-2 flex flex-col justify-center py-16 px-6 sm:px-12 lg:py-24 lg:px-10 xl:px-24 bg-white/[0.01]">
+          <div className="order-1 lg:order-2 flex flex-col justify-center py-12 sm:py-16 lg:py-20 px-6 sm:px-10 lg:px-10 xl:px-20 bg-white/[0.01]">
             <Reveal delay={150}>
               <SectionHeading
                 eyebrow={t("about.eyebrow")}
@@ -141,13 +141,13 @@ export default function AboutPreview() {
             </Reveal>
 
             <Reveal delay={250}>
-              <p className="mt-5 text-base leading-relaxed text-white/70">
+              <p className="mt-4 text-sm leading-relaxed text-white/70 sm:text-base">
                 {t("about.description", { year: SITE.foundedYear, name: SITE.fullName })}
               </p>
             </Reveal>
 
             <Reveal delay={700}>
-              <div className="mt-10">
+              <div className="mt-8">
                 <Button href="/tentang" variant="outline">
                   {t("about.kenali")}
                 </Button>

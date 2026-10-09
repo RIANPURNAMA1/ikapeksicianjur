@@ -24,6 +24,7 @@ const id: TranslationMessages = {
   "nav.tentang": "Tentang",
   "nav.program": "Program",
   "nav.alumni": "Keanggotaan",
+  "nav.alumniNav": "Alumni",
   "nav.kegiatan": "Kegiatan",
   "nav.berita": "Berita",
   "nav.galeri": "Galeri",
@@ -114,8 +115,8 @@ const id: TranslationMessages = {
 
   // ===== JOIN SECTION =====
   "join.eyebrow": "MARI BERGABUNG",
-  "join.heading": "Alumni Pemagangan Kerja Asal Cianjur?",
-  "join.subtitle": "Daftarkan Diri Anda.",
+  "join.heading": "Mari Bergabung Alumni & Pejuang Jepang",
+  "join.subtitle": "Daftarkan diri anda!",
   "join.desc":
     "Perluas jejaring, ikuti kegiatan eksklusif, dan berkontribusi untuk kampung halaman bersama ratusan alumni lainnya dalam satu platform.",
   "join.cta": "Gabung Anggota Sekarang",
@@ -176,12 +177,13 @@ const ja: TranslationMessages = {
   "nav.beranda": "ホーム",
   "nav.tentang": "概要",
   "nav.program": "プログラム",
-  "nav.alumni": "同窓生",
+  "nav.alumni": "会員",
+  "nav.alumniNav": "同窓生",
   "nav.kegiatan": "活動",
   "nav.berita": "ニュース",
   "nav.galeri": "ギャラリー",
   "nav.kontak": "お問い合わせ",
-  "nav.gabungAlumni": "同窓会に参加",
+  "nav.gabungAlumni": "会員登録",
   "nav.bukaMenu": "メニューを開く",
   "nav.tutupMenu": "メニューを閉じる",
 
@@ -192,7 +194,7 @@ const ja: TranslationMessages = {
   "hero.line3": "千の歩み",
   "hero.supportedBy": "支援元",
   "hero.description":
-    "{name}は、故郷チアンジュール出身の海外研修同窓生を結集し、共に成長し、知識を共有し、故郷を発展させることを目指しています。",
+    "{name}は、チアンジュール県の研修同窓生・実務家・インドネシアと日本の未来を担う人材を結集し、共に成長し、知識を共有し、故郷を築くことを目指しています。",
   "hero.daftar": "今すぐ登録",
   "hero.konsultasi": "無料相談",
   "hero.slidePrev": "前のスライド",
@@ -201,9 +203,9 @@ const ja: TranslationMessages = {
 
   // ===== ABOUT PREVIEW =====
   "about.eyebrow": "私たちについて",
-  "about.title": "同窓生をつなぎ、チアンジュールを築く",
+  "about.title": "チアンジュール出身の日本で働く人々の家",
   "about.description":
-    "{year}年以来、{name}はチアンジュール県出身の海外研修同窓生にとっての共通の居場所となっています。単なる親睦だけでなく、各地域の経験を一つに紡ぎ、故郷を前進させる力としています。",
+    "IKAPEKSIは、帰国後に自ら事業を起こす日本の研修（ケンシュセイ）同窓生を結集しています。DPCチアンジュールは新たに設立された支部で、チアンジュール県の同窓生と研修希望者を包み込み、互いに支え合い、ビジネス機会を共有し、渡航を目指す次世代への道を開きます。私たちは、同窓生同士のネットワーク強化、研修希望者への支援、労働問題における地方政府との連携という三つの柱で活動しています。",
   "about.forYou": "こんな方に最適です：",
   "about.item1.title": "帰国した同窓生",
   "about.item1.desc": "新たな経験を持ち帰り、地域を超えたネットワークとつながり続けたい方。",
@@ -241,10 +243,10 @@ const ja: TranslationMessages = {
 
   // ===== VISION & MISSION =====
   "vision.label": "ビジョン",
-  "vision.title": "自立し競争力のあるチアンジュールの同窓生。",
+  "vision.title": "自立し競争力のあるチアンジュール社会。",
   "vision.desc":
     "グローバルな経済的課題に立ち向かう各同窓生の可能性を最大限に引き出す、強固なエコシステムを構築します。",
-  "mission.label": "ミッション",
+  "mission.label": "私たちのミッション",
   "mission.m1": "チアンジュール県全域の研修同窓生を結集し、情報を管理します。",
   "mission.m2": "研修参加希望者と元参加者への研修と指導を提供します。",
   "mission.m3": "同窓生への経済協力と雇用機会へのアクセスを開拓します。",
@@ -267,8 +269,8 @@ const ja: TranslationMessages = {
 
   // ===== JOIN SECTION =====
   "join.eyebrow": "一緒に参加しませんか",
-  "join.heading": "チアンジュール出身の研修同窓生ですか？",
-  "join.subtitle": "お申し込みください。",
+  "join.heading": "同窓生と日本の戦士たち、一緒に参加しよう",
+  "join.subtitle": "今すぐお申し込みください！",
   "join.desc":
     "ネットワークを広げ、特別な活動に参加し、数百人の同窓生と一つのプラットフォームで故郷に貢献しましょう。",
   "join.cta": "今すぐ同窓会に登録",
@@ -316,7 +318,7 @@ const ja: TranslationMessages = {
 
   // ===== FOOTER =====
   "footer.description":
-    "チアンジュール県出身の海外研修同窓生の交流の場であり、その能力を活かします。",
+    "チアンジュール県出身の海外研修同窓生の交流とエンパワーメントの場です。",
   "footer.navigasi": "ナビゲーション",
   "footer.lainnya": "その他",
   "footer.kontak": "お問い合わせ",
