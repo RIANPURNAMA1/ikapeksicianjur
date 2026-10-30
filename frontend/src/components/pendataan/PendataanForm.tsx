@@ -215,14 +215,14 @@ function SectionCard({
   children: ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+    <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
       <div className="mb-6 flex items-center gap-3">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-white">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
           {step}
         </span>
         <div>
-          <h2 className="text-lg font-bold leading-tight text-white">{title}</h2>
-          {subtitle && <p className="text-xs text-white/50">{subtitle}</p>}
+          <h2 className="text-lg font-bold leading-tight text-[#0A0304]">{title}</h2>
+          {subtitle && <p className="text-xs text-[#0A0304]/50">{subtitle}</p>}
         </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">{children}</div>
@@ -499,12 +499,12 @@ export default function PendataanForm() {
 
   if (submitted) {
     return (
-      <section className="bg-ink py-20 text-white">
+      <section className="bg-white py-20 text-[#0A0304] font-jakarta">
         <Container className="mx-auto max-w-2xl text-center">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-10">
+          <div className="rounded-3xl border border-gray-200 bg-gray-100 p-10">
             <p className="text-4xl">✅</p>
             <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">{t("pendataan.successTitle")}</h1>
-            <p className="mt-3 text-sm leading-relaxed text-white/70">{t("pendataan.successDesc")}</p>
+            <p className="mt-3 text-sm leading-relaxed text-[#0A0304]/70">{t("pendataan.successDesc")}</p>
           </div>
         </Container>
       </section>
@@ -512,33 +512,33 @@ export default function PendataanForm() {
   }
 
   return (
-    <section className="bg-ink py-16 text-white">
+      <section className="bg-white py-16 text-[#0A0304] font-jakarta">
       <Container className="mx-auto max-w-4xl">
         <div className="text-center">
-          <span className="stamp-label border-white/30 bg-white/10 text-white">
+          <span className="stamp-label border-white/30 bg-gray-100 text-[#0A0304]">
             {t("pendataan.sectionLabel")}
           </span>
           <h1 className="mt-5 text-3xl font-extrabold leading-tight sm:text-4xl">
             {t("pendataan.title")}
           </h1>
-                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
+                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#0A0304]/70">
             {t("pendataan.subtitle")}
           </p>
 
           {/* Penjelasan & Manfaat Pendataan */}
-          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-sm leading-relaxed text-white/80">
-            <div className="rounded-2xl border border-white/5 bg-white/5 p-6 text-center">
+          <div className="mx-auto mt-8 max-w-3xl space-y-6 text-sm leading-relaxed text-[#0A0304]/80">
+            <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 text-center">
               <p className="mb-2 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-primary">
                <span>{t("pendataan.uniteLabel")}</span>
               </p>
-              <p className="mt-1 text-base font-semibold text-white">
+              <p className="mt-1 text-base font-semibold text-[#0A0304]">
                 {t("pendataan.uniteTagline")}
               </p>
             </div>
 
             <p className="max-w-2xl text-center">
               {t("pendataan.introLead")}{" "}
-              <span className="font-semibold text-white">{t("pendataan.introHighlight")}</span>{" "}
+              <span className="font-semibold text-[#0A0304]">{t("pendataan.introHighlight")}</span>{" "}
               {t("pendataan.introTail")}
             </p>
 
@@ -546,7 +546,7 @@ export default function PendataanForm() {
               {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                 <div
                   key={n}
-                  className="flex items-start gap-2.5 rounded-lg border border-white/5 bg-white/5 p-3 placeholder:text-white/70"
+                  className="flex items-start gap-2.5 rounded-lg border border-gray-200 bg-gray-100 p-3 placeholder:text-[#0A0304]/70"
                 >
                   <span className="mt-0.5 text-base" aria-hidden="true">
                     ✅
@@ -561,15 +561,15 @@ export default function PendataanForm() {
                 ⏱️
               </span>
               <span>
-                <span className="font-semibold text-white">{t("pendataan.estTime")}</span>
+                <span className="font-semibold text-[#0A0304]">{t("pendataan.estTime")}</span>
               </span>
             </p>
 
             <p className="mx-auto max-w-2xl text-center">
               {t("pendataan.minuteLead")}{" "}
-              <span className="font-semibold text-white">{t("pendataan.minuteDoc")}</span>,{" "}
-              <span className="font-semibold text-white">{t("pendataan.minuteAcc")}</span>,{" "}
-              <span className="font-semibold text-white">{t("pendataan.minuteBiz")}</span>.{" "}
+              <span className="font-semibold text-[#0A0304]">{t("pendataan.minuteDoc")}</span>,{" "}
+              <span className="font-semibold text-[#0A0304]">{t("pendataan.minuteAcc")}</span>,{" "}
+              <span className="font-semibold text-[#0A0304]">{t("pendataan.minuteBiz")}</span>.{" "}
               <span className="font-semibold text-[#e8555c]">{t("pendataan.minuteTail")}</span>
             </p>
 
@@ -580,14 +580,14 @@ export default function PendataanForm() {
         <form onSubmit={handleSubmit} className="mt-10 space-y-6">
 
           {/* STEP 1: Saya Adalah */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
             <div className="mb-6 flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-white">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
                 1
               </span>
               <div>
-                <h2 className="text-lg font-bold leading-tight text-white">{t("pendataan.step1.title")} *</h2>
-                <p className="text-xs text-white/50">{t("pendataan.step1.subtitle")}</p>
+                <h2 className="text-lg font-bold leading-tight text-[#0A0304]">{t("pendataan.step1.title")} *</h2>
+                <p className="text-xs text-[#0A0304]/50">{t("pendataan.step1.subtitle")}</p>
               </div>
             </div>
             <div className="grid gap-4">
@@ -597,20 +597,20 @@ export default function PendataanForm() {
                   options={KATEGORI.map((k) => ({ value: k.value, label: t(`pendataan.kategori.${k.value}`) }))}
                   placeholder={t("pendataan.kategoriPlaceholder")}
                   required
-                  variant="dark"
+                  variant="light"
                   value={kategori}
                   onChange={(e) => setKategori(e.target.value as Kategori | "")}
                 />
                 {kategori && (
                   <div className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/10 p-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-white">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-[#0A0304]">
                       {KATEGORI.find((k) => k.value === kategori)?.icon}
                     </span>
                     <div>
-                      <p className="text-sm font-bold text-white">
+                      <p className="text-sm font-bold text-[#0A0304]">
                         {t(`pendataan.kategori.${kategori}`)}
                       </p>
-                      <p className="text-xs text-white/60">
+                      <p className="text-xs text-[#0A0304]/60">
                         {t(`pendataan.kategori.${kategori}.desc`)}
                       </p>
                     </div>
@@ -628,7 +628,7 @@ export default function PendataanForm() {
               label="Nama Lengkap *"
               placeholder="Nama Lengkap Anda"
               required
-              variant="dark"
+              variant="light"
               value={dataDiri.nama}
               onChange={(e) => setData("nama", e.target.value)}
             />
@@ -637,7 +637,7 @@ export default function PendataanForm() {
               label="Nomor WhatsApp *"
               placeholder="08xxxxxxxxxx"
               required
-              variant="dark"
+              variant="light"
               value={dataDiri.whatsapp}
               onChange={(e) => setData("whatsapp", e.target.value)}
             />
@@ -646,7 +646,7 @@ export default function PendataanForm() {
               type="email"
               label="Email"
               placeholder="nama@email.com"
-              variant="dark"
+              variant="light"
               value={dataDiri.email}
               onChange={(e) => setData("email", e.target.value)}
             />
@@ -661,7 +661,7 @@ export default function PendataanForm() {
               options={provinsiOptions}
               placeholder="-- Pilih Provinsi --"
               required
-              variant="dark"
+              variant="light"
               value={dataDiri.provinsi}
               onChange={(e) => handleProvinsiChange(e.target.value)}
             />
@@ -672,7 +672,7 @@ export default function PendataanForm() {
               placeholder={loadingKabupaten ? "Memuat data..." : "-- Pilih Kabupaten / Kota --"}
               required
               disabled={!dataDiri.provinsi || loadingKabupaten}
-              variant="dark"
+              variant="light"
               value={dataDiri.kabupaten}
               onChange={(e) => handleKabupatenChange(e.target.value)}
             />
@@ -683,7 +683,7 @@ export default function PendataanForm() {
               placeholder={loadingKecamatan ? "Memuat data..." : "-- Pilih Kecamatan --"}
               required
               disabled={!dataDiri.kabupaten || loadingKecamatan}
-              variant="dark"
+              variant="light"
               value={dataDiri.kecamatan}
               onChange={(e) => handleKecamatanChange(e.target.value)}
             />
@@ -694,7 +694,7 @@ export default function PendataanForm() {
               placeholder={loadingDesa ? "Memuat data..." : "-- Pilih Desa / Kelurahan --"}
               required
               disabled={!dataDiri.kecamatan || loadingDesa}
-              variant="dark"
+              variant="light"
               value={dataDiri.desa}
               onChange={(e) => setData("desa", e.target.value)}
             />
@@ -703,7 +703,7 @@ export default function PendataanForm() {
               label="Pekerjaan *"
               placeholder="Pekerjaan / profesi Anda"
               required
-              variant="dark"
+              variant="light"
               value={dataDiri.pekerjaan}
               onChange={(e) => setData("pekerjaan", e.target.value)}
             />
@@ -723,7 +723,7 @@ export default function PendataanForm() {
                   options={JALUR_OPTIONS}
                   placeholder="-- Pilih --"
                   required
-                  variant="dark"
+                  variant="light"
                   value={alumni.jalur}
                   onChange={(e) => setAlumniField("jalur", e.target.value)}
                 />
@@ -731,7 +731,7 @@ export default function PendataanForm() {
                   id="al-angkatan"
                   label="Angkatan"
                   placeholder="Contoh: 2019"
-                  variant="dark"
+                  variant="light"
                   value={alumni.angkatan}
                   onChange={(e) => setAlumniField("angkatan", e.target.value)}
                 />
@@ -740,7 +740,7 @@ export default function PendataanForm() {
                   label="Durasi Magang"
                   options={DURASI_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={alumni.durasi}
                   onChange={(e) => setAlumniField("durasi", e.target.value)}
                 />
@@ -749,7 +749,7 @@ export default function PendataanForm() {
                   label="Prefektur Penempatan"
                   options={PREFECTURE_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={alumni.prefektur}
                   onChange={(e) => setAlumniField("prefektur", e.target.value)}
                 />
@@ -757,7 +757,7 @@ export default function PendataanForm() {
                   id="al-tahun"
                   label="Tahun Kepulangan"
                   placeholder="Contoh: 2024"
-                  variant="dark"
+                  variant="light"
                   value={alumni.tahunKepulangan}
                   onChange={(e) => setAlumniField("tahunKepulangan", e.target.value)}
                 />
@@ -770,7 +770,7 @@ export default function PendataanForm() {
                   options={STATUS_OPTIONS}
                   placeholder="-- Pilih --"
                   required
-                  variant="dark"
+                  variant="light"
                   value={alumni.status}
                   onChange={(e) => setAlumniField("status", e.target.value)}
                 />
@@ -778,7 +778,7 @@ export default function PendataanForm() {
                   id="al-pekerjaan"
                   label="Pekerjaan"
                   placeholder="Pekerjaan saat ini"
-                  variant="dark"
+                  variant="light"
                   value={alumni.pekerjaan}
                   onChange={(e) => setAlumniField("pekerjaan", e.target.value)}
                 />
@@ -786,7 +786,7 @@ export default function PendataanForm() {
                   id="al-perusahaan"
                   label="Perusahaan"
                   placeholder="Nama perusahaan / instansi"
-                  variant="dark"
+                  variant="light"
                   value={alumni.perusahaan}
                   onChange={(e) => setAlumniField("perusahaan", e.target.value)}
                 />
@@ -794,7 +794,7 @@ export default function PendataanForm() {
                   id="al-usaha"
                   label="Usaha"
                   placeholder="Nama usaha / UMKM (jika ada)"
-                  variant="dark"
+                  variant="light"
                   value={alumni.usaha}
                   onChange={(e) => setAlumniField("usaha", e.target.value)}
                 />
@@ -814,7 +814,7 @@ export default function PendataanForm() {
                 options={JALUR_OPTIONS}
                 placeholder="-- Pilih --"
                 required
-                variant="dark"
+                variant="light"
                 value={calon.jalur}
                 onChange={(e) => setCalonField("jalur", e.target.value)}
               />
@@ -822,7 +822,7 @@ export default function PendataanForm() {
                 id="ca-lpk"
                 label="LPK"
                 placeholder="Nama LPK / penyalur"
-                variant="dark"
+                variant="light"
                 value={calon.lpk}
                 onChange={(e) => setCalonField("lpk", e.target.value)}
               />
@@ -831,7 +831,7 @@ export default function PendataanForm() {
                 label="Bidang"
                 options={BIDANG_OPTIONS}
                 placeholder="-- Pilih --"
-                variant="dark"
+                variant="light"
                 value={calon.bidang}
                 onChange={(e) => setCalonField("bidang", e.target.value)}
               />
@@ -841,7 +841,7 @@ export default function PendataanForm() {
                 options={STATUS_PROSES_OPTIONS}
                 placeholder="-- Pilih --"
                 required
-                variant="dark"
+                variant="light"
                 value={calon.statusProses}
                 onChange={(e) => setCalonField("statusProses", e.target.value)}
               />
@@ -849,7 +849,7 @@ export default function PendataanForm() {
                 id="ca-keberangkatan"
                 label="Target Keberangkatan"
                 placeholder="Contoh: Kuartal I 2027"
-                variant="dark"
+                variant="light"
                 value={calon.targetKeberangkatan}
                 onChange={(e) => setCalonField("targetKeberangkatan", e.target.value)}
               />
@@ -858,7 +858,7 @@ export default function PendataanForm() {
                 label="Target Prefektur"
                 options={PREFECTURE_OPTIONS}
                 placeholder="-- Pilih --"
-                variant="dark"
+                variant="light"
                 value={calon.targetPrefektur}
                 onChange={(e) => setCalonField("targetPrefektur", e.target.value)}
               />
@@ -873,7 +873,7 @@ export default function PendataanForm() {
                   label="Nama Usaha *"
                   placeholder="Nama usaha / brand"
                   required
-                  variant="dark"
+                  variant="light"
                   value={umkm.namaUsaha}
                   onChange={(e) => setUmkmField("namaUsaha", e.target.value)}
                 />
@@ -883,7 +883,7 @@ export default function PendataanForm() {
                   options={BIDANG_UMKM_OPTIONS}
                   placeholder="-- Pilih --"
                   required
-                  variant="dark"
+                  variant="light"
                   value={umkm.bidang}
                   onChange={(e) => setUmkmField("bidang", e.target.value)}
                 />
@@ -891,7 +891,7 @@ export default function PendataanForm() {
                   id="um-produk"
                   label="Produk"
                   placeholder="Produk unggulan / utama"
-                  variant="dark"
+                  variant="light"
                   value={umkm.produk}
                   onChange={(e) => setUmkmField("produk", e.target.value)}
                 />
@@ -899,7 +899,7 @@ export default function PendataanForm() {
                   id="um-berdiri"
                   label="Tahun Berdiri"
                   placeholder="Contoh: 2020"
-                  variant="dark"
+                  variant="light"
                   value={umkm.tahunBerdiri}
                   onChange={(e) => setUmkmField("tahunBerdiri", e.target.value)}
                 />
@@ -907,7 +907,7 @@ export default function PendataanForm() {
                   id="um-karyawan"
                   label="Jumlah Karyawan"
                   placeholder="Contoh: 5 orang"
-                  variant="dark"
+                  variant="light"
                   value={umkm.karyawan}
                   onChange={(e) => setUmkmField("karyawan", e.target.value)}
                 />
@@ -919,7 +919,7 @@ export default function PendataanForm() {
                   label="NIB (Nomor Induk Berusaha)"
                   options={LEGALITAS_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={umkm.nib}
                   onChange={(e) => setUmkmField("nib", e.target.value)}
                 />
@@ -928,7 +928,7 @@ export default function PendataanForm() {
                   label="Sertifikat Halal"
                   options={LEGALITAS_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={umkm.halal}
                   onChange={(e) => setUmkmField("halal", e.target.value)}
                 />
@@ -937,7 +937,7 @@ export default function PendataanForm() {
                   label="PIRT"
                   options={LEGALITAS_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={umkm.pirt}
                   onChange={(e) => setUmkmField("pirt", e.target.value)}
                 />
@@ -946,7 +946,7 @@ export default function PendataanForm() {
                   label="BPOM"
                   options={LEGALITAS_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={umkm.bpom}
                   onChange={(e) => setUmkmField("bpom", e.target.value)}
                 />
@@ -958,7 +958,7 @@ export default function PendataanForm() {
                   label="Kapasitas Produksi"
                   options={KAPASITAS_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={umkm.kapasitas}
                   onChange={(e) => setUmkmField("kapasitas", e.target.value)}
                 />
@@ -967,7 +967,7 @@ export default function PendataanForm() {
                   label="Omzet per Bulan"
                   options={OMZET_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={umkm.omzet}
                   onChange={(e) => setUmkmField("omzet", e.target.value)}
                 />
@@ -976,7 +976,7 @@ export default function PendataanForm() {
                   label="Pemasaran"
                   options={PEMASARAN_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={umkm.pemasaran}
                   onChange={(e) => setUmkmField("pemasaran", e.target.value)}
                 />
@@ -985,20 +985,20 @@ export default function PendataanForm() {
                   label="Sudah/Ekspor ke Luar Negeri"
                   options={LEGALITAS_OPTIONS}
                   placeholder="-- Pilih --"
-                  variant="dark"
+                  variant="light"
                   value={umkm.ekspor}
                   onChange={(e) => setUmkmField("ekspor", e.target.value)}
                 />
               </SectionCard>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+              <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
                 <div className="mb-6 flex items-center gap-3">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-white">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
                     6
                   </span>
                   <div>
-                    <h2 className="text-lg font-bold leading-tight text-white">Kebutuhan</h2>
-                    <p className="text-xs text-white/50">Pilih bantuan yang dibutuhkan usaha Anda.</p>
+                    <h2 className="text-lg font-bold leading-tight text-[#0A0304]">Kebutuhan</h2>
+                    <p className="text-xs text-[#0A0304]/50">Pilih bantuan yang dibutuhkan usaha Anda.</p>
                   </div>
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
@@ -1012,13 +1012,13 @@ export default function PendataanForm() {
                         aria-pressed={checked}
                         className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition ${
                           checked
-                            ? "border-primary bg-primary/20 text-white"
-                            : "border-white/15 bg-white/5 text-white/70 hover:border-primary/50"
+                            ? "border-primary bg-primary/20 text-[#0A0304]"
+                            : "border-gray-300 bg-gray-100 text-[#0A0304]/70 hover:border-primary/50"
                         }`}
                       >
                         <span
                           className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
-                            checked ? "border-primary bg-primary text-white" : "border-white/30"
+                            checked ? "border-primary bg-primary text-[#0A0304]" : "border-white/30"
                           }`}
                         >
                           {checked && "✓"}
@@ -1033,16 +1033,16 @@ export default function PendataanForm() {
           )}
 
           {/* HARAPAN DARI IKAPEKSI */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
             <div className="mb-6 flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-white">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
                 7
               </span>
               <div>
-                <h2 className="text-lg font-bold leading-tight text-white">Harapan dari IKAPEKSI</h2>
-                <p className="text-xs text-white/50">Pilih maksimal 3 harapan Anda dari IKAPEKSI.</p>
+                <h2 className="text-lg font-bold leading-tight text-[#0A0304]">Harapan dari IKAPEKSI</h2>
+                <p className="text-xs text-[#0A0304]/50">Pilih maksimal 3 harapan Anda dari IKAPEKSI.</p>
               </div>
-              <span className="ml-auto shrink-0 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-bold text-white/70">
+              <span className="ml-auto shrink-0 rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs font-bold text-[#0A0304]/70">
                 {harapan.length}/3
               </span>
             </div>
@@ -1059,15 +1059,15 @@ export default function PendataanForm() {
                     disabled={disabled}
                     className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition ${
                       checked
-                        ? "border-primary bg-primary/20 text-white"
+                        ? "border-primary bg-primary/20 text-[#0A0304]"
                         : disabled
-                          ? "cursor-not-allowed border-white/10 bg-white/5 text-white/40"
-                          : "border-white/15 bg-white/5 text-white/70 hover:border-primary/50"
+                          ? "cursor-not-allowed border-gray-200 bg-gray-100 text-[#0A0304]/40"
+                          : "border-gray-300 bg-gray-100 text-[#0A0304]/70 hover:border-primary/50"
                     }`}
                   >
                     <span
                       className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
-                        checked ? "border-primary bg-primary text-white" : "border-white/30"
+                        checked ? "border-primary bg-primary text-[#0A0304]" : "border-white/30"
                       }`}
                     >
                       {checked && "✓"}
@@ -1082,7 +1082,7 @@ export default function PendataanForm() {
                 id="harapan-lainnya"
                 label="Lainnya (opsional)"
                 placeholder="Harapan lain di luar daftar di atas"
-                variant="dark"
+                variant="light"
                 value={harapanLainnya}
                 onChange={(e) => setHarapanLainnya(e.target.value)}
               />
@@ -1090,14 +1090,14 @@ export default function PendataanForm() {
           </div>
 
           {/* PERSETUJUAN DATA */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
             <div className="mb-6 flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-white">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
                 8
               </span>
-              <h2 className="text-lg font-bold leading-tight text-white">Persetujuan Data</h2>
+              <h2 className="text-lg font-bold leading-tight text-[#0A0304]">Persetujuan Data</h2>
             </div>
-            <label className="flex cursor-pointer items-start gap-3 text-sm text-white/80">
+            <label className="flex cursor-pointer items-start gap-3 text-sm text-[#0A0304]/80">
               <input
                 type="checkbox"
                 checked={agreed}
@@ -1118,7 +1118,7 @@ export default function PendataanForm() {
             <Button
               type="submit"
               disabled={!kategori || !agreed || submitting}
-              className="btn-shine mt-6 w-full !rounded-full !bg-primary py-4 text-base font-bold hover:!bg-primary-dark"
+              className="btn-shine mt-6 w-full !rounded-full !bg-primary py-4 text-base font-bold text-white hover:!bg-primary-dark"
             >
               {submitting ? "Mengirim Data..." : "Daftar Sekarang"}
             </Button>

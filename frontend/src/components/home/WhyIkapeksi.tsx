@@ -76,8 +76,11 @@ export default function WhyIkapeksi() {
             {t("why.eyebrow")}
           </span>
 
-          <h2 className="mt-5 font-jakarta text-[32px] font-extrabold leading-[40px] tracking-[-0.03em] text-[#0A0304] sm:text-[44px] sm:leading-[52px] lg:text-[52px] lg:leading-[60px]">
-            {t("why.title")}
+          <h2 className="mt-5 font-jakarta text-[48px] font-extrabold leading-[56px] tracking-[-0.03em] text-[#0A0304]">
+            Alasan Memilih{" "}
+            <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
+              Bergabung
+            </span>
           </h2>
 
           <p className="mt-5 text-[16px] leading-[26px] text-[#4B5563] sm:text-[18px] sm:leading-[30px]">

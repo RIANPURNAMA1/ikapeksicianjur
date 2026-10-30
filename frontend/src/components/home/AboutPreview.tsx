@@ -94,7 +94,10 @@ export default function AboutPreview() {
               </div>
 
               <h2 className="mb-6 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
-                Membangun Kemandirian Berbasis Disiplin &amp; Pengalaman Jepang
+                 Membangun Kemandirian Berbasis Disiplin &amp;{" "}
+                  <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
+                    Pengalaman Jepang
+                  </span>
               </h2>
             </Reveal>
 

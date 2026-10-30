@@ -49,8 +49,11 @@ export default function VisionMissionPreview() {
           <span className="inline-flex items-center rounded-md bg-[#FFDAD6] px-4 py-1.5 text-[12px] font-bold uppercase leading-4 tracking-[0.1em] text-[#E3202B]">
             Arah &amp; Fokus Strategis
           </span>
-          <h2 className="mt-4 font-jakarta text-[28px] font-extrabold leading-[34px] tracking-[-0.025em] text-[#0A0304] sm:text-[36px] sm:leading-[44px]">
-            Visi &amp; Misi Organisasi
+          <h2 className="mt-4 font-jakarta text-[48px] font-extrabold leading-[56px] tracking-[-0.025em] text-[#0A0304]">
+            Visi &amp; Misi{" "}
+            <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
+              Organisasi
+            </span>
           </h2>
           <p className="mt-3 text-[16px] leading-[26px] text-[#4B5563] sm:text-[18px] sm:leading-[30px]">
             Landasan kerja DPC Kabupaten Cianjur untuk mewujudkan masyarakat

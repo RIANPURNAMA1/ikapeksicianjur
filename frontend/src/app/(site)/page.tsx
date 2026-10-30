@@ -15,7 +15,7 @@ import JoinSection from "@/components/home/JoinSection";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: { absolute: "IKAPEKSI Cianjur | Merajut Alumni, Membangun Cianjur" },
+  title: { absolute: "DPC IKAPEKSI KABUPATEN CIANJUR | Merajut Alumni, Membangun Cianjur" },
   description:
     "IKAPEKSI Cianjur — Ikatan Alumni Pemagangan Kerja Sistem Indonesia DPC Cianjur. Wadah silaturahmi dan pemberdayaan alumni pemagangan kerja luar negeri asal Kabupaten Cianjur. Daftarkan diri Anda di sini.",
   path: "/",

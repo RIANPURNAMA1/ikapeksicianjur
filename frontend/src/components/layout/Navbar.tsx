@@ -42,7 +42,7 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 w-full border-b border-[#E5E7EB] transition-all duration-300",
+          "sticky top-0 z-50 w-full transition-all duration-300",
           scrolled
             ? "bg-[#FFFFFF]/90 shadow-sm backdrop-blur-xl"
             : "bg-[#FFFFFF]"

@@ -265,7 +265,7 @@ function SectionHead({
   size = "lg",
 }: {
   eyebrow?: string;
-  title: string;
+  title: string | React.ReactNode;
   desc: string;
   align?: "center" | "left";
   size?: "md" | "lg";
@@ -279,9 +279,9 @@ function SectionHead({
         className={`font-jakarta font-extrabold tracking-[-0.025em] text-[#0A0304] ${
           eyebrow ? "mt-4" : ""
         } ${
-          size === "lg"
-            ? "text-[28px] leading-[36px] sm:text-[36px] sm:leading-[44px]"
-            : "text-[24px] leading-[32px] sm:text-[28px] sm:leading-[36px]"
+           size === "lg"
+             ? "text-[48px] leading-[56px]"
+             : "text-[48px] leading-[56px]"
         }`}
       >
         {title}
@@ -302,7 +302,14 @@ export default function ProgramSection() {
       <section className="w-full border-b border-[#E5E7EB] bg-[#F9FAFB] py-14 text-[#0A0304] lg:py-16">
         <Container>
           <SectionHead
-            title="Empat Pilar Program Strategis"
+            title={
+              <>
+                Empat Pilar{" "}
+                <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
+                  Program Strategis
+                </span>
+              </>
+            }
             desc="Struktur pilar berkelanjutan yang menopang seluruh agenda kerja DPC Cianjur"
             size="md"
           />
@@ -344,7 +351,14 @@ export default function ProgramSection() {
         <Container>
           <SectionHead
             eyebrow="Integritas Kami"
-            title="Komitmen & Nilai Organisasi"
+            title={
+              <>
+                Komitmen &amp; Nilai{" "}
+                <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
+                  Organisasi
+                </span>
+              </>
+            }
             desc="Prinsip teguh yang membimbing setiap langkah pengurus dan anggota IKAPEKSI DPC Cianjur."
           />
 
@@ -390,10 +404,16 @@ export default function ProgramSection() {
         <Container>
           <SectionHead
             eyebrow="Jaringan Ekosistem"
-            title="Kemitraan Strategis & Ekosistem"
-            desc="Pembinaan calon peserta dan alumni dijalankan bersama instansi pemerintah dan mitra resmi terakreditasi guna menjamin kepastian masa depan pejuang devisa."
-            align="left"
-          />
+            title={
+              <>
+                Kemitraan Strategis &amp;{" "}
+                <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
+                  Ekosistem
+                </span>
+              </>
+            }
+             desc="Pembinaan calon peserta dan alumni dijalankan bersama instansi pemerintah dan mitra resmi terakreditasi guna menjamin kepastian masa depan pejuang devisa."
+           />
 
           <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
             {PARTNERS.map((p, idx) => (
@@ -422,7 +442,14 @@ export default function ProgramSection() {
         <Container>
           <SectionHead
             eyebrow="Agenda Prioritas"
-            title="Program Kerja Utama Cianjur"
+            title={
+              <>
+                Program Kerja Utama{" "}
+                <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
+                  Cianjur
+                </span>
+              </>
+            }
             desc="Rangkaian aksi nyata yang dijadwalkan secara teratur untuk kemaslahatan anggota dan masyarakat umum."
           />
 

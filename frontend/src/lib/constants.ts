@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "IKAPEKSI CIANJUR",
+  name: "DPC IKAPEKSI KABUPATEN CIANJUR",
   fullName: "Ikatan Alumni Pemagangan Kerja Sistem Indonesia - Cianjur",
   tagline: "Merajut Alumni, Membangun Cianjur",
   description:
