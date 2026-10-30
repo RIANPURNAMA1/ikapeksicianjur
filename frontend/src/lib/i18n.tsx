@@ -36,12 +36,12 @@ const id: TranslationMessages = {
   // ===== HERO =====
   "hero.eyebrow": "KOMUNITAS PEJUANG INDONESIA - JEPANG KABUPATEN CIANJUR",
   "hero.line1": "SATU PASPOR",
-  "hero.line2": "PENGALAMAN,",
+  "hero.line2": "PENGALAMAN",
   "hero.line3": "SERIBU LANGKAH",
   "hero.supportedBy": "Didukung oleh",
   "hero.description":
     "Ikatan Alumni Pemagangan Kerja Sistem Indonesia (IKAPEKSI) Kabupaten Cianjur menghimpun Alumni, praktisi, dan calon pejuang Indonesia - Jepang untuk terus tumbuh, berbagi ilmu, dan membangun kampung halaman bersama.",
-  "hero.daftar": "Daftar Sekarang",
+  "hero.daftar": "Gabung Anggota",
   "hero.konsultasi": "Konsultasi Gratis",
   "hero.slidePrev": "Slide sebelumnya",
   "hero.slideNext": "Slide selanjutnya",
@@ -195,7 +195,7 @@ const ja: TranslationMessages = {
   "hero.supportedBy": "支援元",
   "hero.description":
     "{name}は、チアンジュール県の研修同窓生・実務家・インドネシアと日本の未来を担う人材を結集し、共に成長し、知識を共有し、故郷を築くことを目指しています。",
-  "hero.daftar": "今すぐ登録",
+  "hero.daftar": "会員登録",
   "hero.konsultasi": "無料相談",
   "hero.slidePrev": "前のスライド",
   "hero.slideNext": "次のスライド",

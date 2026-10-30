@@ -1,24 +1,66 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Reveal from "@/components/ui/Reveal";
+import Container from "@/components/layout/Container";
 import { useLanguage } from "@/lib/i18n";
 
-const reasons = [
+/*
+  Token warna:
+  merah   #E3202B (tint #FFDAD6)
+  ink     #0A0304
+  muted   #4B5563
+  surface #F9FAFB
+*/
+
+const reasons: {
+  titleKey: string;
+  descKey: string;
+  tag: string; // label merah di bagian bawah kartu
+  icon: ReactNode;
+}[] = [
   {
     titleKey: "why.r1.title",
     descKey: "why.r1.desc",
+    tag: "Kolaborasi Aktif",
+    icon: (
+      <>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </>
+    ),
   },
   {
     titleKey: "why.r2.title",
     descKey: "why.r2.desc",
+    tag: "Perlindungan Resmi",
+    icon: <path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6l-7-3Z" />,
   },
   {
     titleKey: "why.r3.title",
     descKey: "why.r3.desc",
+    tag: "Inkubasi Bisnis",
+    icon: (
+      <>
+        <path d="m22 7-8.5 8.5-5-5L2 17" />
+        <path d="M16 7h6v6" />
+      </>
+    ),
   },
   {
     titleKey: "why.r4.title",
     descKey: "why.r4.desc",
+    tag: "Aksi Kemanusiaan",
+    icon: (
+      <>
+        <path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16" />
+        <path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+        <path d="m2 15 6 6" />
+        <path d="M19.5 8.5c.7-.7 1.5-1.6 1.5-2.7A2.73 2.73 0 0 0 16 4a2.78 2.78 0 0 0-5 1.8c0 1.2.8 2 1.5 2.8L16 12Z" />
+      </>
+    ),
   },
 ];
 
@@ -26,100 +68,86 @@ export default function WhyIkapeksi() {
   const { t } = useLanguage();
 
   return (
-    // Hapus py-24 di sini agar garis vertikal bisa menyentuh ujung paling atas dan bawah
-    <section className="relative overflow-hidden text-white">
-      {/* Pattern Latar Belakang */}
-      <div
-        className="absolute inset-0 bg-grid-squares bg-[length:24px_24px] opacity-10 mix-blend-overlay pointer-events-none"
-        style={{
-          WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 60%, black 100%)",
-          maskImage: "linear-gradient(to bottom, transparent 0%, black 60%, black 100%)",
-        }}
-      />
+    <section className="relative w-full overflow-hidden bg-[#FFFFFF] py-16 text-[#0A0304] sm:py-20 lg:py-24">
+      <Container>
+        {/* Header */}
+        <Reveal className="mx-auto mb-12 flex max-w-3xl flex-col items-center text-center lg:mb-16">
+          <span className="inline-flex items-center rounded-md bg-[#F3F4F6] px-4 py-1.5 text-[12px] font-bold uppercase leading-4 tracking-[0.06em] text-[#E3202B]">
+            {t("why.eyebrow")}
+          </span>
 
-      {/* 
-        GRID UTAMA (3 KOLOM):
-        Menciptakan garis pinggir (vertikal) di kiri dan kanan layar yang menyambung.
-      */}
-      <div className="relative z-10 flex w-full border-t border-white/10">
-        
-        {/* Kolom 1: Ruang Kosong Kiri (Garis Vertikal Kiri) */}
-        {/* Lebarnya disamakan dengan padding lg:pl-[10%] pada section Tentang */}
-        <div className="border-stripe-r hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
+          <h2 className="mt-5 font-jakarta text-[32px] font-extrabold leading-[40px] tracking-[-0.03em] text-[#0A0304] sm:text-[44px] sm:leading-[52px] lg:text-[52px] lg:leading-[60px]">
+            {t("why.title")}
+          </h2>
 
-        {/* Kolom 2: Konten Tengah — border kiri & kanan kini dipegang oleh kolom gutter, sama seperti section lain */}
-        <div className="flex-1 w-full flex flex-col">
-          
-          {/* =========================================
-              HEADER SECTION
-              ========================================= */}
-          <div className="px-6 py-20 lg:py-24 flex flex-col items-center text-center">
-            <Reveal>
-              <span className="inline-flex items-center text-xs font-bold tracking-[0.15em] text-[#e8555c]">
-                {t("why.eyebrow")}
-              </span>
+          <p className="mt-5 text-[16px] leading-[26px] text-[#4B5563] sm:text-[18px] sm:leading-[30px]">
+            {t("why.subtitle")}
+          </p>
+        </Reveal>
 
-              <h2 className="mt-6 font-mona text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-br from-white to-white/50 bg-clip-text text-transparent">
-                {t("why.title")}
-              </h2>
+        {/* 4 kartu alasan */}
+        <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {reasons.map((reason, idx) => (
+            <li key={reason.titleKey} className="flex">
+              <Reveal delay={idx * 100} className="flex w-full">
+                <article className="flex w-full flex-col rounded-3xl bg-[#F9FAFB] p-7 shadow-[0_1px_2px_rgba(10,3,4,0.04)]">
+                  {/* Ikon + label */}
+                  <div className="flex items-start justify-between">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFDAD6] text-[#E3202B]">
+                      <svg
+                        className="h-7 w-7"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={1.75}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        {reason.icon}
+                      </svg>
+                    </div>
+                    <span className="rounded-md bg-[#FFFFFF] px-3 py-1.5 text-[11px] font-bold uppercase leading-4 tracking-[0.08em] text-[#4B5563]">
+                      {t("why.reasonLabel")}
+                    </span>
+                  </div>
 
-              <p className="mt-5 text-base leading-relaxed text-white/60 max-w-2xl mx-auto">
-                {t("why.subtitle")}
-              </p>
-            </Reveal>
-          </div>
+                  {/* Judul + deskripsi */}
+                  <h3 className="mt-6 font-jakarta text-[22px] font-bold leading-[30px] tracking-[-0.015em] text-[#0A0304]">
+                    {t(reason.titleKey)}
+                  </h3>
+                  <p className="mt-3 text-[15px] leading-[26px] text-[#4B5563]">
+                    {t(reason.descKey)}
+                  </p>
 
-          {/* =========================================
-              GRID KARTU ALASAN (2x2)
-              ========================================= */}
-          {/* Ada border-t pemisah antara Teks Header dan Kartu di bawahnya */}
-          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/10 bg-white/[0.01] backdrop-blur-sm">
-            {reasons.map((reason, idx) => {
-              // Logika penempatan garis pembatas (border) agar tidak dobel/tumpang tindih
-              const borderClasses = `
-                border-white/10 
-                ${idx === 0 ? "border-b md:border-r" : ""}
-                ${idx === 1 ? "border-b" : ""}
-                ${idx === 2 ? "border-b md:border-b-0 md:border-r" : ""}
-              `;
-
-              return (
-                <div 
-                  key={reason.titleKey} 
-                  className={`group relative flex flex-col p-8 sm:p-12 transition-colors duration-500 hover:bg-white/[0.03] ${borderClasses}`}
-                >
-                  <Reveal delay={idx * 100} className="h-full flex flex-col">
-                    {/* Header Kartu */}
-                    <div className="mb-8 flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-sm font-black text-white/50 transition-all duration-500 group-hover:bg-[#C62930]/20 group-hover:border-[#C62930]/50 group-hover:text-[#C62930] group-hover:shadow-[0_0_20px_rgba(198,41,48,0.3)]">
-                        {String(idx + 1).padStart(2, "0")}
-                      </div>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30 transition-colors duration-500 group-hover:text-[#C62930]/80">
-                        {t("why.reasonLabel")}
+                  {/* Footer kartu */}
+                  <div className="mt-auto pt-8">
+                    <div className="flex items-center justify-between border-t border-[#E5E7EB] pt-5">
+                      <span className="text-[12px] font-bold uppercase leading-4 tracking-[0.1em] text-[#E3202B]">
+                        {reason.tag}
+                      </span>
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#FFFFFF] text-[#E3202B]">
+                        <svg
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
                       </span>
                     </div>
-
-                    {/* Konten Kartu */}
-                    <div className="flex flex-col flex-grow">
-                      <h3 className="font-mona text-xl font-bold text-white/80 transition-colors duration-300 group-hover:text-white">
-                        {t(reason.titleKey)}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-white/50 transition-colors duration-300 group-hover:text-white/70">
-                        {t(reason.descKey)}
-                      </p>
-                    </div>
-                  </Reveal>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-
-        {/* Kolom 3: Ruang Kosong Kanan (Garis Vertikal Kanan) */}
-        <div className="border-stripe-l hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
-      
-      </div>
+                  </div>
+                </article>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </Container>
     </section>
   );
 }

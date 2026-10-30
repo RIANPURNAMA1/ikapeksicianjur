@@ -1,109 +1,130 @@
 "use client";
 
 import Reveal from "@/components/ui/Reveal";
-import { useLanguage } from "@/lib/i18n";
+import Container from "@/components/layout/Container";
 
-const missionKeys = [
-  "mission.m1",
-  "mission.m2",
-  "mission.m3",
-  "mission.m4",
+/*
+  Token warna:
+  merah   #E3202B (tint #FFDAD6, teks badge #BB001A)
+  kuning  #FEDC00
+  navy    #111827 (kartu visi)
+  garis   #E5E7EB
+  surface #F9FAFB
+  muted   #4B5563
+*/
+
+const MISSIONS = [
+  {
+    title: "Pendataan & Konsolidasi Alumni",
+    desc: "Menghimpun dan mendata seluruh alumni kenshusei dan jisshusei se-Kabupaten Cianjur dalam satu basis data terverifikasi.",
+  },
+  {
+    title: "Pengembangan SDM",
+    desc: "Pelatihan intensif bahasa, etika kerja, dan pembinaan karakter bagi calon dan mantan peserta magang Jepang.",
+  },
+  {
+    title: "Pemberdayaan Ekonomi",
+    desc: "Membuka akses kerja sama bisnis, pembiayaan modal UMKM, dan penciptaan lapangan kerja produktif baru bagi alumni.",
+  },
+  {
+    title: "Kolaborasi Kelembagaan",
+    desc: "Bermitra erat secara resmi dengan pemerintah kabupaten (Disnaker), dunia industri/usaha (HIPMI), dan LPK terpercaya.",
+  },
+  {
+    title: "Kepedulian Sosial",
+    desc: "Aktif dalam agenda bakti sosial kemanusiaan, tanggap darurat bencana daerah, dan gotong royong warga Cianjur.",
+  },
+  {
+    title: "Edukasi Jalur Resmi",
+    desc: "Sosialisasi literasi migrasi kerja resmi agar generasi muda Cianjur terhindar dari jeratan calo ilegal tak berizin.",
+  },
 ];
 
 export default function VisionMissionPreview() {
-  const { t } = useLanguage();
-
   return (
-    <section className="relative overflow-hidden text-white">
+    <section className="relative w-full overflow-hidden bg-[#FAFAFA] py-16 text-[#0A0304] sm:py-20 lg:py-24">
+      <Container>
+        {/* Header section */}
+        <Reveal className="mx-auto mb-12 flex max-w-3xl flex-col items-center text-center lg:mb-16">
+          <span className="inline-flex items-center rounded-md bg-[#FFDAD6] px-4 py-1.5 text-[12px] font-bold uppercase leading-4 tracking-[0.1em] text-[#E3202B]">
+            Arah &amp; Fokus Strategis
+          </span>
+          <h2 className="mt-4 font-jakarta text-[28px] font-extrabold leading-[34px] tracking-[-0.025em] text-[#0A0304] sm:text-[36px] sm:leading-[44px]">
+            Visi &amp; Misi Organisasi
+          </h2>
+          <p className="mt-3 text-[16px] leading-[26px] text-[#4B5563] sm:text-[18px] sm:leading-[30px]">
+            Landasan kerja DPC Kabupaten Cianjur untuk mewujudkan masyarakat
+            mandiri, berdaya saing global, dan berdampak nyata bagi daerah.
+          </p>
+        </Reveal>
 
-      {/* Background Pattern dengan gradasi ke atas & ke bawah */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.08]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H24V24H0V0Z' fill='none'/%3E%3Cpath d='M23 1V23H1V1H23ZM24 0H0V24H24V0Z' fill='white'/%3E%3C/svg%3E")`,
-          backgroundSize: "12px 12px",
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch">
+          {/* KIRI: Kartu Visi (gelap) */}
+          <Reveal delay={100} className="lg:col-span-5">
+            <div className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-[#111827] p-8 shadow-[0_12px_32px_-8px_rgba(17,24,39,0.35)] sm:p-10">
+              {/* Cahaya merah halus di pojok kanan atas */}
+              <div
+                className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#E3202B]/20 blur-3xl"
+                aria-hidden="true"
+              />
 
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)",
-
-          WebkitMaskRepeat: "no-repeat",
-          maskRepeat: "no-repeat",
-        }}
-      />
-
-      {/* Ambient Light */}
-      <div className="pointer-events-none absolute left-0 top-1/2 z-0 h-[600px] w-[600px] -translate-x-1/3 -translate-y-1/2 rounded-full bg-[#C62930]/10 blur-[130px]" />
-
-      {/* 
-        GRID UTAMA (3 KOLOM):
-        Garis vertikal di sisi kiri dan kanan layar tetap dipertahankan agar menyambung.
-      */}
-      <div className="relative z-10 flex w-full border-t border-white/10">
-
-        {/* Kolom 1: Ruang Kosong Kiri (Garis Vertikal Kiri) */}
-        <div className="border-stripe-r hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
-
-        {/* Kolom 2: Konten Tengah (Border tengah dihapus dengan menghilangkan divide-x) */}
-        <div className="flex-1 w-full grid lg:grid-cols-2 lg:items-center gap-10 lg:gap-16 xl:gap-20 py-16 sm:py-20 lg:py-24 px-6 sm:px-10 lg:px-10 xl:px-20 bg-white/[0.02] backdrop-blur-sm">
-
-          {/* KOLOM KIRI: VISI */}
-          <Reveal
-            delay={100}
-            className="flex h-full flex-col items-center justify-center text-center lg:items-start lg:text-left"
-          >
-            <div className="mb-5 flex items-center gap-4">
-              <span className="inline-flex items-center px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-[#e8555c] rounded-full border border-white/10 bg-white/5 sm:text-xs">
-                {t("vision.label")}
-              </span>
-            </div>
-
-            <h2 className="bg-gradient-to-r from-white via-white to-[#C62930]/55 bg-clip-text text-balance font-mona text-3xl font-extrabold leading-[1.15] tracking-tight text-transparent sm:text-4xl md:text-5xl lg:text-[2.6rem] xl:text-[3rem]">
-              {t("vision.title")}
-            </h2>
-
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400 sm:text-base lg:mx-0">
-              {t("vision.desc")}
-            </p>
-          </Reveal>
-
-          {/* KOLOM KANAN: MISI */}
-          <Reveal delay={250} className="lg:pl-6 xl:pl-10">
-            <div className="flex flex-col">
-
-              <div className="mb-5 flex items-center justify-center gap-4 lg:justify-start">
-                <span className="inline-flex items-center px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400 rounded-full border border-white/10 bg-white/5 sm:text-xs">
-                  {t("mission.label")}
+              <div className="relative flex flex-1 flex-col">
+                <span className="inline-flex w-fit items-center rounded-md bg-[#E3202B] px-3 py-1.5 text-[11px] font-bold uppercase leading-4 tracking-[0.08em] text-[#FFFFFF]">
+                  Visi Kami
                 </span>
+
+                <blockquote className="mt-8 font-jakarta text-[28px] font-extrabold leading-[1.22] tracking-[-0.025em] text-[#FFFFFF] sm:text-[32px]">
+                  &ldquo;Menjadi wadah alumni magang Jepang Kabupaten Cianjur
+                  yang <span className="text-[#FEDC00]">mandiri</span>,{" "}
+                  <span className="text-[#FEDC00]">berdaya saing</span>, dan
+                  berperan aktif dalam{" "}
+                  <span className="underline decoration-[#E3202B] decoration-[3px] underline-offset-[5px]">
+                    pertumbuhan ekonomi daerah
+                  </span>
+                  .&rdquo;
+                </blockquote>
+
+                <p className="mt-6 text-[15px] leading-[26px] text-[#D1D5DB]">
+                  Mencetak ekosistem wirausaha dan profesional yang tangguh,
+                  memanfaatkan etos disiplin 5S dari Jepang demi akselerasi
+                  kemajuan Cianjur.
+                </p>
+
+                <div className="mt-auto flex items-center justify-between border-t border-[#FFFFFF]/10 pt-5">
+                  <span className="mt-8 text-[13px] text-[#9CA3AF]">
+                    DPC IKAPEKSI Cianjur
+                  </span>
+                  <span className="mt-8 text-[13px] font-bold text-[#FEDC00]">
+                    Periode Berjalan
+                  </span>
+                </div>
               </div>
-
-              <ul className="flex flex-col">
-                {missionKeys.map((key, idx) => (
-                  <li
-                    key={key}
-                    className="group relative flex items-start gap-4 border-b border-white/10 py-4 transition-colors duration-300 last:border-0 hover:border-white/10 sm:gap-5 sm:py-5"
-                  >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/5 font-mono text-xs font-bold text-zinc-500 transition-all duration-300 group-hover:bg-[#C62930] group-hover:text-white group-hover:shadow-[0_0_20px_rgba(198,41,48,0.4)] sm:h-11 sm:w-11 sm:text-sm">
-                      {String(idx + 1).padStart(2, "0")}
-                    </div>
-
-                    <p className="mt-2 text-sm leading-relaxed text-zinc-400 transition-colors duration-300 group-hover:text-zinc-200 sm:text-base">
-                      {t(key)}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-
             </div>
           </Reveal>
 
+          {/* KANAN: 6 kartu misi (2 kolom) */}
+          <Reveal delay={250} className="lg:col-span-7">
+            <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              {MISSIONS.map((m, idx) => (
+                <li
+                  key={m.title}
+                  className="rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] p-6 shadow-sm"
+                >
+                  <div className="text-[24px] font-extrabold leading-8 tracking-[-0.015em] text-[#E3202B]">
+                    {String(idx + 1).padStart(2, "0")}
+                  </div>
+                  <h3 className="mt-3 text-[16px] font-bold leading-6 text-[#0A0304]">
+                    {m.title}
+                  </h3>
+                  <p className="mt-2 text-[14px] leading-[24px] text-[#4B5563]">
+                    {m.desc}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
-
-        {/* Kolom 3: Ruang Kosong Kanan (Garis Vertikal Kanan) */}
-        <div className="border-stripe-l hidden md:block w-[3%] lg:w-[4%] xl:w-[10%] 2xl:w-[15%] bg-white/[0.02] backdrop-blur-sm shrink-0" />
-
-      </div>
+      </Container>
     </section>
   );
 }
