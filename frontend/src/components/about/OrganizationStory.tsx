@@ -66,7 +66,7 @@ export default function OrganizationStory() {
             </div>
 
             {/* Title */}
-            <h2 className="mt-6 text-balance font-mona text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
+            <h2 className="mt-6 text-balance font-jakarta text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
               Perjalanan{" "}
               <span className="bg-gradient-to-r from-white via-white to-[#ff7e84] bg-clip-text text-transparent">
                 IKAPEKSI Cianjur
@@ -140,7 +140,7 @@ export default function OrganizationStory() {
                   <div className="relative flex items-start gap-5">
 
                     {/* Number */}
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#C62930]/20 bg-[#C62930]/10 font-mono text-sm font-bold text-[#e8555c] transition-all duration-300 group-hover:border-[#C62930]/40 group-hover:bg-[#C62930] group-hover:text-white">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#C62930]/20 bg-[#C62930]/10 font-jakarta text-sm font-bold text-[#e8555c] transition-all duration-300 group-hover:border-[#C62930]/40 group-hover:bg-[#C62930] group-hover:text-white">
                       {String(index + 1).padStart(2, "0")}
                     </div>
 
@@ -148,7 +148,7 @@ export default function OrganizationStory() {
                     <div className="min-w-0">
 
                       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <p className="font-mona text-2xl font-extrabold leading-none text-white sm:text-3xl">
+                        <p className="font-jakarta text-2xl font-extrabold leading-none text-white sm:text-3xl">
                           {milestone.value}
                         </p>
 

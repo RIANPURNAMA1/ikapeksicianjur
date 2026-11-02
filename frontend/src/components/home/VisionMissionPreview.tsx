@@ -5,126 +5,152 @@ import Container from "@/components/layout/Container";
 
 /*
   Token warna:
-  merah   #E3202B (tint #FFDAD6, teks badge #BB001A)
+  merah   #E3202B (tint #FFDAD6)
   kuning  #FEDC00
-  navy    #111827 (kartu visi)
-  garis   #E5E7EB
+  hitam   #0A0304 (kartu visi)
   surface #F9FAFB
   muted   #4B5563
+
+  Font: Plus Jakarta Sans (font-jakarta) untuk seluruh teks section ini
 */
 
 const MISSIONS = [
   {
-    title: "Pendataan & Konsolidasi Alumni",
-    desc: "Menghimpun dan mendata seluruh alumni kenshusei dan jisshusei se-Kabupaten Cianjur dalam satu basis data terverifikasi.",
+    title: "Menghimpun",
+    desc: "Menyatukan alumni, praktisi Jepang di Cianjur dalam satu rumah yang aktif.",
   },
   {
-    title: "Pengembangan SDM",
-    desc: "Pelatihan intensif bahasa, etika kerja, dan pembinaan karakter bagi calon dan mantan peserta magang Jepang.",
+    title: "Membuka Jalan",
+    desc: "Membuka akses warga Cianjur menuju program magang dan kerja ke Jepang lewat sosialisasi dan pendampingan.",
   },
   {
-    title: "Pemberdayaan Ekonomi",
-    desc: "Membuka akses kerja sama bisnis, pembiayaan modal UMKM, dan penciptaan lapangan kerja produktif baru bagi alumni.",
+    title: "Menumbuhkan Usaha",
+    desc: "Mendorong usaha alumni naik kelas lewat program ekonomi dan jejaring bisnis antaranggota.",
   },
   {
-    title: "Kolaborasi Kelembagaan",
-    desc: "Bermitra erat secara resmi dengan pemerintah kabupaten (Disnaker), dunia industri/usaha (HIPMI), dan LPK terpercaya.",
-  },
-  {
-    title: "Kepedulian Sosial",
-    desc: "Aktif dalam agenda bakti sosial kemanusiaan, tanggap darurat bencana daerah, dan gotong royong warga Cianjur.",
-  },
-  {
-    title: "Edukasi Jalur Resmi",
-    desc: "Sosialisasi literasi migrasi kerja resmi agar generasi muda Cianjur terhindar dari jeratan calo ilegal tak berizin.",
+    title: "Bermitra untuk Cianjur",
+    desc: "Bersinergi dengan Pemkab, Disnaker, dan dunia usaha untuk memajukan tenaga kerja dan ekonomi daerah.",
   },
 ];
 
 export default function VisionMissionPreview() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#FAFAFA] py-16 text-[#0A0304] sm:py-20 lg:py-24">
+    <section className="relative w-full overflow-hidden bg-[#FFFFFF] py-16 font-jakarta text-[#0A0304] antialiased sm:py-20 lg:py-24">
       <Container>
-        {/* Header section */}
-        <Reveal className="mx-auto mb-12 flex max-w-3xl flex-col items-center text-center lg:mb-16">
-          <span className="inline-flex items-center rounded-md bg-[#FFDAD6] px-4 py-1.5 text-[12px] font-bold uppercase leading-4 tracking-[0.1em] text-[#E3202B]">
-            Arah &amp; Fokus Strategis
-          </span>
-          <h2 className="mt-4 font-jakarta text-[48px] font-extrabold leading-[56px] tracking-[-0.025em] text-[#0A0304]">
-            Visi &amp; Misi{" "}
-            <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
-              Organisasi
-            </span>
-          </h2>
-          <p className="mt-3 text-[16px] leading-[26px] text-[#4B5563] sm:text-[18px] sm:leading-[30px]">
-            Landasan kerja DPC Kabupaten Cianjur untuk mewujudkan masyarakat
-            mandiri, berdaya saing global, dan berdampak nyata bagi daerah.
-          </p>
-        </Reveal>
-
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch">
           {/* KIRI: Kartu Visi (gelap) */}
-          <Reveal delay={100} className="lg:col-span-5">
-            <div className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-[#111827] p-8 shadow-[0_12px_32px_-8px_rgba(17,24,39,0.35)] sm:p-10">
-              {/* Cahaya merah halus di pojok kanan atas */}
+          <Reveal delay={100} className="h-full lg:col-span-5">
+            <div className="relative flex h-full min-h-[480px] flex-col overflow-hidden rounded-lg bg-[#0A0304] p-8 shadow-[0_8px_24px_-6px_rgba(10,3,4,0.35)] sm:p-10">
+              {/* Cahaya merah di pojok kanan bawah */}
               <div
-                className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#E3202B]/20 blur-3xl"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_92%,rgba(227,32,43,0.30),transparent_45%)]"
                 aria-hidden="true"
               />
 
               <div className="relative flex flex-1 flex-col">
-                <span className="inline-flex w-fit items-center rounded-md bg-[#E3202B] px-3 py-1.5 text-[11px] font-bold uppercase leading-4 tracking-[0.08em] text-[#FFFFFF]">
-                  Visi Kami
-                </span>
-
-                <blockquote className="mt-8 font-jakarta text-[28px] font-extrabold leading-[1.22] tracking-[-0.025em] text-[#FFFFFF] sm:text-[32px]">
-                  &ldquo;Menjadi wadah alumni magang Jepang Kabupaten Cianjur
-                  yang <span className="text-[#FEDC00]">mandiri</span>,{" "}
-                  <span className="text-[#FEDC00]">berdaya saing</span>, dan
-                  berperan aktif dalam{" "}
-                  <span className="underline decoration-[#E3202B] decoration-[3px] underline-offset-[5px]">
-                    pertumbuhan ekonomi daerah
+                {/* Badge + label */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center rounded bg-[#E3202B] px-2.5 py-1.5 text-[10px] font-bold uppercase leading-3 tracking-[0.04em] text-[#FFFFFF]">
+                    Visi Kami
                   </span>
-                  .&rdquo;
-                </blockquote>
+                  <span className="text-[11px] font-bold uppercase leading-4 tracking-[0.04em] text-[#D1D5DB]">
+                    DPC Cianjur 2024-2029
+                  </span>
+                </div>
 
-                <p className="mt-6 text-[15px] leading-[26px] text-[#D1D5DB]">
-                  Mencetak ekosistem wirausaha dan profesional yang tangguh,
-                  memanfaatkan etos disiplin 5S dari Jepang demi akselerasi
-                  kemajuan Cianjur.
+                {/* Judul visi */}
+                <h2 className="mt-8 text-[44px] font-semibold leading-[52px] tracking-[-0.04em] text-[#FFFFFF] sm:text-[48px] sm:leading-[56px]">
+                  Masyarakat Cianjur yang{" "}
+                  <span className="text-[#FEDC00]">Mandiri</span> dan{" "}
+                  <span className="text-[#FFDAD6]">Berdaya Saing.</span>
+                </h2>
+
+                {/* Paragraf */}
+                <p className="mt-6 text-[16px] font-normal leading-[26px] tracking-[-0.02em] text-[#E5E7EB]">
+                  Membangun ekosistem alumni yang kuat, adaptif, dan
+                  berintegritas tinggi untuk mengoptimalkan potensi setiap
+                  insan kenshusei dalam menjawab tantangan revolusi industri
+                  dan ekonomi global.
                 </p>
 
-                <div className="mt-auto flex items-center justify-between border-t border-[#FFFFFF]/10 pt-5">
-                  <span className="mt-8 text-[13px] text-[#9CA3AF]">
-                    DPC IKAPEKSI Cianjur
+                {/* Footer */}
+                <div className="mt-auto flex items-center justify-between pt-16">
+                  <span className="text-[11px] font-bold tracking-[0.02em] text-[#FFFFFF]">
+                    Integritas · Sinergi · Mandiri
                   </span>
-                  <span className="mt-8 text-[13px] font-bold text-[#FEDC00]">
-                    Periode Berjalan
-                  </span>
+                  <svg
+                    className="h-[18px] w-[18px] text-[#FEDC00]"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                    <path d="M4 22v-7" />
+                  </svg>
                 </div>
               </div>
             </div>
           </Reveal>
 
-          {/* KANAN: 6 kartu misi (2 kolom) */}
-          <Reveal delay={250} className="lg:col-span-7">
-            <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              {MISSIONS.map((m, idx) => (
-                <li
-                  key={m.title}
-                  className="rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] p-6 shadow-sm"
-                >
-                  <div className="text-[24px] font-extrabold leading-8 tracking-[-0.015em] text-[#E3202B]">
-                    {String(idx + 1).padStart(2, "0")}
-                  </div>
-                  <h3 className="mt-3 text-[16px] font-bold leading-6 text-[#0A0304]">
-                    {m.title}
-                  </h3>
-                  <p className="mt-2 text-[14px] leading-[24px] text-[#4B5563]">
-                    {m.desc}
-                  </p>
-                </li>
-              ))}
-            </ul>
+          {/* KANAN: Kartu misi (putih) */}
+          <Reveal delay={250} className="h-full lg:col-span-7">
+            <div className="flex h-full flex-col rounded-lg bg-[#FFFFFF] p-6 shadow-[0_2px_12px_rgba(10,3,4,0.08)] sm:p-10">
+              {/* Header kartu */}
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-bold uppercase leading-4 tracking-[0.04em] text-[#E3202B]">
+                    Panduan Langkah
+                  </span>
+                  <h2 className="mt-1 text-[24px] font-semibold leading-8 tracking-[-0.04em] text-[#0A0304]">
+                    Empat Misi Organisasi
+                  </h2>
+                </div>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F9FAFB] text-[#0A0304]">
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="m3 17 2 2 4-4" />
+                    <path d="m3 7 2 2 4-4" />
+                    <path d="M13 6h8" />
+                    <path d="M13 12h8" />
+                    <path d="M13 18h8" />
+                  </svg>
+                </span>
+              </div>
+
+              {/* Daftar misi */}
+              <ul className="mt-10 flex flex-col gap-4">
+                {MISSIONS.map((m, idx) => (
+                  <li
+                    key={m.title}
+                    className="flex items-start gap-4 rounded-lg bg-[#F9FAFB] px-4 py-4"
+                  >
+                    <span className="w-8 shrink-0 text-[20px] font-semibold leading-7 tracking-[-0.03em] text-[#E3202B]">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="text-[15px] font-semibold leading-6 tracking-[-0.02em] text-[#0A0304]">
+                        {m.title}
+                      </h3>
+                      <p className="mt-0.5 text-[14px] font-normal leading-[20px] tracking-[-0.02em] text-[#4B5563]">
+                        {m.desc}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
         </div>
       </Container>

@@ -35,12 +35,12 @@ const id: TranslationMessages = {
 
   // ===== HERO =====
   "hero.eyebrow": "KOMUNITAS PEJUANG INDONESIA - JEPANG KABUPATEN CIANJUR",
-  "hero.line1": "SATU PASPOR",
-  "hero.line2": "PENGALAMAN",
-  "hero.line3": "SERIBU LANGKAH",
-  "hero.supportedBy": "Didukung oleh",
+  "hero.line1": "Wadah Alumni Pejuang ",
+  "hero.line2": "Indonesia - Jepang dan Pengusaha Mandiri",
+  "hero.line3": "Kabupaten Cianjur",
+  "hero.supportedBy": "Didukung oleh IKAPEKSI Indonesia",
   "hero.description":
-    "Ikatan Alumni Pemagangan Kerja Sistem Indonesia (IKAPEKSI) Kabupaten Cianjur menghimpun Alumni, praktisi, dan calon pejuang Indonesia - Jepang untuk terus tumbuh, berbagi ilmu, dan membangun kampung halaman bersama.",
+    "Ikatan Alumni & Praktisi Kenshusei Seluruh Indonesia (IKAPEKSI) Kabupaten Cianjur menghimpun Alumni, praktisi, dan calon pejuang Indonesia - Jepang untuk terus tumbuh, berbagi ilmu, dan membangun kampung halaman bersama.",
   "hero.daftar": "Gabung Anggota",
   "hero.konsultasi": "Konsultasi Gratis",
   "hero.slidePrev": "Slide sebelumnya",
@@ -93,10 +93,10 @@ const id: TranslationMessages = {
   "vision.desc":
     "Membangun ekosistem yang kuat untuk mengoptimalkan potensi setiap alumni dalam menghadapi tantangan ekonomi global.",
   "mission.label": "Misi Kami",
-  "mission.m1": "Menghimpun dan mendata seluruh alumni pemagangan kerja se-Kabupaten Cianjur.",
-  "mission.m2": "Menyediakan pelatihan dan pendampingan bagi calon dan mantan peserta magang.",
-  "mission.m3": "Membuka akses kerja sama ekonomi dan lapangan kerja bagi alumni.",
-  "mission.m4": "Berkontribusi aktif dalam kegiatan sosial kemasyarakatan di Cianjur.",
+  "mission.m1": "Menghimpun: Menyatukan alumni, praktisi Jepang di Cianjur dalam satu rumah yang aktif.",
+  "mission.m2": "Membuka Jalan: Membuka akses warga Cianjur menuju program magang dan kerja ke Jepang lewat sosialisasi dan pendampingan.",
+  "mission.m3": "Menumbuhkan Usaha: Mendorong usaha alumni naik kelas lewat program ekonomi dan jejaring bisnis antaranggota.",
+  "mission.m4": "Bermitra untuk Cianjur: Bersinergi dengan Pemkab, Disnaker, dan dunia usaha untuk memajukan tenaga kerja dan ekonomi daerah.",
 
   // ===== PROGRAM SECTION =====
   "program.eyebrow": "Program",
@@ -247,10 +247,10 @@ const ja: TranslationMessages = {
   "vision.desc":
     "グローバルな経済的課題に立ち向かう各同窓生の可能性を最大限に引き出す、強固なエコシステムを構築します。",
   "mission.label": "私たちのミッション",
-  "mission.m1": "チアンジュール県全域の研修同窓生を結集し、情報を管理します。",
-  "mission.m2": "研修参加希望者と元参加者への研修と指導を提供します。",
-  "mission.m3": "同窓生への経済協力と雇用機会へのアクセスを開拓します。",
-  "mission.m4": "チアンジュールの社会・地域活動に積極的に貢献します。",
+  "mission.m1": "結集：チアンジュールの同窓生と日本での実務経験者を、活発な一つの場に結びつけます。",
+  "mission.m2": "道を開く：社会普及と支援を通じて、チアンジュール住民が日本での研修・就労プログラムにアクセスできるようにします。",
+  "mission.m3": "事業を育む：経済プログラムと会員間のビジネスネットワークを通じて、同窓生の事業のレベルアップを促します。",
+  "mission.m4": "チアンジュールのための連携：県庁、労働局、産業界と連携し、地域の労働力と経済の発展を推進します。",
 
   // ===== PROGRAM SECTION =====
   "program.eyebrow": "プログラム",

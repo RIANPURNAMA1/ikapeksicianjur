@@ -11,12 +11,14 @@ import { useLanguage } from "@/lib/i18n";
   ink     #0A0304
   muted   #4B5563
   surface #F9FAFB
+
+  Font: Plus Jakarta Sans (font-jakarta) untuk seluruh teks section ini
 */
 
 const reasons: {
   titleKey: string;
   descKey: string;
-  tag: string; // label merah di bagian bawah kartu
+  tag: string;
   icon: ReactNode;
 }[] = [
   {
@@ -68,22 +70,19 @@ export default function WhyIkapeksi() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#FFFFFF] py-16 text-[#0A0304] sm:py-20 lg:py-24">
+    <section className="relative w-full overflow-hidden bg-[#F9FAFB] py-16 font-jakarta text-[#0A0304] antialiased sm:py-20 lg:py-24">
       <Container>
         {/* Header */}
         <Reveal className="mx-auto mb-12 flex max-w-3xl flex-col items-center text-center lg:mb-16">
-          <span className="inline-flex items-center rounded-md bg-[#F3F4F6] px-4 py-1.5 text-[12px] font-bold uppercase leading-4 tracking-[0.06em] text-[#E3202B]">
+          <span className="inline-flex items-center rounded bg-[#F3F4F6] px-3 py-1 text-[10px] font-bold uppercase leading-4 tracking-[0.02em] text-[#E3202B]">
             {t("why.eyebrow")}
           </span>
 
-          <h2 className="mt-5 font-jakarta text-[48px] font-extrabold leading-[56px] tracking-[-0.03em] text-[#0A0304]">
-            Alasan Memilih{" "}
-            <span className="text-[#E3202B] underline decoration-[#FEDC00] decoration-[4px] underline-offset-[6px]">
-              Bergabung
-            </span>
+          <h2 className="mt-5 text-[32px] font-semibold leading-[40px] tracking-[-0.04em] text-[#0A0304] sm:text-[44px] sm:leading-[52px]">
+            Alasan Memilih Bergabung
           </h2>
 
-          <p className="mt-5 text-[16px] leading-[26px] text-[#4B5563] sm:text-[18px] sm:leading-[30px]">
+          <p className="mt-4 text-[16px] font-normal leading-[24px] tracking-[-0.02em] text-[#4B5563] sm:text-[17px]">
             {t("why.subtitle")}
           </p>
         </Reveal>
@@ -93,57 +92,64 @@ export default function WhyIkapeksi() {
           {reasons.map((reason, idx) => (
             <li key={reason.titleKey} className="flex">
               <Reveal delay={idx * 100} className="flex w-full">
-                <article className="flex w-full flex-col rounded-3xl bg-[#F9FAFB] p-7 shadow-[0_1px_2px_rgba(10,3,4,0.04)]">
-                  {/* Ikon + label */}
+               <article className="group relative flex w-full flex-col overflow-hidden rounded-2xl bg-gradient-to-b from-white via-white/40 to-transparent p-6 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:from-white hover:via-white/70 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                  {/* Garis aksen merah (muncul saat hover) */}
+                  <span
+                    className="pointer-events-none absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[#E3202B] transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
+                    aria-hidden="true"
+                  />
+
+                  {/* Nomor + label */}
                   <div className="flex items-start justify-between">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#FFDAD6] text-[#E3202B]">
+                    <span className="text-[26px] font-extrabold leading-8 tracking-[-0.03em] text-[#E3202B]">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="rounded bg-[#FFFFFF] px-2.5 py-1 text-[9px] font-bold uppercase leading-3 tracking-[0.04em] text-[#0A0304] transition-colors duration-300 group-hover:bg-[#FFDAD6] group-hover:text-[#E3202B] motion-reduce:transition-none">
+                      {t("why.reasonLabel")}
+                    </span>
+                  </div>
+
+                  {/* Ikon kecil: berubah merah saat hover */}
+                  <div className="mt-6 flex h-10 w-10 items-center justify-center rounded-lg bg-[#FFFFFF] text-[#0A0304] transition-colors duration-300 group-hover:bg-[#E3202B] group-hover:text-[#FFFFFF] motion-reduce:transition-none">
+                    <svg
+                      className="h-[18px] w-[18px]"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      {reason.icon}
+                    </svg>
+                  </div>
+
+                  {/* Judul + deskripsi */}
+                  <h3 className="mt-5 text-[19px] font-semibold leading-[26px] tracking-[-0.03em] text-[#0A0304]">
+                    {t(reason.titleKey)}
+                  </h3>
+                  <p className="mt-3 text-[14px] font-normal leading-[22.5px] tracking-[-0.02em] text-[#4B5563]">
+                    {t(reason.descKey)}
+                  </p>
+
+                  {/* Footer kartu */}
+                  <div className="mt-auto pt-10">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase leading-4 tracking-[0.04em] text-[#E3202B]">
+                      {reason.tag}
                       <svg
-                        className="h-7 w-7"
+                        className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth={1.75}
+                        strokeWidth={2.25}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                       >
-                        {reason.icon}
+                        <path d="M5 12h14M13 6l6 6-6 6" />
                       </svg>
-                    </div>
-                    <span className="rounded-md bg-[#FFFFFF] px-3 py-1.5 text-[11px] font-bold uppercase leading-4 tracking-[0.08em] text-[#4B5563]">
-                      {t("why.reasonLabel")}
                     </span>
-                  </div>
-
-                  {/* Judul + deskripsi */}
-                  <h3 className="mt-6 font-jakarta text-[22px] font-bold leading-[30px] tracking-[-0.015em] text-[#0A0304]">
-                    {t(reason.titleKey)}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-[26px] text-[#4B5563]">
-                    {t(reason.descKey)}
-                  </p>
-
-                  {/* Footer kartu */}
-                  <div className="mt-auto pt-8">
-                    <div className="flex items-center justify-between border-t border-[#E5E7EB] pt-5">
-                      <span className="text-[12px] font-bold uppercase leading-4 tracking-[0.1em] text-[#E3202B]">
-                        {reason.tag}
-                      </span>
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#FFFFFF] text-[#E3202B]">
-                        <svg
-                          className="h-4 w-4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path d="M5 12h14M13 6l6 6-6 6" />
-                        </svg>
-                      </span>
-                    </div>
                   </div>
                 </article>
               </Reveal>

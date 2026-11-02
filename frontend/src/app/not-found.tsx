@@ -6,8 +6,8 @@ export default function NotFound() {
       <div className="pointer-events-none absolute inset-0 bg-grid-squares bg-[length:24px_24px] opacity-10 mix-blend-overlay" />
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C62930]/10 blur-[130px]" />
       <div className="relative z-10">
-        <p className="font-mono text-7xl font-black tracking-tight text-[#C62930] sm:text-8xl">404</p>
-        <h1 className="mt-6 font-mona text-2xl font-extrabold sm:text-3xl">
+        <p className="font-jakarta text-7xl font-black tracking-tight text-[#C62930] sm:text-8xl">404</p>
+        <h1 className="mt-6 font-jakarta text-2xl font-extrabold sm:text-3xl">
           Halaman Tidak Ditemukan
         </h1>
         <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/60">

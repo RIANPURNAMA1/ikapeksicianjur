@@ -18,6 +18,11 @@ import { cn } from "@/lib/utils";
   ink     #0A0304
   muted   #4B5563
   garis   #E5E7EB
+
+  Mode navbar:
+  - overlay : di beranda & belum di-scroll -> transparan + scrim halus,
+              teks putih, menyatu dengan background hero
+  - solid   : setelah scroll / halaman lain -> putih
 */
 
 const NAV_LABEL_KEY: Record<string, string> = {
@@ -38,43 +43,54 @@ export default function Navbar() {
   const { t } = useLanguage();
   const enabledNav = new Set(["/", "/tentang"]);
 
+  // Transparan hanya di beranda saat posisi paling atas
+  const overlay = pathname === "/" && !scrolled;
+
   return (
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 w-full transition-all duration-300",
-          scrolled
-            ? "bg-[#FFFFFF]/90 shadow-sm backdrop-blur-xl"
-            : "bg-[#FFFFFF]"
+          "sticky top-0 z-50 w-full transition-[background-color,border-color,box-shadow] duration-300",
+          overlay
+            ? "border-b border-transparent bg-transparent"
+            : scrolled
+              ? "border-b border-[#E5E7EB] bg-[#FFFFFF]/85 shadow-[0_12px_32px_-24px_rgba(10,3,4,0.45)] backdrop-blur-xl"
+              : "border-b border-[#E5E7EB]/70 bg-[#FFFFFF]"
         )}
       >
-        <Container size="wide">
-          <div className="flex h-[72px] items-center justify-between gap-6">
-            {/* =========================================
-                LEFT SECTION
-                LOGO + NAVIGATION
-                ========================================= */}
-            <div className="flex h-full items-center gap-8 xl:gap-12">
-              {/* LOGO */}
+        {/* Scrim transparan agar teks tetap terbaca di atas foto hero */}
+        {overlay && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0A0304]/55 via-[#0A0304]/15 to-transparent"
+          />
+        )}
+
+        <Container size="wide" className="relative">
+          <div className="flex h-[72px] items-center justify-between gap-4 sm:gap-6">
+            {/* LEFT: LOGO + NAVIGATION */}
+            <div className="flex h-full min-w-0 items-center gap-6 xl:gap-10">
+              {/* LOGO (logo2 putih saat overlay, logo1 normal saat solid) */}
               <Link
                 href="/"
                 className="btn-focus flex shrink-0 items-center"
               >
                 <Image
-                  src="/images/logo/logo1.png"
+                  src={
+                    overlay
+                      ? "/images/logo/logo2.png"
+                      : "/images/logo/logo1.png"
+                  }
                   alt={`${SITE.name} logo`}
                   width={160}
                   height={52}
-                  className="h-10 w-auto object-contain"
+                  className="h-10 w-auto object-contain transition-opacity duration-300"
                   priority
                 />
               </Link>
 
-              {/* =========================================
-                  DESKTOP NAVIGATION
-                  Item aktif: teks merah tebal + garis bawah merah
-                  ========================================= */}
-              <nav className="hidden h-full items-stretch gap-6 lg:flex">
+              {/* DESKTOP NAVIGATION */}
+              <nav className="hidden h-full items-stretch gap-5 lg:flex xl:gap-7">
                 {NAV_LINKS.map((link) => {
                   const disabled = !enabledNav.has(link.href);
 
@@ -82,7 +98,10 @@ export default function Navbar() {
                     return (
                       <span
                         key={link.href}
-                        className="inline-flex h-full cursor-not-allowed items-center border-b-2 border-transparent text-[14px] font-semibold tracking-[0.02em] text-[#4B5563]/40"
+                        className={cn(
+                          "inline-flex h-full cursor-not-allowed items-center whitespace-nowrap border-b-2 border-transparent text-[14px] font-semibold tracking-[0.02em] transition-colors duration-300",
+                          overlay ? "text-[#FFFFFF]/40" : "text-[#4B5563]/40"
+                        )}
                       >
                         {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
                       </span>
@@ -99,10 +118,15 @@ export default function Navbar() {
                       href={link.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "inline-flex h-full items-center border-b-2 text-[14px] tracking-[0.02em] transition-colors duration-200",
+                        "inline-flex h-full items-center whitespace-nowrap border-b-2 text-[14px] tracking-[0.02em] transition-colors duration-200",
                         active
-                          ? "border-[#E3202B] font-bold text-[#E3202B]"
-                          : "border-transparent font-semibold text-[#4B5563] hover:text-[#0A0304]"
+                          ? cn(
+                              "border-[#E3202B] font-bold",
+                              overlay ? "text-[#FFFFFF]" : "text-[#E3202B]"
+                            )
+                          : overlay
+                            ? "border-transparent font-semibold text-[#FFFFFF]/85 hover:text-[#FFFFFF]"
+                            : "border-transparent font-semibold text-[#4B5563] hover:text-[#0A0304]"
                       )}
                     >
                       {t(NAV_LABEL_KEY[link.href] ?? "nav.beranda")}
@@ -112,12 +136,10 @@ export default function Navbar() {
               </nav>
             </div>
 
-            {/* =========================================
-                RIGHT SECTION
-                ========================================= */}
+            {/* RIGHT */}
             <div className="hidden items-center gap-4 lg:flex">
               {/* LANGUAGE SWITCHER */}
-              <LanguageSwitcher onDark={false} />
+              <LanguageSwitcher onDark={overlay} />
 
               {/* CTA */}
               <Link
@@ -149,9 +171,7 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* =========================================
-                MOBILE MENU BUTTON
-                ========================================= */}
+            {/* MOBILE MENU BUTTON */}
             <button
               onClick={toggle}
               aria-label={isOpen ? t("nav.tutupMenu") : t("nav.bukaMenu")}
@@ -159,7 +179,9 @@ export default function Navbar() {
               className={cn(
                 "btn-focus flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
                 "transition-colors duration-200 lg:hidden",
-                "text-[#0A0304]/70 hover:bg-[#F3F4F6] hover:text-[#0A0304]"
+                overlay
+                  ? "text-[#FFFFFF] hover:bg-[#FFFFFF]/10"
+                  : "text-[#0A0304]/70 hover:bg-[#F3F4F6] hover:text-[#0A0304]"
               )}
             >
               {isOpen ? (
@@ -198,11 +220,7 @@ export default function Navbar() {
         </Container>
       </header>
 
-      {/* =========================================
-          MOBILE NAVIGATION
-          Dirender di luar <header> agar tidak terkurung oleh
-          backdrop-filter (containing block) pada header sticky.
-          ========================================= */}
+      {/* MOBILE NAVIGATION (di luar <header> agar tidak terkurung backdrop-filter) */}
       <MobileMenu isOpen={isOpen} onClose={close} />
     </>
   );
