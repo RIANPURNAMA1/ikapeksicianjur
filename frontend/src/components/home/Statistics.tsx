@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useInView } from "framer-motion";
 import Container from "@/components/layout/Container";
 import { statistics, type Statistic } from "@/data/statistics";
 
@@ -46,38 +47,25 @@ const ICONS: Record<number, ReactNode> = {
 function useCountUp(target: number, duration = 1700) {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLParagraphElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-150px 0px" });
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    if (!inView) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          observer.disconnect();
-
-          const start = performance.now();
-          const step = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setValue(Math.round(target * eased));
-            if (progress < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-        });
-      },
-      { threshold: 0.3 },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target, duration]);
+    const start = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(target * eased));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [inView, target, duration]);
 
   return { value, ref };
 }
 
-function StatItem({ id, label, value, suffix }: Statistic) {
+function StatItem({ id, label, value, suffix, subLabel }: Statistic) {
   const { value: displayValue, ref } = useCountUp(value);
 
   return (
@@ -95,6 +83,11 @@ function StatItem({ id, label, value, suffix }: Statistic) {
       <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60">
         {label}
       </p>
+      {subLabel && (
+        <p className="text-[10px] text-white/40 leading-tight">
+          {subLabel}
+        </p>
+      )}
     </div>
   );
 }

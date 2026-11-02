@@ -98,11 +98,74 @@ function delay(ms: number): CSSProperties {
   return { animationDelay: `${ms}ms` };
 }
 
+/* Hitung naik dari 0 ke angka tujuan. Teks tanpa angka (mis. "Resmi") tampil apa adanya. */
+function CountUp({
+  value,
+  run,
+  delayMs = 0,
+  duration = 1800,
+}: {
+  value: string;
+  run: boolean;
+  delayMs?: number;
+  duration?: number;
+}) {
+  const match = value.match(/^(\d+)(.*)$/);
+  const target = match ? parseInt(match[1], 10) : 0;
+  const suffix = match ? match[2] : "";
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    if (!match || !run) return;
+
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (reduce) {
+      setN(target);
+      return;
+    }
+
+    let raf = 0;
+    let startTime = 0;
+    const easeOutExpo = (x: number) =>
+      x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+
+    const tick = (now: number) => {
+      if (!startTime) startTime = now;
+      const progress = Math.min((now - startTime) / duration, 1);
+      setN(Math.round(easeOutExpo(progress) * target));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    };
+
+    const timer = window.setTimeout(() => {
+      raf = requestAnimationFrame(tick);
+    }, delayMs);
+
+    return () => {
+      window.clearTimeout(timer);
+      if (raf) cancelAnimationFrame(raf);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [run, target, delayMs, duration]);
+
+  if (!match) return <>{value}</>;
+
+  return (
+    <span className="tabular-nums">
+      {n}
+      {suffix}
+    </span>
+  );
+}
+
 export default function Hero() {
   const { t } = useLanguage();
   const [active, setActive] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [statsVisible, setStatsVisible] = useState(false);
 
   // Autoplay carousel
   useEffect(() => {
@@ -112,6 +175,25 @@ export default function Hero() {
       AUTOPLAY_MS
     );
     return () => window.clearInterval(id);
+  }, []);
+
+  // Mulai hitung saat strip statistik terlihat (sekali saja)
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   // Parallax: scroll + mouse -> CSS variable (tanpa re-render React)
@@ -229,7 +311,7 @@ export default function Hero() {
 
         {/* LAYER 2: Gradasi hitam (kiri) -> merah transparan (kanan) */}
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0A0304]/90 via-[#0A0304]/85 to-[#E3202B]/30"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0A0304]/95 via-[#0A0304]/85 to-[#E3202B]/40"
           aria-hidden="true"
         />
 
@@ -271,10 +353,9 @@ export default function Hero() {
           }}
         >
           <Container size="wide" className="relative z-10">
-            {/* Eyebrow: pill kaca dengan titik berdenyut */}
+            {/* Eyebrow */}
             <div className={`mb-7 ${ENTER}`} style={delay(100)}>
-              <span className="inline-flex items-center gap-2.5   py-2 text-[11px] font-bold uppercase leading-4 tracking-[0.14em] text-[#FFFFFF]/90 backdrop-blur-md sm:text-[12px]">
-           
+              <span className="inline-flex items-center gap-2.5 py-2 text-[11px] font-bold uppercase leading-4 tracking-[0.14em] text-[#FFFFFF]/90 backdrop-blur-md sm:text-[12px]">
                 {t("hero.eyebrow")}
               </span>
             </div>
@@ -431,6 +512,7 @@ export default function Hero() {
       {/* ============ STRIP STATISTIK ============ */}
       <Container size="wide" className="relative z-20 -mt-20 pb-16 lg:pb-20">
         <div
+          ref={statsRef}
           className={`grid grid-cols-2 overflow-hidden rounded-2xl bg-[#FFFFFF] shadow-[0_16px_40px_-12px_rgba(10,3,4,0.25)] will-change-transform sm:grid-cols-4 ${ENTER}`}
           style={{
             ...delay(900),
@@ -458,7 +540,11 @@ export default function Hero() {
                     s.red ? "text-[#E3202B]" : "text-[#0A0304]"
                   }`}
                 >
-                  {s.value}
+                  <CountUp
+                    value={s.value}
+                    run={statsVisible}
+                    delayMs={idx * 120 + 900}
+                  />
                 </div>
                 <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#F3F4F6] text-[#0A0304] transition-colors duration-300 group-hover:bg-[#E3202B] group-hover:text-[#FFFFFF] motion-reduce:transition-none">
                   <svg

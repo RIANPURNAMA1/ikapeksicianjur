@@ -3,11 +3,12 @@ export interface Statistic {
   label: string;
   value: number;
   suffix: string;
+  subLabel: string;
 }
 
 export const statistics: Statistic[] = [
-  { id: 1, label: "Alumni Terdaftar", value: 480, suffix: "+" },
-  { id: 2, label: "Kecamatan Terjangkau", value: 10, suffix: "" },
-  { id: 3, label: "Program Pemagangan", value: 8, suffix: "" },
-  { id: 4, label: "Tahun Berdiri", value: 9, suffix: "" },
+  { id: 1, label: "Kecamatan Cianjur", value: 32, suffix: "+", subLabel: "Terdata di direktori wilayah" },
+  { id: 2, label: "Jalur Legal", value: 100, suffix: "%", subLabel: "Terverifikasi & bebas calo" },
+  { id: 3, label: "Pilar Pemberdayaan", value: 4, suffix: "", subLabel: "Berkelanjutan bagi alumni" },
+  { id: 4, label: "Resmi", value: 1, suffix: "", subLabel: "Struktur Sah, Di bawah DPD Jabar & DPP" },
 ];
