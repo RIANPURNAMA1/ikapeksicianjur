@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import Statistics from "@/components/home/Statistics";
 import AboutPreview from "@/components/home/AboutPreview";
+import OrganizationStructureSection from "@/components/home/OrganizationStructureSection";
 import WhyIkapeksi from "@/components/home/WhyIkapeksi";
 import VisionMissionPreview from "@/components/home/VisionMissionPreview";
 import ProgramSection from "@/components/home/ProgramSection";
@@ -42,6 +43,7 @@ export default async function HomePage() {
       <Hero />
       {/* <Statistics /> */}
       <AboutPreview />
+      <OrganizationStructureSection />
       <div className="bg-[#070707]">
         {/* <WhyIkapeksi /> */}
         <VisionMissionPreview />

@@ -36,6 +36,7 @@ export const NAV_LINKS = [
 
 export const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://instagram.com/ikapeksicianjur", icon: "instagram" },
+  { label: "TikTok", href: "https://www.tiktok.com/@ikapeksicianjur", icon: "tiktok" },
   { label: "Facebook", href: "https://facebook.com/ikapeksicianjur", icon: "facebook" },
   { label: "YouTube", href: "https://youtube.com/@ikapeksicianjur", icon: "youtube" },
   { label: "WhatsApp", href: "https://wa.me/6285624651871", icon: "whatsapp" },
