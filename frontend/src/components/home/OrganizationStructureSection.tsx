@@ -44,7 +44,7 @@ const LEVELS: StructureLevel[] = [
     number: "03",
     scope: "Kabupaten",
     name: "DPC Kabupaten Cianjur",
-    subtitle: "Lokal",
+    subtitle: "Dewan Pimpinan Cabang — Tingkat Kabupaten",
     badge: "DPC",
     desc: "Cabang IKAPEKSI — rumah bersama alumni dan para pejuang kerja Jepang di Kabupaten Cianjur.",
     highlight: true,
