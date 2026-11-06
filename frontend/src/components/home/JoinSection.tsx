@@ -54,7 +54,7 @@ export default function JoinSection() {
                 />
 
                 <Image
-                  src="/images/join/cta.png"
+                  src="/images/join/cta.webp"
                   alt="Alumni pemagangan kerja IKAPEKSI"
                   width={640}
                   height={962}

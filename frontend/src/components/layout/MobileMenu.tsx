@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
-import LanguageSwitcher from "./LanguageSwitcher";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -69,6 +68,8 @@ const MENU_ICONS: Record<string, ReactNode> = {
   ),
 };
 
+const ENABLED_NAV = new Set(["/", "/tentang"]);
+
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const { t } = useLanguage();
 
@@ -102,13 +103,28 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {/* Scrolling menu area */}
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto flex max-w-sm flex-col gap-1 px-8 pt-5">
-          <div className="mb-3 flex justify-center">
+          {/* Language switcher disembunyikan sementara */}
+          {/* <div className="mb-3 flex justify-center">
             <LanguageSwitcher onDark />
-          </div>
+          </div> */}
 
           <nav className="flex flex-col">
             {NAV_LINKS.map((link) => {
               const label = t(NAV_LABEL_KEY[link.href] ?? "nav.beranda");
+
+              if (!ENABLED_NAV.has(link.href)) {
+                return (
+                  <span
+                    key={link.href}
+                    aria-disabled="true"
+                    className="flex cursor-not-allowed items-center justify-center gap-3 border-b border-white/10 py-3.5 text-lg font-semibold text-white/40"
+                  >
+                    {MENU_ICONS[link.href]}
+                    <span>{label}</span>
+                  </span>
+                );
+              }
+
               return (
                 <Link
                   key={link.href}

@@ -37,7 +37,7 @@ export const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://instagram.com/ikapeksicianjur", icon: "instagram" },
   { label: "Facebook", href: "https://facebook.com/ikapeksicianjur", icon: "facebook" },
   { label: "YouTube", href: "https://youtube.com/@ikapeksicianjur", icon: "youtube" },
-  { label: "WhatsApp", href: "https://wa.me/62895391685825", icon: "whatsapp" },
+  { label: "WhatsApp", href: "https://wa.me/6285624651871", icon: "whatsapp" },
 ] as const;
 
 export const DISTRICTS = [
