@@ -116,7 +116,7 @@ export default function OrganizationStructureSection() {
           <p className="mt-5 max-w-[620px] text-[13px] font-normal leading-[22px] text-[#4B4747] sm:text-[14px]">
             DPC Kabupaten Cianjur bernaung di bawah DPD Jawa Barat dan DPP
             IKAPEKSI. Sinergi tiga tingkat ini memastikan setiap program berjalan
-            selaras dari pusat hingga ke rumah bersama alumni di Cianjur.
+            selaras dari pusat hingga ke rumah bersama Pejuang Jepang di Cianjur.
           </p>
         </Reveal>
 
