@@ -9,6 +9,7 @@ import {
   JsonLd,
   KEYWORDS,
   organizationJsonLd,
+  SITE_TITLE,
   siteUrl,
   websiteJsonLd,
 } from "@/lib/seo";
@@ -26,8 +27,6 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   display: "swap",
 });
-
-const SITE_TITLE = `${SITE.name} | ${SITE.tagline}`;
 
 export const viewport: Viewport = {
   width: "device-width",

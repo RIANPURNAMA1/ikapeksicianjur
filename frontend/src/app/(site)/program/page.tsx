@@ -8,7 +8,7 @@ import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: { absolute: "Program IKAPEKSI Cianjur" },
   description:
-    "Program IKAPEKSI Cianjur — pendataan dan pemberdayaan alumni, pembinaan calon pemagang Jepang, pengembangan UMKM binaan, pelatihan keterampilan, dan networking alumni pemagangan kerja.",
+    "4 Pilar Program Strategis IKAPEKSI Kabupaten Cianjur: menghimpun alumni lewat Rumah Alumni Cianjur, membuka jalan melalui SMART IKAPEKSI Plus Cianjur dan SELEKNAS IM Japan, menumbuhkan usaha alumni lewat UMKM binaan, serta bermitra membangun Cianjur.",
   path: "/program",
 });
 

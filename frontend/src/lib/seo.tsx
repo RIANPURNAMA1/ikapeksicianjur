@@ -1,23 +1,35 @@
 import type { Metadata } from "next";
 import { SITE, SOCIAL_LINKS } from "@/lib/constants";
 
+export const SITE_TITLE =
+  "DPC IKAPEKSI KABUPATEN CIANJUR | Merajut Alumni, Membangun Cianjur";
+
+export const SITE_SEO_DESCRIPTION =
+  "Komunitas Pejuang Indonesia–Jepang Kabupaten Cianjur. Ikatan Alumni & Praktisi Kenshusei Seluruh Indonesia (IKAPEKSI) Kabupaten Cianjur menghimpun alumni, praktisi, dan calon pejuang Indonesia–Jepang untuk terus tumbuh, berbagi ilmu, dan membangun kampung halaman bersama.";
+
 export const KEYWORDS = [
   "IKAPEKSI",
   "IKAPEKSI Cianjur",
   "ikapeksi",
   "ikapeksi cianjur",
   "ikapeksicianjur",
-  "Ikatan Alumni Pemagangan Kerja Sistem Indonesia",
+  "DPC IKAPEKSI Kabupaten Cianjur",
+  "Ikatan Alumni & Praktisi Kenshusei Seluruh Indonesia",
   "Ikatan Pengusaha Kenshusei Indonesia Cianjur",
-  "alumni pemagangan Jepang",
+  "komunitas pejuang Indonesia Jepang",
+  "wadah alumni pejuang Indonesia Jepang",
+  "alumni pemagangan Jepang Cianjur",
   "pemagangan kerja Jepang",
   "kenshusei Cianjur",
   "alumni Jepang Cianjur",
-  "DPC IKAPEKSI Cianjur",
   "magang ke Jepang Cianjur",
-  "UMKM Cianjur",
+  "SMART IKAPEKSI Plus Cianjur",
+  "SELEKNAS IM Japan",
+  "LPK Cianjur",
+  "UMKM binaan IKAPEKSI",
+  "pengusaha mandiri Cianjur",
   "organisasi alumni Cianjur",
-  "lowongan magang Jepang",
+  "pemberdayaan alumni Jepang",
 ];
 
 export function siteUrl(): string {
@@ -108,10 +120,16 @@ export function organizationJsonLd(): Record<string, unknown> {
     "@type": "Organization",
     "@id": `${siteUrl()}/#organization`,
     name: SITE.fullName,
-    alternateName: [SITE.name, "IKAPEKSI Cianjur", "Ikatan Pengusaha Kenshusei Indonesia Cianjur"],
-    description: SITE.description,
+    alternateName: [
+      SITE.name,
+      "IKAPEKSI Cianjur",
+      "DPC IKAPEKSI Cianjur",
+      "Ikatan Pengusaha Kenshusei Indonesia Cianjur",
+    ],
+    description: SITE_SEO_DESCRIPTION,
+    slogan: SITE.tagline,
     url: siteUrl(),
-    logo: absoluteUrl("/images/logo/logo-bulat.png"),
+    logo: absoluteUrl("/logo-bulat.png"),
     email: SITE.email,
     telephone: SITE.phone,
     address: {
@@ -122,6 +140,10 @@ export function organizationJsonLd(): Record<string, unknown> {
       postalCode: "43281",
       addressCountry: "ID",
     },
+    areaServed: {
+      "@type": "AdministrativeArea",
+      name: "Kabupaten Cianjur, Jawa Barat",
+    },
     geo: {
       "@type": "GeoCoordinates",
       latitude: SITE.geo.latitude,
@@ -129,7 +151,30 @@ export function organizationJsonLd(): Record<string, unknown> {
     },
     map: SITE.mapEmbedUrl,
     foundingDate: String(SITE.foundedYear),
-    keywords: "IKAPEKSI, IKAPEKSI Cianjur, alumni pemagangan Jepang",
+    foundingLocation: "Kabupaten Cianjur, Jawa Barat, Indonesia",
+    keywords: KEYWORDS.join(", "),
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        telephone: SITE.phone,
+        email: SITE.email,
+        areaServed: "ID",
+        availableLanguage: ["id", "ja"],
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        telephone: SITE.phone2,
+        email: SITE.email2,
+        areaServed: "ID",
+        availableLanguage: ["id", "ja"],
+      },
+    ],
+    parentOrganization: {
+      "@type": "Organization",
+      name: "DPD IKAPEKSI Jawa Barat",
+    },
     sameAs: SOCIAL_LINKS.map((s) => s.href),
   };
 }
@@ -140,11 +185,12 @@ export function websiteJsonLd(): Record<string, unknown> {
     "@type": "WebSite",
     "@id": `${siteUrl()}/#website`,
     name: SITE.name,
-    alternateName: "IKAPEKSI",
+    alternateName: "IKAPEKSI Cianjur",
     url: siteUrl(),
-    description: SITE.description,
+    description: SITE_SEO_DESCRIPTION,
     inLanguage: "id-ID",
     publisher: { "@id": `${siteUrl()}/#organization` },
+    about: { "@id": `${siteUrl()}/#organization` },
     potentialAction: {
       "@type": "SearchAction",
       target: {

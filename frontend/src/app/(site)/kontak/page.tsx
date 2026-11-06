@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: { absolute: "Kontak IKAPEKSI Cianjur" },
-  description: `Hubungi DPC IKAPEKSI Cianjur — alamat ${SITE.address}, telepon, WhatsApp, dan email. Kami siap membantu alumni dan calon peserta pemagangan kerja.`,
+  description: `Hubungi DPC IKAPEKSI Kabupaten Cianjur, ${SITE.address2}. Telepon/WhatsApp ${SITE.phone2}, email ${SITE.email2}. Kami siap membantu alumni dan calon pejuang Indonesia–Jepang.`,
   path: "/kontak",
 });
 

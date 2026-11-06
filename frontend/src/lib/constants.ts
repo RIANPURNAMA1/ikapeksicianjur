@@ -1,6 +1,7 @@
 export const SITE = {
   name: "DPC IKAPEKSI KABUPATEN CIANJUR",
-  fullName: "Ikatan Alumni Pemagangan Kerja Sistem Indonesia - Cianjur",
+  fullName:
+    "Ikatan Alumni & Praktisi Kenshusei Seluruh Indonesia (IKAPEKSI) Kabupaten Cianjur",
   tagline: "Merajut Alumni, Membangun Cianjur",
   description:
     "Tempat pulang bagi para pejuang Indonesia-Jepang. Untuk saling menguatkan, berbagi ilmu dan bersama memajukan Cianjur.",

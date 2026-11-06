@@ -12,7 +12,7 @@ import NewsPreview from "@/components/home/NewsPreview";
 import GalleryPreview from "@/components/home/GalleryPreview";
 import Testimonial from "@/components/home/Testimonial";
 import JoinSection from "@/components/home/JoinSection";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, SITE_SEO_DESCRIPTION, SITE_TITLE } from "@/lib/seo";
 import { apiFetch } from "@/lib/api";
 import { FALLBACK_KEGIATAN, type KegiatanCard } from "@/lib/kegiatan";
 
@@ -20,9 +20,8 @@ import { FALLBACK_KEGIATAN, type KegiatanCard } from "@/lib/kegiatan";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
-  title: { absolute: "DPC IKAPEKSI KABUPATEN CIANJUR | Merajut Alumni, Membangun Cianjur" },
-  description:
-    "IKAPEKSI Cianjur — Ikatan Alumni Pemagangan Kerja Sistem Indonesia DPC Cianjur. Wadah silaturahmi dan pemberdayaan alumni pemagangan kerja luar negeri asal Kabupaten Cianjur. Daftarkan diri Anda di sini.",
+  title: { absolute: SITE_TITLE },
+  description: SITE_SEO_DESCRIPTION,
   path: "/",
 });
 

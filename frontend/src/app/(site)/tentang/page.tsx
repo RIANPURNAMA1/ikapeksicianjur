@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: { absolute: "Tentang IKAPEKSI Cianjur" },
   description:
-    "Profil Ikatan Alumni Pemagangan Kerja Sistem Indonesia (IKAPEKSI) DPC Cianjur — sejarah, visi, misi, dan peran organisasi alumni pemagangan kerja luar negeri asal Kabupaten Cianjur.",
+    "Profil Ikatan Alumni & Praktisi Kenshusei Seluruh Indonesia (IKAPEKSI) DPC Kabupaten Cianjur — sejarah, visi \"Rumah Alumni Jepang yang Berdaya dan Memberdayakan\", empat misi, dan peran organisasi bagi alumni serta calon pejuang Indonesia–Jepang di Cianjur.",
   path: "/tentang",
 });
 
