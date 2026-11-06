@@ -42,7 +42,7 @@ const LEVELS: StructureLevel[] = [
   },
   {
     number: "03",
-    scope: "Lokal",
+    scope: "Kabupaten",
     name: "DPC Kabupaten Cianjur",
     subtitle: "Lokal",
     badge: "DPC",
