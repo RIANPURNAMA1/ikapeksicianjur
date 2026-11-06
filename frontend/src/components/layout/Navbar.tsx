@@ -139,7 +139,7 @@ export default function Navbar() {
             {/* RIGHT */}
             <div className="hidden items-center gap-4 lg:flex">
               {/* LANGUAGE SWITCHER */}
-              <LanguageSwitcher onDark={overlay} />
+              {/* <LanguageSwitcher onDark={overlay} /> */}
 
               {/* CTA */}
               <Link

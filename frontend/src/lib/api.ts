@@ -120,15 +120,26 @@ export async function apiUpload<T>(path: string, file: File): Promise<T> {
 
 export function resolveAssetUrl(url: string): string {
   if (!url) return url;
-  if (!/^https?:\/\//.test(url)) return `${API_BASE_URL}${url}`;
 
-  // Backend may emit absolute URLs using APP_URL without its port
-  // (e.g. http://localhost/storage/...), which points to the wrong origin.
-  // Rewrite local hosts to the actual API origin.
+  const base = API_BASE_URL.replace(/\/$/, "");
+
+  if (!/^https?:\/\//.test(url)) {
+    return `${base}${url.startsWith("/") ? "" : "/"}${url}`;
+  }
+
+  // Backend upload URLs are produced with Laravel APP_URL. If APP_URL is
+  // misconfigured (localhost, internal IP, or http instead of https) the
+  // browser cannot load the file. Always point /storage/* assets to the
+  // configured API origin, and rewrite local hosts for any other asset.
   try {
     const parsed = new URL(url);
-    if (parsed.hostname === "localhost" || parsed.hostname === "127.0.0.1") {
-      const api = new URL(API_BASE_URL);
+    const isLocalHost =
+      parsed.hostname === "localhost" ||
+      parsed.hostname === "127.0.0.1" ||
+      parsed.hostname === "0.0.0.0";
+
+    if (isLocalHost || parsed.pathname.startsWith("/storage/")) {
+      const api = new URL(base);
       return `${api.origin}${parsed.pathname}${parsed.search}${parsed.hash}`;
     }
   } catch {

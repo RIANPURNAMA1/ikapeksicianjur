@@ -11,7 +11,6 @@ import ActivityPreview from "@/components/home/ActivityPreview";
 import NewsPreview from "@/components/home/NewsPreview";
 import GalleryPreview from "@/components/home/GalleryPreview";
 import Testimonial from "@/components/home/Testimonial";
-import Reveal from "@/components/ui/Reveal";
 import JoinSection from "@/components/home/JoinSection";
 import { buildMetadata } from "@/lib/seo";
 import { apiFetch } from "@/lib/api";
@@ -41,31 +40,23 @@ export default async function HomePage() {
 
   return (
     <>
-      <Reveal>
-        <Hero />
-      </Reveal>
+      <Hero />
       {/* <Statistics /> */}
-      <Reveal>
-        <AboutPreview />
-      </Reveal>
-      <Reveal>
-        <div className="bg-[#070707]">
-          {/* <WhyIkapeksi /> */}
-          <VisionMissionPreview />
-          <ProgramSection />
-          <OrganizationCommitment />
-          <ProgramPreview items={kegiatan} />
-          <JoinSection />
-        </div>
-      </Reveal>
+      <AboutPreview />
+      <div className="bg-[#070707]">
+        {/* <WhyIkapeksi /> */}
+        <VisionMissionPreview />
+        <ProgramSection />
+        <OrganizationCommitment />
+        <ProgramPreview items={kegiatan} />
+        <JoinSection />
+      </div>
       {/* <ProgramPreview />
       <AlumniPreview />
       <ActivityPreview />
       <GalleryPreview />
       <Testimonial /> */}
-      {/* <Reveal>
-        <NewsPreview />
-      </Reveal> */}
+      {/* <NewsPreview /> */}
     </>
   );
 }
