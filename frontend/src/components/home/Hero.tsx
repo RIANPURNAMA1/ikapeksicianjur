@@ -471,68 +471,65 @@ export default function Hero() {
         )}
       </div>
 
-      {/* ============ STRIP STATISTIK ============ */}
-      <Container size="wide" className="relative z-20 -mt-20 pb-16 lg:pb-20">
-        <div
-          ref={statsRef}
-          className={`grid grid-cols-2 overflow-hidden rounded-2xl bg-[#FFFFFF] shadow-[0_16px_40px_-12px_rgba(10,3,4,0.25)] will-change-transform sm:grid-cols-4 ${ENTER}`}
-          style={{
-            ...delay(900),
-            translate: "0 calc(var(--p) * -36px)",
-          }}
-        >
-          {STATS.map((s, idx) => (
-            <div
-              key={s.label}
-              className={`group relative px-5 py-6 transition-colors duration-300 hover:bg-[#F9FAFB] motion-reduce:transition-none lg:px-8 lg:py-7 ${
-                idx > 0 ? "sm:border-l sm:border-[#E5E7EB]" : ""
-              } ${idx % 2 === 1 ? "border-l border-[#E5E7EB] sm:border-l" : ""} ${
-                idx >= 2 ? "border-t border-[#E5E7EB] sm:border-t-0" : ""
-              }`}
-            >
-              {/* Garis aksen merah saat hover */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[#E3202B] transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
-              />
+{/* ============ STRIP STATISTIK ============ */}
+<Container size="wide" className="relative z-20 -mt-16 pb-12 lg:pb-16">
+  <div
+    ref={statsRef}
+    className={`grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/50 bg-white/30 shadow-[0_16px_40px_-12px_rgba(10,3,4,0.35)] backdrop-blur-xl backdrop-saturate-150 will-change-transform sm:grid-cols-4 ${ENTER}`}
+    style={{
+      ...delay(900),
+      translate: "0 calc(var(--p) * -36px)",
+    }}
+  >
+    {STATS.map((s, idx) => (
+      <div
+        key={s.label}
+        className="group relative bg-white/60 px-4 py-4 transition-colors duration-300 hover:bg-white/80 motion-reduce:transition-none lg:px-6 lg:py-5"
+      >
+        {/* Garis aksen merah saat hover */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-[#E3202B] transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
+        />
 
-              <div className="flex items-start justify-between gap-3">
-                <div
-                  className={`text-[30px] font-extrabold leading-[38px] tracking-[-0.04em] sm:text-[38px] sm:leading-[46px] ${
-                    s.red ? "text-[#E3202B]" : "text-[#0A0304]"
-                  }`}
-                >
-                  <CountUp
-                    value={s.value}
-                    run={statsVisible}
-                    delayMs={idx * 120 + 900}
-                  />
-                </div>
-                <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#F3F4F6] text-[#0A0304] transition-colors duration-300 group-hover:bg-[#E3202B] group-hover:text-[#FFFFFF] motion-reduce:transition-none">
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    {s.icon}
-                  </svg>
-                </span>
-              </div>
-              <div className="mt-1 text-[11px] font-bold uppercase leading-4 tracking-[0.04em] text-[#0A0304]">
-                {s.label}
-              </div>
-              <div className="mt-1.5 text-[12px] font-normal leading-4 tracking-[-0.01em] text-[#4B5563]">
-                {s.desc}
-              </div>
-            </div>
-          ))}
+        <div className="flex items-center justify-between gap-3">
+          <div
+            className={`text-[22px] font-extrabold leading-7 tracking-[-0.04em] sm:text-[26px] sm:leading-8 ${
+              s.red ? "text-[#E3202B]" : "text-[#0A0304]"
+            }`}
+          >
+            <CountUp
+              value={s.value}
+              run={statsVisible}
+              delayMs={idx * 120 + 900}
+            />
+          </div>
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/70 text-[#E3202B] ring-1 ring-[#E3202B]/10 transition-colors duration-300 group-hover:bg-[#E3202B] group-hover:text-[#FFFFFF] motion-reduce:transition-none">
+            <svg
+              className="h-3.5 w-3.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              {s.icon}
+            </svg>
+          </span>
         </div>
-      </Container>
+
+        <div className="mt-1 text-[10px] font-bold uppercase leading-4 tracking-[0.08em] text-[#0A0304]">
+          {s.label}
+        </div>
+        <div className="mt-0.5 text-[11px] font-normal leading-4 tracking-[-0.01em] text-[#1F2937]">
+          {s.desc}
+        </div>
+      </div>
+    ))}
+  </div>
+</Container>
     </section>
   );
 }
