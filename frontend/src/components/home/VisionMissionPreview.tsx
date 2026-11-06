@@ -11,7 +11,7 @@ import Container from "@/components/layout/Container";
   surface #F9FAFB
   muted   #4B5563
 
-  Font: Plus Jakarta Sans (font-jakarta) untuk seluruh teks section ini
+  Font: Poppins (font-sans) untuk seluruh teks section ini
 */
 
 const MISSIONS = [
@@ -35,7 +35,7 @@ const MISSIONS = [
 
 export default function VisionMissionPreview() {
   return (
-    <section className="relative w-full overflow-hidden bg-[rgb(249,250,251)] py-16 font-jakarta text-[#0A0304] antialiased sm:py-20 lg:py-24">
+    <section className="relative w-full overflow-hidden bg-[rgb(249,250,251)] py-16 font-sans text-[#0A0304] antialiased sm:py-20 lg:py-24">
       <Container>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch">
           {/* KIRI: Kartu Visi (gelap) */}
@@ -101,7 +101,7 @@ export default function VisionMissionPreview() {
                   <span className="text-[10px] font-bold uppercase leading-4 tracking-[0.04em] text-[#E3202B]">
                     Panduan Langkah
                   </span>
-                  <h2 className="mt-1 text-[24px] font-semibold leading-8 tracking-[-0.04em] text-[#0A0304]">
+                  <h2 className="mt-1 text-[24px] font-bold leading-8 tracking-[-0.04em] text-[#0A0304]">
                     Empat Misi Organisasi
                   </h2>
                 </div>

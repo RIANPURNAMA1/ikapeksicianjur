@@ -28,8 +28,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-jakarta)", "ui-sans-serif", "system-ui", "Arial", "Helvetica", "sans-serif"],
-        mona: ["var(--font-mona)", "ui-sans-serif", "system-ui", "Arial", "Helvetica", "sans-serif"],
+        sans: ["var(--font-poppins)", "ui-sans-serif", "system-ui", "Arial", "Helvetica", "sans-serif"],
         jakarta: ["var(--font-jakarta)", "ui-sans-serif", "system-ui", "Arial", "Helvetica", "sans-serif"],
       },
       screens: {

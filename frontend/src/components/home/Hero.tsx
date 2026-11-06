@@ -270,7 +270,7 @@ export default function Hero() {
   return (
     <section
       ref={rootRef}
-      className="relative -mt-[72px] w-full bg-[#FFFFFF] font-jakarta text-[#0A0304] antialiased"
+      className="relative -mt-[72px] w-full bg-[#FFFFFF] font-sans text-[#0A0304] antialiased"
       style={{ "--p": 0, "--mx": 0, "--my": 0 } as CSSProperties}
     >
       <style>{`
@@ -363,8 +363,11 @@ export default function Hero() {
             <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
               <div className="flex flex-col lg:col-span-7">
                 <h1
-                  className={`text-[36px] font-extrabold leading-[42px] tracking-[-0.04em] text-[#FFFFFF] sm:text-[48px] sm:leading-[56px] lg:text-[60px] lg:leading-[66px] ${ENTER}`}
-                  style={delay(220)}
+                  className={`font-jakarta text-[36px] font-extrabold leading-[42px] tracking-[-0.04em] text-[#FFFFFF] sm:text-[48px] sm:leading-[56px] lg:text-[60px] lg:leading-[66px] ${ENTER}`}
+                  style={{
+                    ...delay(220),
+                    fontFamily: "var(--font-jakarta), ui-sans-serif, system-ui, sans-serif",
+                  }}
                 >
                   <span className="block">{t("hero.line1")}</span>
                   <span className="block text-[#FEDC00]">
@@ -387,7 +390,7 @@ export default function Hero() {
                 >
                   <Button
                     href="/pendataan"
-                    className="group/btn inline-flex items-center justify-center gap-2.5 rounded-lg bg-[#E3202B] px-6 py-3.5 text-[15px] font-semibold tracking-[-0.01em] text-[#FFFFFF] shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#C62930] hover:shadow-[0_10px_24px_-6px_rgba(227,32,43,0.6)] motion-reduce:transition-none"
+                    className="group/btn inline-flex items-center justify-center gap-2.5 rounded-full bg-[#E3202B] px-6 py-3.5 text-[15px] font-semibold tracking-[-0.01em] text-[#FFFFFF] shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#C62930] hover:shadow-[0_10px_24px_-6px_rgba(227,32,43,0.6)] motion-reduce:transition-none"
                   >
                     <svg
                       className="h-5 w-5"

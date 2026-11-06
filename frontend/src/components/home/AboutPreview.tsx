@@ -12,14 +12,14 @@ import Reveal from "@/components/ui/Reveal";
   muted   #4B5563
   surface #F9FAFB / #F3F4F6
 
-  Font: Plus Jakarta Sans (font-jakarta) untuk seluruh teks section ini
+  Font: Poppins (font-sans) untuk seluruh teks section ini
 */
 
 export default function AboutPreview() {
   return (
     <section
       id="tentang"
-      className="relative w-full scroll-mt-20 overflow-hidden bg-[#FFFFFF] py-16 font-jakarta text-[#0A0304] antialiased sm:py-20 lg:py-24"
+      className="relative w-full scroll-mt-20 overflow-hidden bg-[#FFFFFF] py-16 font-sans text-[#0A0304] antialiased sm:py-20 lg:py-24"
     >
       <Container size="wide">
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
@@ -38,11 +38,11 @@ export default function AboutPreview() {
                 {/* Aksen latar */}
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 -translate-x-3 -translate-y-3 rounded-3xl bg-[#FFDAD6] lg:-translate-x-5 lg:-translate-y-5"
+                  className="absolute inset-0 -translate-x-3 -translate-y-3 rounded-md bg-[#FFDAD6] lg:-translate-x-5 lg:-translate-y-5"
                 />
 
                 {/* Gambar utama */}
-                <div className="group relative z-10 aspect-[4/3] overflow-hidden rounded-2xl bg-[#F3F4F6] shadow-[0_16px_40px_-12px_rgba(10,3,4,0.25)]">
+                <div className="group relative z-10 aspect-[4/3] overflow-hidden rounded-md bg-[#F3F4F6] shadow-[0_16px_40px_-12px_rgba(10,3,4,0.25)]">
                   <Image
                     src="/images/carausel/carausel.webp"
                     alt="Kegiatan IKAPEKSI Cianjur"
@@ -101,11 +101,11 @@ export default function AboutPreview() {
               ========================================= */}
           <div className="order-1 flex flex-col justify-center lg:order-2">
             <Reveal delay={150}>
-              <span className="inline-flex w-fit items-center rounded bg-[#F3F4F6] px-3 py-1 text-[10px] font-bold uppercase leading-4 tracking-[0.02em] text-[#E3202B]">
+              <span className="inline-flex w-fit items-center  text-[10px] font-bold uppercase leading-4 tracking-[0.02em] text-[#E3202B]">
                 Tentang IKAPEKSI DPC Cianjur
               </span>
 
-              <h2 className="mt-5 text-[32px] font-bold leading-[40px] tracking-[-0.04em] text-[#0A0304] sm:text-[44px] sm:leading-[52px]">
+              <h2 className="text-[32px] font-bold leading-[40px] tracking-[-0.04em] text-[#0A0304] sm:text-[44px] sm:leading-[52px]">
                 Membangun Kemandirian Berbasis Disiplin &amp;{" "}
                 <span className="text-[#E3202B]">Pengalaman Jepang</span>
               </h2>

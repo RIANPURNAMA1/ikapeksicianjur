@@ -22,8 +22,18 @@ const KATEGORI: {
     label: "Alumni",
     desc: "Sudah pernah magang/kerja di Jepang",
     icon: (
-      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.6}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m-6-3.5V12m12 1.5V12" />
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        strokeWidth={1.6}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m-6-3.5V12m12 1.5V12"
+        />
       </svg>
     ),
   },
@@ -32,8 +42,18 @@ const KATEGORI: {
     label: "Calon Alumni",
     desc: "Sedang proses magang/kerja ke Jepang",
     icon: (
-      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.6}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        strokeWidth={1.6}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M14 5l7 7m0 0l-7 7m7-7H3"
+        />
       </svg>
     ),
   },
@@ -42,8 +62,18 @@ const KATEGORI: {
     label: "Binaan UMKM",
     desc: "Pelaku usaha binaan IKAPEKSI",
     icon: (
-      <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.6}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01" />
+      <svg
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        strokeWidth={1.6}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M9 10h.01M15 10h.01M9 14h.01M15 14h.01"
+        />
       </svg>
     ),
   },
@@ -55,8 +85,11 @@ interface WilayahItem {
 }
 
 const JALUR_OPTIONS: SelectOption[] = [
-  { label: "IM Japan", value: "im-japan" },
-  { label: "Swasta", value: "swasta" },
+  { label: "IM JAPAN", value: "im-japan" },
+  { label: "magang SO", value: "magang-so" },
+  { label: "Tokutei Ginou", value: "tokutei-ginou" },
+  { label: "Kuliah", value: "kuliah" },
+  { label: "Bisnis", value: "bisnis" },
 ];
 
 const DURASI_OPTIONS: SelectOption[] = [
@@ -138,7 +171,13 @@ const PEMASARAN_OPTIONS: SelectOption[] = [
   { label: "Ekspor", value: "ekspor" },
 ];
 
-const KEBUTUHAN_OPTIONS = ["Buyer", "Ekspor", "Modal", "Marketing", "Pendampingan"];
+const KEBUTUHAN_OPTIONS = [
+  "Buyer",
+  "Ekspor",
+  "Modal",
+  "Marketing",
+  "Pendampingan",
+];
 
 const HARAPAN_OPTIONS = [
   "Business Matching",
@@ -171,6 +210,7 @@ interface AlumniState {
   durasi: string;
   prefektur: string;
   tahunKepulangan: string;
+  lpk: string;
   status: string;
   pekerjaan: string;
   perusahaan: string;
@@ -221,7 +261,9 @@ function SectionCard({
           {step}
         </span>
         <div>
-          <h2 className="text-lg font-bold leading-tight text-[#0A0304]">{title}</h2>
+          <h2 className="text-lg font-bold leading-tight text-[#0A0304]">
+            {title}
+          </h2>
           {subtitle && <p className="text-xs text-[#0A0304]/50">{subtitle}</p>}
         </div>
       </div>
@@ -257,6 +299,7 @@ export default function PendataanForm() {
     durasi: "",
     prefektur: "",
     tahunKepulangan: "",
+    lpk: "",
     status: "",
     pekerjaan: "",
     perusahaan: "",
@@ -307,16 +350,26 @@ export default function PendataanForm() {
 
   async function loadWilayahOptions(
     kind: "regencies" | "districts" | "villages",
-    parentId: string
+    parentId: string,
   ): Promise<SelectOption[]> {
-    const data = await apiFetch<WilayahItem[]>(`/api/wilayah/${kind}/${parentId}`);
-    return data.map((item) => ({ label: toTitleCase(item.name), value: item.id }));
+    const data = await apiFetch<WilayahItem[]>(
+      `/api/wilayah/${kind}/${parentId}`,
+    );
+    return data.map((item) => ({
+      label: toTitleCase(item.name),
+      value: item.id,
+    }));
   }
 
   useEffect(() => {
     apiFetch<WilayahItem[]>("/api/wilayah/provinces")
       .then((data) =>
-        setProvinsiOptions(data.map((item) => ({ label: toTitleCase(item.name), value: item.id })))
+        setProvinsiOptions(
+          data.map((item) => ({
+            label: toTitleCase(item.name),
+            value: item.id,
+          })),
+        ),
       )
       .catch(() => setWilayahError("Gagal memuat data provinsi."));
   }, []);
@@ -383,7 +436,10 @@ export default function PendataanForm() {
     setCalon((prev) => ({ ...prev, [key]: value }));
   }
 
-  function setUmkmField<K extends keyof Omit<UmkmState, "kebutuhan">>(key: K, value: string) {
+  function setUmkmField<K extends keyof Omit<UmkmState, "kebutuhan">>(
+    key: K,
+    value: string,
+  ) {
     setUmkm((prev) => ({ ...prev, [key]: value }));
   }
 
@@ -428,7 +484,9 @@ export default function PendataanForm() {
       })
       .catch((err) => {
         setSubmitError(
-          err instanceof Error ? err.message : "Gagal mengirim data. Silakan coba lagi."
+          err instanceof Error
+            ? err.message
+            : "Gagal mengirim data. Silakan coba lagi.",
         );
       })
       .finally(() => setSubmitting(false));
@@ -461,6 +519,7 @@ export default function PendataanForm() {
         durasi: labelOf(DURASI_OPTIONS, alumni.durasi),
         prefektur: labelOf(PREFECTURE_OPTIONS, alumni.prefektur),
         tahun_kepulangan: alumni.tahunKepulangan,
+        lpk: alumni.lpk,
         status_saat_ini: labelOf(STATUS_OPTIONS, alumni.status),
         pekerjaan_saat_ini: alumni.pekerjaan,
         perusahaan: alumni.perusahaan,
@@ -499,12 +558,16 @@ export default function PendataanForm() {
 
   if (submitted) {
     return (
-      <section className="bg-white py-20 text-[#0A0304] font-jakarta">
+      <section className="bg-white py-20 text-[#0A0304] font-sans">
         <Container className="mx-auto max-w-2xl text-center">
           <div className="rounded-3xl border border-gray-200 bg-gray-100 p-10">
             <p className="text-4xl">✅</p>
-            <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">{t("pendataan.successTitle")}</h1>
-            <p className="mt-3 text-sm leading-relaxed text-[#0A0304]/70">{t("pendataan.successDesc")}</p>
+            <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">
+              {t("pendataan.successTitle")}
+            </h1>
+            <p className="mt-3 text-sm leading-relaxed text-[#0A0304]/70">
+              {t("pendataan.successDesc")}
+            </p>
           </div>
         </Container>
       </section>
@@ -512,7 +575,7 @@ export default function PendataanForm() {
   }
 
   return (
-      <section className="bg-white py-16 text-[#0A0304] font-jakarta">
+    <section className="bg-white py-16 text-[#0A0304] font-sans">
       <Container className="mx-auto max-w-4xl">
         <div className="text-center">
           <span className="stamp-label border-white/30 bg-gray-100 text-[#0A0304]">
@@ -521,7 +584,7 @@ export default function PendataanForm() {
           <h1 className="mt-5 text-3xl font-extrabold leading-tight sm:text-4xl">
             {t("pendataan.title")}
           </h1>
-                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#0A0304]/70">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#0A0304]/70">
             {t("pendataan.subtitle")}
           </p>
 
@@ -529,7 +592,7 @@ export default function PendataanForm() {
           <div className="mx-auto mt-8 max-w-3xl space-y-6 text-sm leading-relaxed text-[#0A0304]/80">
             <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 text-center">
               <p className="mb-2 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-primary">
-               <span>{t("pendataan.uniteLabel")}</span>
+                <span>{t("pendataan.uniteLabel")}</span>
               </p>
               <p className="mt-1 text-base font-semibold text-[#0A0304]">
                 {t("pendataan.uniteTagline")}
@@ -538,7 +601,9 @@ export default function PendataanForm() {
 
             <p className="max-w-2xl text-center">
               {t("pendataan.introLead")}{" "}
-              <span className="font-semibold text-[#0A0304]">{t("pendataan.introHighlight")}</span>{" "}
+              <span className="font-semibold text-[#0A0304]">
+                {t("pendataan.introHighlight")}
+              </span>{" "}
               {t("pendataan.introTail")}
             </p>
 
@@ -561,24 +626,34 @@ export default function PendataanForm() {
                 ⏱️
               </span>
               <span>
-                <span className="font-semibold text-[#0A0304]">{t("pendataan.estTime")}</span>
+                <span className="font-semibold text-[#0A0304]">
+                  {t("pendataan.estTime")}
+                </span>
               </span>
             </p>
 
             <p className="mx-auto max-w-2xl text-center">
               {t("pendataan.minuteLead")}{" "}
-              <span className="font-semibold text-[#0A0304]">{t("pendataan.minuteDoc")}</span>,{" "}
-              <span className="font-semibold text-[#0A0304]">{t("pendataan.minuteAcc")}</span>,{" "}
-              <span className="font-semibold text-[#0A0304]">{t("pendataan.minuteBiz")}</span>.{" "}
-              <span className="font-semibold text-[#e8555c]">{t("pendataan.minuteTail")}</span>
+              <span className="font-semibold text-[#0A0304]">
+                {t("pendataan.minuteDoc")}
+              </span>
+              ,{" "}
+              <span className="font-semibold text-[#0A0304]">
+                {t("pendataan.minuteAcc")}
+              </span>
+              ,{" "}
+              <span className="font-semibold text-[#0A0304]">
+                {t("pendataan.minuteBiz")}
+              </span>
+              .{" "}
+              <span className="font-semibold text-[#e8555c]">
+                {t("pendataan.minuteTail")}
+              </span>
             </p>
-
-            <p className="text-center italic">{t("pendataan.closing")}</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-10 space-y-6">
-
           {/* STEP 1: Saya Adalah */}
           <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
             <div className="mb-6 flex items-center gap-3">
@@ -586,543 +661,645 @@ export default function PendataanForm() {
                 1
               </span>
               <div>
-                <h2 className="text-lg font-bold leading-tight text-[#0A0304]">{t("pendataan.step1.title")} *</h2>
-                <p className="text-xs text-[#0A0304]/50">{t("pendataan.step1.subtitle")}</p>
+                <h2 className="text-lg font-bold leading-tight text-[#0A0304]">
+                  {t("pendataan.step1.title")} *
+                </h2>
+                <p className="text-xs text-[#0A0304]/50">
+                  {t("pendataan.step1.subtitle")}
+                </p>
               </div>
             </div>
             <div className="grid gap-4">
-                <Select
-                  id="kategori"
-                  label={t("pendataan.kategoriLabel")}
-                  options={KATEGORI.map((k) => ({ value: k.value, label: t(`pendataan.kategori.${k.value}`) }))}
-                  placeholder={t("pendataan.kategoriPlaceholder")}
-                  required
-                  variant="light"
-                  value={kategori}
-                  onChange={(e) => setKategori(e.target.value as Kategori | "")}
-                />
-                {kategori && (
-                  <div className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/10 p-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-[#0A0304]">
-                      {KATEGORI.find((k) => k.value === kategori)?.icon}
-                    </span>
-                    <div>
-                      <p className="text-sm font-bold text-[#0A0304]">
-                        {t(`pendataan.kategori.${kategori}`)}
-                      </p>
-                      <p className="text-xs text-[#0A0304]/60">
-                        {t(`pendataan.kategori.${kategori}.desc`)}
-                      </p>
-                    </div>
+              <Select
+                id="kategori"
+                label={t("pendataan.kategoriLabel")}
+                options={KATEGORI.map((k) => ({
+                  value: k.value,
+                  label: t(`pendataan.kategori.${k.value}`),
+                }))}
+                placeholder={t("pendataan.kategoriPlaceholder")}
+                required
+                variant="light"
+                value={kategori}
+                onChange={(e) => setKategori(e.target.value as Kategori | "")}
+              />
+              {kategori && (
+                <div className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/10 p-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-[#0A0304]">
+                    {KATEGORI.find((k) => k.value === kategori)?.icon}
+                  </span>
+                  <div>
+                    <p className="text-sm font-bold text-[#0A0304]">
+                      {t(`pendataan.kategori.${kategori}`)}
+                    </p>
+                    <p className="text-xs text-[#0A0304]/60">
+                      {t(`pendataan.kategori.${kategori}.desc`)}
+                    </p>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Steps 2–8: dimmed & locked until kategori is selected */}
-          <div className={`space-y-6 transition-all duration-500 ${kategori ? "" : "pointer-events-none select-none opacity-40"}`}>
-          {/* STEP 2: Data Diri */}
-          <SectionCard step="2" title="Data Diri" subtitle="Isi data kontak yang valid untuk keperluan pendataan.">
-            <Input
-              id="nama"
-              label="Nama Lengkap *"
-              placeholder="Nama Lengkap Anda"
-              required
-              variant="light"
-              value={dataDiri.nama}
-              onChange={(e) => setData("nama", e.target.value)}
-            />
-            <Input
-              id="whatsapp"
-              label="Nomor WhatsApp *"
-              placeholder="08xxxxxxxxxx"
-              required
-              variant="light"
-              value={dataDiri.whatsapp}
-              onChange={(e) => setData("whatsapp", e.target.value)}
-            />
-            <Input
-              id="email"
-              type="email"
-              label="Email"
-              placeholder="nama@email.com"
-              variant="light"
-              value={dataDiri.email}
-              onChange={(e) => setData("email", e.target.value)}
-            />
-            {wilayahError && (
-              <div className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-xs text-red-300 sm:col-span-2">
-                {wilayahError}
-              </div>
-            )}
-            <Select
-              id="provinsi"
-              label="Provinsi *"
-              options={provinsiOptions}
-              placeholder="-- Pilih Provinsi --"
-              required
-              variant="light"
-              value={dataDiri.provinsi}
-              onChange={(e) => handleProvinsiChange(e.target.value)}
-            />
-            <Select
-              id="kabupaten"
-              label="Kabupaten / Kota *"
-              options={kabupatenOptions}
-              placeholder={loadingKabupaten ? "Memuat data..." : "-- Pilih Kabupaten / Kota --"}
-              required
-              disabled={!dataDiri.provinsi || loadingKabupaten}
-              variant="light"
-              value={dataDiri.kabupaten}
-              onChange={(e) => handleKabupatenChange(e.target.value)}
-            />
-            <Select
-              id="kecamatan"
-              label="Kecamatan *"
-              options={kecamatanOptions}
-              placeholder={loadingKecamatan ? "Memuat data..." : "-- Pilih Kecamatan --"}
-              required
-              disabled={!dataDiri.kabupaten || loadingKecamatan}
-              variant="light"
-              value={dataDiri.kecamatan}
-              onChange={(e) => handleKecamatanChange(e.target.value)}
-            />
-            <Select
-              id="desa"
-              label="Desa / Kelurahan *"
-              options={desaOptions}
-              placeholder={loadingDesa ? "Memuat data..." : "-- Pilih Desa / Kelurahan --"}
-              required
-              disabled={!dataDiri.kecamatan || loadingDesa}
-              variant="light"
-              value={dataDiri.desa}
-              onChange={(e) => setData("desa", e.target.value)}
-            />
-            <Input
-              id="pekerjaan"
-              label="Pekerjaan *"
-              placeholder="Pekerjaan / profesi Anda"
-              required
-              variant="light"
-              value={dataDiri.pekerjaan}
-              onChange={(e) => setData("pekerjaan", e.target.value)}
-            />
-          </SectionCard>
+          <div
+            className={`space-y-6 transition-all duration-500 ${kategori ? "" : "pointer-events-none select-none opacity-40"}`}
+          >
+            {/* STEP 2: Data Diri */}
+            <SectionCard
+              step="2"
+              title="Data Diri"
+              subtitle="Isi data kontak yang valid untuk keperluan pendataan."
+            >
+              <Input
+                id="nama"
+                label="Nama Lengkap *"
+                placeholder="Nama Lengkap Anda"
+                required
+                variant="light"
+                value={dataDiri.nama}
+                onChange={(e) => setData("nama", e.target.value)}
+              />
+              <Input
+                id="whatsapp"
+                label="Nomor WhatsApp *"
+                placeholder="08xxxxxxxxxx"
+                required
+                variant="light"
+                value={dataDiri.whatsapp}
+                onChange={(e) => setData("whatsapp", e.target.value)}
+              />
+              <Input
+                id="email"
+                type="email"
+                label="Email"
+                placeholder="nama@email.com"
+                variant="light"
+                value={dataDiri.email}
+                onChange={(e) => setData("email", e.target.value)}
+              />
+              {wilayahError && (
+                <div className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-xs text-red-300 sm:col-span-2">
+                  {wilayahError}
+                </div>
+              )}
+              <Select
+                id="provinsi"
+                label="Provinsi *"
+                options={provinsiOptions}
+                placeholder="-- Pilih Provinsi --"
+                required
+                variant="light"
+                value={dataDiri.provinsi}
+                onChange={(e) => handleProvinsiChange(e.target.value)}
+              />
+              <Select
+                id="kabupaten"
+                label="Kabupaten / Kota *"
+                options={kabupatenOptions}
+                placeholder={
+                  loadingKabupaten
+                    ? "Memuat data..."
+                    : "-- Pilih Kabupaten / Kota --"
+                }
+                required
+                disabled={!dataDiri.provinsi || loadingKabupaten}
+                variant="light"
+                value={dataDiri.kabupaten}
+                onChange={(e) => handleKabupatenChange(e.target.value)}
+              />
+              <Select
+                id="kecamatan"
+                label="Kecamatan *"
+                options={kecamatanOptions}
+                placeholder={
+                  loadingKecamatan ? "Memuat data..." : "-- Pilih Kecamatan --"
+                }
+                required
+                disabled={!dataDiri.kabupaten || loadingKecamatan}
+                variant="light"
+                value={dataDiri.kecamatan}
+                onChange={(e) => handleKecamatanChange(e.target.value)}
+              />
+              <Select
+                id="desa"
+                label="Desa / Kelurahan *"
+                options={desaOptions}
+                placeholder={
+                  loadingDesa
+                    ? "Memuat data..."
+                    : "-- Pilih Desa / Kelurahan --"
+                }
+                required
+                disabled={!dataDiri.kecamatan || loadingDesa}
+                variant="light"
+                value={dataDiri.desa}
+                onChange={(e) => setData("desa", e.target.value)}
+              />
+              <Input
+                id="pekerjaan"
+                label="Pekerjaan *"
+                placeholder="Pekerjaan / profesi Anda"
+                required
+                variant="light"
+                value={dataDiri.pekerjaan}
+                onChange={(e) => setData("pekerjaan", e.target.value)}
+              />
+            </SectionCard>
 
-          {/* STEP 3+: Kondisional sesuai kategori */}
-          {kategori === "alumni" && (
-            <>
+            {/* STEP 3+: Kondisional sesuai kategori */}
+            {kategori === "alumni" && (
+              <>
+                <SectionCard
+                  step="3"
+                  title="Data Alumni"
+                  subtitle="Data masa ketika berjuang di jepang."
+                >
+                  <Select
+                    id="al-jalur"
+                    label="Jalur  *"
+                    options={JALUR_OPTIONS}
+                    placeholder="-- Pilih --"
+                    required
+                    variant="light"
+                    value={alumni.jalur}
+                    onChange={(e) => setAlumniField("jalur", e.target.value)}
+                  />
+                  <Input
+                    id="al-angkatan"
+                    label="Angkatan"
+                    placeholder="Contoh: 2019"
+                    variant="light"
+                    value={alumni.angkatan}
+                    onChange={(e) => setAlumniField("angkatan", e.target.value)}
+                  />
+                  <Select
+                    id="al-durasi"
+                    label="Durasi Magang"
+                    options={DURASI_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={alumni.durasi}
+                    onChange={(e) => setAlumniField("durasi", e.target.value)}
+                  />
+                  <Select
+                    id="al-prefektur"
+                    label="Prefektur Penempatan"
+                    options={PREFECTURE_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={alumni.prefektur}
+                    onChange={(e) =>
+                      setAlumniField("prefektur", e.target.value)
+                    }
+                  />
+                  <Input
+                    id="al-tahun"
+                    label="Tahun Kepulangan"
+                    placeholder="Contoh: 2024"
+                    variant="light"
+                    value={alumni.tahunKepulangan}
+                    onChange={(e) =>
+                      setAlumniField("tahunKepulangan", e.target.value)
+                    }
+                  />
+                  <Input
+                    id="al-lpk"
+                    label="LPK Tempat Belajar"
+                    placeholder="Nama LPK tempat belajar"
+                    variant="light"
+                    value={alumni.lpk}
+                    onChange={(e) => setAlumniField("lpk", e.target.value)}
+                  />
+                </SectionCard>
+
+                <SectionCard
+                  step="4"
+                  title="Status Saat Ini"
+                  subtitle="Kondisi Anda setelah kembali ke Indonesia."
+                >
+                  <Select
+                    id="al-status"
+                    label="Status Saat Ini *"
+                    options={STATUS_OPTIONS}
+                    placeholder="-- Pilih --"
+                    required
+                    variant="light"
+                    value={alumni.status}
+                    onChange={(e) => setAlumniField("status", e.target.value)}
+                  />
+                  <Input
+                    id="al-pekerjaan"
+                    label="Pekerjaan"
+                    placeholder="Pekerjaan saat ini"
+                    variant="light"
+                    value={alumni.pekerjaan}
+                    onChange={(e) =>
+                      setAlumniField("pekerjaan", e.target.value)
+                    }
+                  />
+                  <Input
+                    id="al-perusahaan"
+                    label="Perusahaan"
+                    placeholder="Nama perusahaan / instansi"
+                    variant="light"
+                    value={alumni.perusahaan}
+                    onChange={(e) =>
+                      setAlumniField("perusahaan", e.target.value)
+                    }
+                  />
+                  <Input
+                    id="al-usaha"
+                    label="Usaha"
+                    placeholder="Nama usaha / UMKM (jika ada)"
+                    variant="light"
+                    value={alumni.usaha}
+                    onChange={(e) => setAlumniField("usaha", e.target.value)}
+                  />
+                </SectionCard>
+              </>
+            )}
+
+            {kategori === "calon-alumni" && (
               <SectionCard
                 step="3"
-                title="Data Kenshusei"
-                subtitle="Data masa magang / kerja di Jepang."
+                title="Program Jepang"
+                subtitle="Data rencana magang / kerja ke Jepang."
               >
                 <Select
-                  id="al-jalur"
-                  label="Jalur Pemagangan *"
+                  id="ca-jalur"
+                  label="Jalur *"
                   options={JALUR_OPTIONS}
                   placeholder="-- Pilih --"
                   required
                   variant="light"
-                  value={alumni.jalur}
-                  onChange={(e) => setAlumniField("jalur", e.target.value)}
+                  value={calon.jalur}
+                  onChange={(e) => setCalonField("jalur", e.target.value)}
                 />
                 <Input
-                  id="al-angkatan"
-                  label="Angkatan"
-                  placeholder="Contoh: 2019"
+                  id="ca-lpk"
+                  label="
+                        LPK Tempat Belajar"
+                  placeholder="Nama LPK / penyalur"
                   variant="light"
-                  value={alumni.angkatan}
-                  onChange={(e) => setAlumniField("angkatan", e.target.value)}
+                  value={calon.lpk}
+                  onChange={(e) => setCalonField("lpk", e.target.value)}
                 />
                 <Select
-                  id="al-durasi"
-                  label="Durasi Magang"
-                  options={DURASI_OPTIONS}
+                  id="ca-bidang"
+                  label="Bidang"
+                  options={BIDANG_OPTIONS}
                   placeholder="-- Pilih --"
                   variant="light"
-                  value={alumni.durasi}
-                  onChange={(e) => setAlumniField("durasi", e.target.value)}
+                  value={calon.bidang}
+                  onChange={(e) => setCalonField("bidang", e.target.value)}
                 />
                 <Select
-                  id="al-prefektur"
-                  label="Prefektur Penempatan"
+                  id="ca-status"
+                  label="Status Proses *"
+                  options={STATUS_PROSES_OPTIONS}
+                  placeholder="-- Pilih --"
+                  required
+                  variant="light"
+                  value={calon.statusProses}
+                  onChange={(e) =>
+                    setCalonField("statusProses", e.target.value)
+                  }
+                />
+                <Input
+                  id="ca-keberangkatan"
+                  label="Target Keberangkatan"
+                  placeholder="Contoh: Kuartal I 2027"
+                  variant="light"
+                  value={calon.targetKeberangkatan}
+                  onChange={(e) =>
+                    setCalonField("targetKeberangkatan", e.target.value)
+                  }
+                />
+                <Select
+                  id="ca-target-prefektur"
+                  label="Target Prefektur"
                   options={PREFECTURE_OPTIONS}
                   placeholder="-- Pilih --"
                   variant="light"
-                  value={alumni.prefektur}
-                  onChange={(e) => setAlumniField("prefektur", e.target.value)}
-                />
-                <Input
-                  id="al-tahun"
-                  label="Tahun Kepulangan"
-                  placeholder="Contoh: 2024"
-                  variant="light"
-                  value={alumni.tahunKepulangan}
-                  onChange={(e) => setAlumniField("tahunKepulangan", e.target.value)}
+                  value={calon.targetPrefektur}
+                  onChange={(e) =>
+                    setCalonField("targetPrefektur", e.target.value)
+                  }
                 />
               </SectionCard>
+            )}
 
-              <SectionCard step="4" title="Status Saat Ini" subtitle="Kondisi Anda setelah kembali ke Indonesia.">
-                <Select
-                  id="al-status"
-                  label="Status Saat Ini *"
-                  options={STATUS_OPTIONS}
-                  placeholder="-- Pilih --"
-                  required
-                  variant="light"
-                  value={alumni.status}
-                  onChange={(e) => setAlumniField("status", e.target.value)}
-                />
-                <Input
-                  id="al-pekerjaan"
-                  label="Pekerjaan"
-                  placeholder="Pekerjaan saat ini"
-                  variant="light"
-                  value={alumni.pekerjaan}
-                  onChange={(e) => setAlumniField("pekerjaan", e.target.value)}
-                />
-                <Input
-                  id="al-perusahaan"
-                  label="Perusahaan"
-                  placeholder="Nama perusahaan / instansi"
-                  variant="light"
-                  value={alumni.perusahaan}
-                  onChange={(e) => setAlumniField("perusahaan", e.target.value)}
-                />
-                <Input
-                  id="al-usaha"
-                  label="Usaha"
-                  placeholder="Nama usaha / UMKM (jika ada)"
-                  variant="light"
-                  value={alumni.usaha}
-                  onChange={(e) => setAlumniField("usaha", e.target.value)}
-                />
-              </SectionCard>
-            </>
-          )}
+            {kategori === "umkm-binaan" && (
+              <>
+                <SectionCard
+                  step="3"
+                  title="Profil UMKM"
+                  subtitle="Informasi dasar usaha Anda."
+                >
+                  <Input
+                    id="um-nama"
+                    label="Nama Usaha *"
+                    placeholder="Nama usaha / brand"
+                    required
+                    variant="light"
+                    value={umkm.namaUsaha}
+                    onChange={(e) => setUmkmField("namaUsaha", e.target.value)}
+                  />
+                  <Select
+                    id="um-bidang"
+                    label="Bidang Usaha *"
+                    options={BIDANG_UMKM_OPTIONS}
+                    placeholder="-- Pilih --"
+                    required
+                    variant="light"
+                    value={umkm.bidang}
+                    onChange={(e) => setUmkmField("bidang", e.target.value)}
+                  />
+                  <Input
+                    id="um-produk"
+                    label="Produk"
+                    placeholder="Produk unggulan / utama"
+                    variant="light"
+                    value={umkm.produk}
+                    onChange={(e) => setUmkmField("produk", e.target.value)}
+                  />
+                  <Input
+                    id="um-berdiri"
+                    label="Tahun Berdiri"
+                    placeholder="Contoh: 2020"
+                    variant="light"
+                    value={umkm.tahunBerdiri}
+                    onChange={(e) =>
+                      setUmkmField("tahunBerdiri", e.target.value)
+                    }
+                  />
+                  <Input
+                    id="um-karyawan"
+                    label="Jumlah Karyawan"
+                    placeholder="Contoh: 5 orang"
+                    variant="light"
+                    value={umkm.karyawan}
+                    onChange={(e) => setUmkmField("karyawan", e.target.value)}
+                  />
+                </SectionCard>
 
-          {kategori === "calon-alumni" && (
-            <SectionCard
-              step="3"
-              title="Program Jepang"
-              subtitle="Data rencana magang / kerja ke Jepang."
-            >
-              <Select
-                id="ca-jalur"
-                label="Jalur *"
-                options={JALUR_OPTIONS}
-                placeholder="-- Pilih --"
-                required
-                variant="light"
-                value={calon.jalur}
-                onChange={(e) => setCalonField("jalur", e.target.value)}
-              />
-              <Input
-                id="ca-lpk"
-                label="LPK"
-                placeholder="Nama LPK / penyalur"
-                variant="light"
-                value={calon.lpk}
-                onChange={(e) => setCalonField("lpk", e.target.value)}
-              />
-              <Select
-                id="ca-bidang"
-                label="Bidang"
-                options={BIDANG_OPTIONS}
-                placeholder="-- Pilih --"
-                variant="light"
-                value={calon.bidang}
-                onChange={(e) => setCalonField("bidang", e.target.value)}
-              />
-              <Select
-                id="ca-status"
-                label="Status Proses *"
-                options={STATUS_PROSES_OPTIONS}
-                placeholder="-- Pilih --"
-                required
-                variant="light"
-                value={calon.statusProses}
-                onChange={(e) => setCalonField("statusProses", e.target.value)}
-              />
-              <Input
-                id="ca-keberangkatan"
-                label="Target Keberangkatan"
-                placeholder="Contoh: Kuartal I 2027"
-                variant="light"
-                value={calon.targetKeberangkatan}
-                onChange={(e) => setCalonField("targetKeberangkatan", e.target.value)}
-              />
-              <Select
-                id="ca-target-prefektur"
-                label="Target Prefektur"
-                options={PREFECTURE_OPTIONS}
-                placeholder="-- Pilih --"
-                variant="light"
-                value={calon.targetPrefektur}
-                onChange={(e) => setCalonField("targetPrefektur", e.target.value)}
-              />
-            </SectionCard>
-          )}
+                <SectionCard
+                  step="4"
+                  title="Legalitas"
+                  subtitle="Kelengkapan izin dan sertifikasi usaha."
+                >
+                  <Select
+                    id="um-nib"
+                    label="NIB (Nomor Induk Berusaha)"
+                    options={LEGALITAS_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={umkm.nib}
+                    onChange={(e) => setUmkmField("nib", e.target.value)}
+                  />
+                  <Select
+                    id="um-halal"
+                    label="Sertifikat Halal"
+                    options={LEGALITAS_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={umkm.halal}
+                    onChange={(e) => setUmkmField("halal", e.target.value)}
+                  />
+                  <Select
+                    id="um-pirt"
+                    label="PIRT"
+                    options={LEGALITAS_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={umkm.pirt}
+                    onChange={(e) => setUmkmField("pirt", e.target.value)}
+                  />
+                  <Select
+                    id="um-bpom"
+                    label="BPOM"
+                    options={LEGALITAS_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={umkm.bpom}
+                    onChange={(e) => setUmkmField("bpom", e.target.value)}
+                  />
+                </SectionCard>
 
-          {kategori === "umkm-binaan" && (
-            <>
-              <SectionCard step="3" title="Profil UMKM" subtitle="Informasi dasar usaha Anda.">
-                <Input
-                  id="um-nama"
-                  label="Nama Usaha *"
-                  placeholder="Nama usaha / brand"
-                  required
-                  variant="light"
-                  value={umkm.namaUsaha}
-                  onChange={(e) => setUmkmField("namaUsaha", e.target.value)}
-                />
-                <Select
-                  id="um-bidang"
-                  label="Bidang Usaha *"
-                  options={BIDANG_UMKM_OPTIONS}
-                  placeholder="-- Pilih --"
-                  required
-                  variant="light"
-                  value={umkm.bidang}
-                  onChange={(e) => setUmkmField("bidang", e.target.value)}
-                />
-                <Input
-                  id="um-produk"
-                  label="Produk"
-                  placeholder="Produk unggulan / utama"
-                  variant="light"
-                  value={umkm.produk}
-                  onChange={(e) => setUmkmField("produk", e.target.value)}
-                />
-                <Input
-                  id="um-berdiri"
-                  label="Tahun Berdiri"
-                  placeholder="Contoh: 2020"
-                  variant="light"
-                  value={umkm.tahunBerdiri}
-                  onChange={(e) => setUmkmField("tahunBerdiri", e.target.value)}
-                />
-                <Input
-                  id="um-karyawan"
-                  label="Jumlah Karyawan"
-                  placeholder="Contoh: 5 orang"
-                  variant="light"
-                  value={umkm.karyawan}
-                  onChange={(e) => setUmkmField("karyawan", e.target.value)}
-                />
-              </SectionCard>
+                <SectionCard
+                  step="5"
+                  title="Usaha"
+                  subtitle="Skala produksi dan pemasaran usaha."
+                >
+                  <Select
+                    id="um-kapasitas"
+                    label="Kapasitas Produksi"
+                    options={KAPASITAS_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={umkm.kapasitas}
+                    onChange={(e) => setUmkmField("kapasitas", e.target.value)}
+                  />
+                  <Select
+                    id="um-omzet"
+                    label="Omzet per Bulan"
+                    options={OMZET_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={umkm.omzet}
+                    onChange={(e) => setUmkmField("omzet", e.target.value)}
+                  />
+                  <Select
+                    id="um-pemasaran"
+                    label="Pemasaran"
+                    options={PEMASARAN_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={umkm.pemasaran}
+                    onChange={(e) => setUmkmField("pemasaran", e.target.value)}
+                  />
+                  <Select
+                    id="um-ekspor"
+                    label="Sudah/Ekspor ke Luar Negeri"
+                    options={LEGALITAS_OPTIONS}
+                    placeholder="-- Pilih --"
+                    variant="light"
+                    value={umkm.ekspor}
+                    onChange={(e) => setUmkmField("ekspor", e.target.value)}
+                  />
+                </SectionCard>
 
-              <SectionCard step="4" title="Legalitas" subtitle="Kelengkapan izin dan sertifikasi usaha.">
-                <Select
-                  id="um-nib"
-                  label="NIB (Nomor Induk Berusaha)"
-                  options={LEGALITAS_OPTIONS}
-                  placeholder="-- Pilih --"
-                  variant="light"
-                  value={umkm.nib}
-                  onChange={(e) => setUmkmField("nib", e.target.value)}
-                />
-                <Select
-                  id="um-halal"
-                  label="Sertifikat Halal"
-                  options={LEGALITAS_OPTIONS}
-                  placeholder="-- Pilih --"
-                  variant="light"
-                  value={umkm.halal}
-                  onChange={(e) => setUmkmField("halal", e.target.value)}
-                />
-                <Select
-                  id="um-pirt"
-                  label="PIRT"
-                  options={LEGALITAS_OPTIONS}
-                  placeholder="-- Pilih --"
-                  variant="light"
-                  value={umkm.pirt}
-                  onChange={(e) => setUmkmField("pirt", e.target.value)}
-                />
-                <Select
-                  id="um-bpom"
-                  label="BPOM"
-                  options={LEGALITAS_OPTIONS}
-                  placeholder="-- Pilih --"
-                  variant="light"
-                  value={umkm.bpom}
-                  onChange={(e) => setUmkmField("bpom", e.target.value)}
-                />
-              </SectionCard>
-
-              <SectionCard step="5" title="Usaha" subtitle="Skala produksi dan pemasaran usaha.">
-                <Select
-                  id="um-kapasitas"
-                  label="Kapasitas Produksi"
-                  options={KAPASITAS_OPTIONS}
-                  placeholder="-- Pilih --"
-                  variant="light"
-                  value={umkm.kapasitas}
-                  onChange={(e) => setUmkmField("kapasitas", e.target.value)}
-                />
-                <Select
-                  id="um-omzet"
-                  label="Omzet per Bulan"
-                  options={OMZET_OPTIONS}
-                  placeholder="-- Pilih --"
-                  variant="light"
-                  value={umkm.omzet}
-                  onChange={(e) => setUmkmField("omzet", e.target.value)}
-                />
-                <Select
-                  id="um-pemasaran"
-                  label="Pemasaran"
-                  options={PEMASARAN_OPTIONS}
-                  placeholder="-- Pilih --"
-                  variant="light"
-                  value={umkm.pemasaran}
-                  onChange={(e) => setUmkmField("pemasaran", e.target.value)}
-                />
-                <Select
-                  id="um-ekspor"
-                  label="Sudah/Ekspor ke Luar Negeri"
-                  options={LEGALITAS_OPTIONS}
-                  placeholder="-- Pilih --"
-                  variant="light"
-                  value={umkm.ekspor}
-                  onChange={(e) => setUmkmField("ekspor", e.target.value)}
-                />
-              </SectionCard>
-
-              <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
-                <div className="mb-6 flex items-center gap-3">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
-                    6
-                  </span>
-                  <div>
-                    <h2 className="text-lg font-bold leading-tight text-[#0A0304]">Kebutuhan</h2>
-                    <p className="text-xs text-[#0A0304]/50">Pilih bantuan yang dibutuhkan usaha Anda.</p>
+                <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
+                  <div className="mb-6 flex items-center gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
+                      6
+                    </span>
+                    <div>
+                      <h2 className="text-lg font-bold leading-tight text-[#0A0304]">
+                        Kebutuhan
+                      </h2>
+                      <p className="text-xs text-[#0A0304]/50">
+                        Pilih bantuan yang dibutuhkan usaha Anda.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {KEBUTUHAN_OPTIONS.map((need) => {
-                    const checked = umkm.kebutuhan.includes(need);
-                    return (
-                      <button
-                        type="button"
-                        key={need}
-                        onClick={() => toggleKebutuhan(need)}
-                        aria-pressed={checked}
-                        className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition ${
-                          checked
-                            ? "border-primary bg-primary/20 text-[#0A0304]"
-                            : "border-gray-300 bg-gray-100 text-[#0A0304]/70 hover:border-primary/50"
-                        }`}
-                      >
-                        <span
-                          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
-                            checked ? "border-primary bg-primary text-[#0A0304]" : "border-white/30"
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {KEBUTUHAN_OPTIONS.map((need) => {
+                      const checked = umkm.kebutuhan.includes(need);
+                      return (
+                        <button
+                          type="button"
+                          key={need}
+                          onClick={() => toggleKebutuhan(need)}
+                          aria-pressed={checked}
+                          className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition ${
+                            checked
+                              ? "border-primary bg-primary/20 text-[#0A0304]"
+                              : "border-gray-300 bg-gray-100 text-[#0A0304]/70 hover:border-primary/50"
                           }`}
                         >
-                          {checked && "✓"}
-                        </span>
-                        {need}
-                      </button>
-                    );
-                  })}
+                          <span
+                            className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
+                              checked
+                                ? "border-primary bg-primary text-[#0A0304]"
+                                : "border-white/30"
+                            }`}
+                          >
+                            {checked && "✓"}
+                          </span>
+                          {need}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
 
-          {/* HARAPAN DARI IKAPEKSI */}
-          <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
-            <div className="mb-6 flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
-                7
-              </span>
-              <div>
-                <h2 className="text-lg font-bold leading-tight text-[#0A0304]">Harapan dari IKAPEKSI</h2>
-                <p className="text-xs text-[#0A0304]/50">Pilih maksimal 3 harapan Anda dari IKAPEKSI.</p>
+            {/* HARAPAN DARI IKAPEKSI */}
+            <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
+              <div className="mb-6 flex items-center gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
+                  7
+                </span>
+                <div>
+                  <h2 className="text-lg font-bold leading-tight text-[#0A0304]">
+                    Harapan dari IKAPEKSI
+                  </h2>
+                  <p className="text-xs text-[#0A0304]/60">
+                    Pilih maksimal 3 harapan Anda dari IKAPEKSI.
+                  </p>
+                </div>
+                <span
+                  className={`ml-auto shrink-0 rounded-full border px-3 py-1 text-xs font-bold transition ${
+                    harapan.length === 3
+                      ? "border-primary bg-primary text-[#0A0304]"
+                      : "border-gray-300 bg-white text-[#0A0304]/70"
+                  }`}
+                >
+                  {harapan.length}/3
+                </span>
               </div>
-              <span className="ml-auto shrink-0 rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-xs font-bold text-[#0A0304]/70">
-                {harapan.length}/3
-              </span>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {HARAPAN_OPTIONS.map((item) => {
-                const checked = harapan.includes(item);
-                const disabled = !checked && harapan.length >= 3;
-                return (
-                  <button
-                    type="button"
-                    key={item}
-                    onClick={() => toggleHarapan(item)}
-                    aria-pressed={checked}
-                    disabled={disabled}
-                    className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition ${
-                      checked
-                        ? "border-primary bg-primary/20 text-[#0A0304]"
-                        : disabled
-                          ? "cursor-not-allowed border-gray-200 bg-gray-100 text-[#0A0304]/40"
-                          : "border-gray-300 bg-gray-100 text-[#0A0304]/70 hover:border-primary/50"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
-                        checked ? "border-primary bg-primary text-[#0A0304]" : "border-white/30"
+
+              <div className="grid gap-2.5 sm:grid-cols-2">
+                {HARAPAN_OPTIONS.map((item) => {
+                  const checked = harapan.includes(item);
+                  const disabled = !checked && harapan.length >= 3;
+                  return (
+                    <button
+                      type="button"
+                      key={item}
+                      onClick={() => toggleHarapan(item)}
+                      aria-pressed={checked}
+                      disabled={disabled}
+                      className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                        checked
+                          ? "border-primary bg-white text-[#0A0304] shadow-sm ring-1 ring-primary"
+                          : disabled
+                            ? "cursor-not-allowed border-gray-200 bg-gray-50 text-[#0A0304]/35"
+                            : "border-gray-300 bg-white text-[#0A0304]/80 hover:border-primary hover:shadow-sm"
                       }`}
                     >
-                      {checked && "✓"}
-                    </span>
-                    {item}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mt-4">
-              <Input
-                id="harapan-lainnya"
-                label="Lainnya (opsional)"
-                placeholder="Harapan lain di luar daftar di atas"
-                variant="light"
-                value={harapanLainnya}
-                onChange={(e) => setHarapanLainnya(e.target.value)}
-              />
-            </div>
-          </div>
+                      <span
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition ${
+                          checked
+                            ? "border-primary bg-primary text-[#0A0304]"
+                            : disabled
+                              ? "border-gray-200 bg-gray-100"
+                              : "border-gray-400 bg-white"
+                        }`}
+                        aria-hidden="true"
+                      >
+                        {checked && (
+                          <svg
+                            className="h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={3.5}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M20 6 9 17l-5-5" />
+                          </svg>
+                        )}
+                      </span>
+                      {item}
+                    </button>
+                  );
+                })}
+              </div>
 
-          {/* PERSETUJUAN DATA */}
-          <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
-            <div className="mb-6 flex items-center gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
-                8
-              </span>
-              <h2 className="text-lg font-bold leading-tight text-[#0A0304]">Persetujuan Data</h2>
+              <div className="mt-5">
+                <Input
+                  id="harapan-lainnya"
+                  label="Lainnya (opsional)"
+                  placeholder="Harapan lain di luar daftar di atas"
+                  variant="light"
+                  value={harapanLainnya}
+                  onChange={(e) => setHarapanLainnya(e.target.value)}
+                />
+              </div>
             </div>
-            <label className="flex cursor-pointer items-start gap-3 text-sm text-[#0A0304]/80">
-              <input
-                type="checkbox"
-                checked={agreed}
-                onChange={(e) => setAgreed(e.target.checked)}
-                required
-                className="mt-0.5 h-4 w-4 accent-primary"
-              />
-              <span>
-                Saya menyatakan bahwa data yang saya isi adalah benar, serta menyetujui penggunaan
-                data oleh DPC IKAPEKSI CIANJUR untuk keperluan pendataan dan program organisasi. *
-              </span>
-            </label>
-            {submitError && (
-              <p className="mt-6 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-                {submitError}
-              </p>
-            )}
-            <Button
-              type="submit"
-              disabled={!kategori || !agreed || submitting}
-              className="btn-shine mt-6 w-full !rounded-full !bg-primary py-4 text-base font-bold text-white hover:!bg-primary-dark"
-            >
-              {submitting ? "Mengirim Data..." : "Daftar Sekarang"}
-            </Button>
-          </div>
+
+            {/* PERSETUJUAN DATA */}
+            <div className="rounded-2xl border border-gray-200 bg-gray-100 p-6 sm:p-8">
+              <div className="mb-6 flex items-center gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-black text-[#0A0304]">
+                  8
+                </span>
+                <h2 className="text-lg font-bold leading-tight text-[#0A0304]">
+                  Persetujuan Data
+                </h2>
+              </div>
+              <label className="flex cursor-pointer items-start gap-3 text-sm text-[#0A0304]/80">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  required
+                  className="mt-0.5 h-4 w-4 accent-primary"
+                />
+                <span>
+                  Saya menyatakan bahwa data yang saya isi adalah benar, serta
+                  menyetujui penggunaan data oleh DPC IKAPEKSI CIANJUR untuk
+                  keperluan pendataan dan program organisasi. *
+                </span>
+              </label>
+              {submitError && (
+                <p className="mt-6 rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                  {submitError}
+                </p>
+              )}
+              <Button
+                type="submit"
+                disabled={!kategori || !agreed || submitting}
+                className="btn-shine mt-6 w-full !rounded-full !bg-primary py-4 text-base font-bold text-white hover:!bg-primary-dark"
+              >
+                {submitting ? "Mengirim Data..." : "Daftar Sekarang"}
+              </Button>
+            </div>
           </div>
         </form>
       </Container>

@@ -120,6 +120,20 @@ export async function apiUpload<T>(path: string, file: File): Promise<T> {
 
 export function resolveAssetUrl(url: string): string {
   if (!url) return url;
-  if (/^https?:\/\//.test(url)) return url;
-  return `${API_BASE_URL}${url}`;
+  if (!/^https?:\/\//.test(url)) return `${API_BASE_URL}${url}`;
+
+  // Backend may emit absolute URLs using APP_URL without its port
+  // (e.g. http://localhost/storage/...), which points to the wrong origin.
+  // Rewrite local hosts to the actual API origin.
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname === "localhost" || parsed.hostname === "127.0.0.1") {
+      const api = new URL(API_BASE_URL);
+      return `${api.origin}${parsed.pathname}${parsed.search}${parsed.hash}`;
+    }
+  } catch {
+    return url;
+  }
+
+  return url;
 }

@@ -12,7 +12,7 @@ import { useLanguage } from "@/lib/i18n";
   muted   #4B5563
   surface #F9FAFB
 
-  Font: Plus Jakarta Sans (font-jakarta) untuk seluruh teks section ini
+  Font: Poppins (font-sans) untuk seluruh teks section ini
 */
 
 const reasons: {
@@ -70,7 +70,7 @@ export default function WhyIkapeksi() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#F9FAFB] py-16 font-jakarta text-[#0A0304] antialiased sm:py-20 lg:py-24">
+    <section className="relative w-full overflow-hidden bg-[#F9FAFB] py-16 font-sans text-[#0A0304] antialiased sm:py-20 lg:py-24">
       <Container>
         {/* Header */}
         <Reveal className="mx-auto mb-12 flex max-w-3xl flex-col items-center text-center lg:mb-16">

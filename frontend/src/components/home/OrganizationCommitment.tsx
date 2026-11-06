@@ -26,7 +26,7 @@ const commitments: Commitment[] = [
     number: "01",
     title: "Profesionalisme",
     desc: "Mengembangkan program yang terencana, terukur, dan berorientasi pada peningkatan kualitas pelayanan serta kompetensi anggota secara berkelanjutan.",
-    iconBox: "bg-[#1A1415] text-white",
+    iconBox: "text-[#1A1415] ",
     icon: (
       <>
         <circle cx="12" cy="9" r="6" />
@@ -38,14 +38,14 @@ const commitments: Commitment[] = [
     number: "02",
     title: "Integritas",
     desc: "Menjunjung tinggi transparansi, akuntabilitas, dan tanggung jawab dalam setiap aktivitas organisasi maupun kerja sama kelembagaan.",
-    iconBox: "bg-[#B3101B] text-white",
+    iconBox: "text-[#B3101B] ",
     icon: <path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6l-7-3Z" />,
   },
   {
     number: "03",
     title: "Kolaborasi",
     desc: "Membangun sinergi antara pemerintah, dunia industri, lembaga pendidikan, alumni, dan mitra strategis untuk menciptakan manfaat yang lebih luas.",
-    iconBox: "bg-[#F5C518] text-[#1A1415]",
+    iconBox: "text-[#F5C518] ",
     icon: (
       <>
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -59,13 +59,13 @@ const commitments: Commitment[] = [
 
 export default function OrganizationCommitment() {
   return (
-    <section className="w-full bg-[rgb(249,250,251)] py-16 font-jakarta text-[#1A1415] antialiased sm:py-20 lg:py-24">
+    <section className="w-full bg-[rgb(249,250,251)] py-16 font-sans text-[#1A1415] antialiased sm:py-20 lg:py-24">
       <Container>
         <div className="mx-auto grid max-w-[1040px] grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
           {/* KIRI: Header */}
           <Reveal className="lg:col-span-5">
             <div className="lg:sticky lg:top-24">
-               <span className="inline-flex w-fit items-center rounded bg-[#F3F4F6] px-3 py-1 text-[10px] font-bold uppercase leading-4 tracking-[0.02em] text-[#E3202B]">
+               <span className="inline-flex w-fit items-center  text-[10px] font-bold uppercase leading-4 tracking-[0.02em] text-[#E3202B]">
                  Nilai Utama Organisasi
               </span>
               <h2 className=" text-[32px] font-bold leading-[38px] tracking-[-0.045em] text-[#1A1415] sm:text-[40px] sm:leading-[46px]">
@@ -93,7 +93,7 @@ export default function OrganizationCommitment() {
             {commitments.map((item, idx) => (
               <li key={item.title} className="flex">
                 <Reveal delay={idx * 80} className="flex w-full">
-                  <article className="group flex w-full items-start gap-5 rounded-2xl bg-white p-6 transition-all duration-300 hover:bg-white hover:shadow-[0_12px_32px_-12px_rgba(26,20,21,0.15)] sm:p-7">
+                  <article className="group flex w-full items-start gap-5 rounded-md bg-white p-6 transition-all duration-300 hover:bg-white hover:shadow-[0_12px_32px_-12px_rgba(26,20,21,0.15)] sm:p-7">
                     <div
                       className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${item.iconBox}`}
                     >

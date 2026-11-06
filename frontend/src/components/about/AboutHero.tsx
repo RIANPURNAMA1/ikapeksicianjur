@@ -66,7 +66,7 @@ export default function AboutHero() {
           </div>
 
           {/* Heading */}
-          <h1 className="mt-7 text-balance font-jakarta text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-7 text-balance font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
             Mengenal{" "}
             <span className="bg-gradient-to-r from-white via-white to-[#ff7e84] bg-clip-text text-transparent">
               {SITE.name}

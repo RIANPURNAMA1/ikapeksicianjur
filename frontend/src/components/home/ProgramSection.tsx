@@ -14,7 +14,7 @@ import Container from "@/components/layout/Container";
   maroon tua    : #5E0B14
   muted         : #4B4747
 
-  Font: Plus Jakarta Sans (font-jakarta)
+  Font: Poppins (font-sans)
 */
 
 /* ---------- Data ---------- */
@@ -59,7 +59,8 @@ const PILLARS: Pillar[] = [
     tagClass: "bg-[#B3101B] text-white",
     mission: "Misi 02 · Membuka Jalan",
     title: "SMART IKAPEKSI Plus Cianjur",
-    subtitle: "Seleksi magang terpadu berbasis kompetensi dan standar industri Jepang",
+    subtitle:
+      "Seleksi magang terpadu berbasis kompetensi dan standar industri Jepang",
     desc: "Mendekatkan kesempatan magang ke Jepang bagi warga Cianjur, dari informasi hingga seleksi untuk Program Magang IM Japan.",
     focus: [
       {
@@ -154,7 +155,7 @@ function CheckIcon() {
 
 function PillarCard({ p }: { p: Pillar }) {
   return (
-    <article className="flex h-full w-full flex-col rounded-3xl bg-[#F9FAFB] p-6 sm:p-7">
+    <article className="flex h-full w-full flex-col rounded-md bg-[#F9FAFB] p-6 sm:p-7">
       {/* Baris atas: tag pilar + misi */}
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
         <span
@@ -215,15 +216,15 @@ function PillarCard({ p }: { p: Pillar }) {
 
 export default function ProgramSection() {
   return (
-    <section className="w-full bg-white py-16 font-jakarta text-[#1A1415] antialiased sm:py-20 lg:py-24">
+    <section className="w-full bg-white py-16 font-sans text-[#1A1415] antialiased sm:py-20 lg:py-24">
       <Container>
         {/* Header */}
         <Reveal className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <span className="inline-flex items-center rounded-full border border-[#E7E2DE] bg-white px-4 py-1.5 text-[10px] font-bold uppercase leading-4 tracking-[0.16em] text-[#B3101B]">
-            Arah Strategis
+          <span className="inline-flex w-fit items-center  text-[10px] font-bold uppercase leading-4 tracking-[0.02em] text-[#E3202B]">
+            Arahan Strategis Organisasi
           </span>
 
-          <h2 className="mt-6 text-[32px] font-bold leading-[38px] tracking-[-0.045em] text-[#1A1415] sm:text-[40px] sm:leading-[46px]">
+          <h2 className="text-[32px] font-bold leading-[38px] tracking-[-0.045em] text-[#1A1415] sm:text-[40px] sm:leading-[46px]">
             4 Pilar Program Strategis
             <span className="block text-[#B3101B]">
               IKAPEKSI Kabupaten Cianjur

@@ -146,7 +146,7 @@ export default function Navbar() {
                 href="/pendataan"
                 className={cn(
                   "btn-focus inline-flex items-center justify-center gap-2",
-                  "rounded-lg px-6 py-2.5",
+                  "rounded-full px-6 py-2.5",
                   "bg-[#E3202B] text-[14px] font-semibold tracking-[0.02em] text-[#FFFFFF] shadow-sm",
                   "transition-colors duration-200 hover:bg-[#C62930]"
                 )}

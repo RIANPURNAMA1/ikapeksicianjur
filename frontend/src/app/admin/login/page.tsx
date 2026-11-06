@@ -56,11 +56,11 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Image
-            src="/images/logo/logo.png"
+            src="/images/logo/logo2.png"
             alt={`${SITE.name} logo`}
             width={280}
             height={91}
-            className="mx-auto h-12 w-auto object-contain brightness-0 invert"
+            className="mx-auto h-12 w-auto object-contain"
           />
           <h1 className="mt-6 text-2xl font-extrabold text-white">Sign In Account</h1>
           <p className="mt-1 text-sm text-white/60">

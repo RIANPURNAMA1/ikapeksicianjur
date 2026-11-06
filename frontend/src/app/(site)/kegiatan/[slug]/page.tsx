@@ -84,10 +84,10 @@ export default async function KegiatanDetailPage({
         />
 
         <Link
-          href="/kegiatan"
+          href="/#kegiatan"
           className="btn-focus text-sm font-bold uppercase tracking-wide text-primary"
         >
-          &larr; Kembali ke Kegiatan
+          &larr; Kembali ke Beranda
         </Link>
 
         <article className="mt-8">

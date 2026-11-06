@@ -6,7 +6,7 @@ Frontend resmi website IKAPEKSI Cianjur (Ikatan Alumni Pemagangan Kerja Sistem I
 
 - Next.js 14 (App Router) + TypeScript
 - Tailwind CSS
-- Font: Plus Jakarta Sans (via `next/font/google`)
+- Font: Poppins (via `next/font/google`)
 
 ## Menjalankan Proyek
 

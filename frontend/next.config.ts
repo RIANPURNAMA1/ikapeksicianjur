@@ -23,7 +23,10 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "i.pravatar.cc" },
       { protocol: "https", hostname: "picsum.photos" },
       { protocol: "https", hostname: "i.pinimg.com" },
-      ...(API_HOST ? [API_HOST] : []),
+      // Allow the API host on any port. The backend sometimes emits absolute
+      // asset URLs using APP_URL (e.g. http://localhost/storage/...) without
+      // the API port, which otherwise crashes pages using next/image.
+      ...(API_HOST ? [{ protocol: API_HOST.protocol, hostname: API_HOST.hostname }] : []),
     ],
   },
 };
