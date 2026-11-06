@@ -4,8 +4,8 @@ import Reveal from "@/components/ui/Reveal";
 import Container from "@/components/layout/Container";
 
 /*
-  Token warna (mengikuti referensi UI):
-  latar section : #F5F3F1
+  Token warna:
+  latar section : #FFFFFF
   kartu         : #FFFFFF
   kotak fokus   : #F7F5F3
   ink           : #1A1415
@@ -154,7 +154,7 @@ function CheckIcon() {
 
 function PillarCard({ p }: { p: Pillar }) {
   return (
-    <article className="flex h-full w-full flex-col rounded-3xl bg-white p-6 shadow-[0_1px_2px_rgba(26,20,21,0.04)] sm:p-7">
+    <article className="flex h-full w-full flex-col rounded-3xl bg-[#F9FAFB] p-6 sm:p-7">
       {/* Baris atas: tag pilar + misi */}
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
         <span
@@ -178,8 +178,8 @@ function PillarCard({ p }: { p: Pillar }) {
         {p.desc}
       </p>
 
-      {/* Fokus program */}
-      <div className="mt-5 rounded-xl bg-[#F7F5F3] p-5">
+      {/* Fokus program (putih di atas kartu krem) */}
+      <div className="mt-5 rounded-xl bg-white p-5 shadow-[0_1px_2px_rgba(26,20,21,0.04)]">
         <p className="text-[10px] font-bold uppercase leading-4 tracking-[0.14em] text-[#1A1415]">
           Fokus Program
         </p>
@@ -198,7 +198,7 @@ function PillarCard({ p }: { p: Pillar }) {
 
       {/* Tujuan */}
       <div className="mt-auto pt-6">
-        <div className="border-t border-[#EFEBE8] pt-4">
+        <div className="border-t border-[#E5E0DC] pt-4">
           <p className="text-[10px] font-normal leading-4 text-[#6B6666]">
             Tujuan
           </p>
@@ -215,7 +215,7 @@ function PillarCard({ p }: { p: Pillar }) {
 
 export default function ProgramSection() {
   return (
-    <section className="w-full bg-[#F5F3F1] py-16 font-jakarta text-[#1A1415] antialiased sm:py-20 lg:py-24">
+    <section className="w-full bg-white py-16 font-jakarta text-[#1A1415] antialiased sm:py-20 lg:py-24">
       <Container>
         {/* Header */}
         <Reveal className="mx-auto flex max-w-3xl flex-col items-center text-center">
@@ -252,7 +252,6 @@ export default function ProgramSection() {
             </li>
           ))}
         </ul>
-
       </Container>
     </section>
   );

@@ -31,7 +31,7 @@ export default function ProgramPreview({ items }: { items: KegiatanCard[] }) {
   const hasMore = shown < total;
 
   return (
-    <section className="w-full bg-[#F5F3F1] py-16 font-jakarta text-[#1A1415] antialiased sm:py-20 lg:py-24">
+    <section className="w-full bg-[white] py-16 font-jakarta text-[#1A1415] antialiased sm:py-20 lg:py-24">
       <Container>
         {/* Header */}
         <Reveal className="mx-auto flex max-w-3xl flex-col items-center text-center">
