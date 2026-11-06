@@ -35,7 +35,7 @@ const MISSIONS = [
 
 export default function VisionMissionPreview() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#FFFFFF] py-16 font-jakarta text-[#0A0304] antialiased sm:py-20 lg:py-24">
+    <section className="relative w-full overflow-hidden bg-[rgb(249,250,251)] py-16 font-jakarta text-[#0A0304] antialiased sm:py-20 lg:py-24">
       <Container>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch">
           {/* KIRI: Kartu Visi (gelap) */}
@@ -59,14 +59,14 @@ export default function VisionMissionPreview() {
                 </div>
 
                 {/* Judul visi */}
-                <h2 className="mt-8 text-[44px] font-bold leading-[52px] tracking-[-0.04em] text-[#FFFFFF] sm:text-[48px] sm:leading-[56px]">
+                <h2 className="mt-8 bg-gradient-to-r from-[#FFFFFF] from-30% to-[#FEDC00] to-90% bg-clip-text text-[44px] font-bold leading-[52px] tracking-[-0.04em] text-transparent sm:text-[48px] sm:leading-[56px]">
                   Rumah Alumni Jepang yang Berdaya dan Memberdayakan
                 </h2>
 
                 {/* Paragraf */}
                 <p className="mt-6 text-[16px] font-normal leading-[26px] tracking-[-0.02em] text-[#E5E7EB]">
-                  Tempat pulang bagi para pejuang Indonesia-Jepang. Untuk
-                  saling menguatkan, berbagi ilmu dan bersama memajukan Cianjur.
+                  Tempat pulang bagi para pejuang Indonesia-Jepang. Untuk saling
+                  menguatkan, berbagi ilmu dan bersama memajukan Cianjur.
                 </p>
 
                 {/* Footer */}
