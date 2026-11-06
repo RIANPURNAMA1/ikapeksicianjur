@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import ActivityGrid from "@/components/activities/ActivityGrid";
-import { activities } from "@/data/activities";
+import KegiatanGrid from "@/components/activities/KegiatanGrid";
+import { apiFetch } from "@/lib/api";
+import { FALLBACK_KEGIATAN, type KegiatanCard } from "@/lib/kegiatan";
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from "@/lib/seo";
+
+// Konten kegiatan dikelola dari admin, jadi halaman selalu mengambil data terbaru.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   title: { absolute: "Kegiatan IKAPEKSI Cianjur" },
@@ -12,7 +16,18 @@ export const metadata: Metadata = buildMetadata({
   path: "/kegiatan",
 });
 
-export default function KegiatanPage() {
+export default async function KegiatanPage() {
+  let items: KegiatanCard[] = FALLBACK_KEGIATAN;
+
+  try {
+    const data = await apiFetch<{ kegiatan: KegiatanCard[] }>(
+      "/api/kegiatan-publik?per_page=50"
+    );
+    items = data.kegiatan;
+  } catch {
+    // Tampilkan data cadangan bila API belum dapat diakses.
+  }
+
   return (
     <section className="py-20">
       <JsonLd
@@ -31,7 +46,7 @@ export default function KegiatanPage() {
           description="Rangkaian kegiatan sosial, pelatihan, dan silaturahmi yang telah dan akan diselenggarakan."
         />
         <div className="mt-12">
-          <ActivityGrid activities={activities} />
+          <KegiatanGrid items={items} />
         </div>
       </Container>
     </section>

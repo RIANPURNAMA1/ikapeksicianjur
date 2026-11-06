@@ -85,9 +85,9 @@ export default function Footer() {
         <div>
           <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-light sm:text-xs">{t("footer.kontak")}</h4>
           <ul className="mt-3 space-y-1.5 text-xs text-white/70 sm:text-sm">
-            <li>{SITE.address}</li>
-            <li>{SITE.phone}</li>
-            <li>{SITE.email}</li>
+            <li>{SITE.address2}</li>
+            <li>{SITE.phone2}</li>
+            <li>{SITE.email2}</li>
           </ul>
           <Link
             href="/pendataan"

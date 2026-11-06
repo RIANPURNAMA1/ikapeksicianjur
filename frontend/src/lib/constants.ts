@@ -3,12 +3,15 @@ export const SITE = {
   fullName: "Ikatan Alumni Pemagangan Kerja Sistem Indonesia - Cianjur",
   tagline: "Merajut Alumni, Membangun Cianjur",
   description:
-    "Wadah silaturahmi dan pemberdayaan alumni pemagangan kerja luar negeri asal Kabupaten Cianjur.",
+    "Tempat pulang bagi para pejuang Indonesia-Jepang. Untuk saling menguatkan, berbagi ilmu dan bersama memajukan Cianjur.",
   email: "cianjur@ikapeksi.com",
+  email2: "dpcikapesi@cianjur.com",
   phone: "+62 895-3916-85825",
+  phone2: "+62 856-2465-1871",
   whatsapp: "62895391685825",
   streetAddress: "Perumahan Bumi Marhamah Blok C1, Sindangasih",
   address: "Perumahan Bumi Marhamah Blok C1, Sindangasih, Kec. Karangtengah, Kabupaten Cianjur, Jawa Barat 43281",
+  address2: "Bumi Marhamah Blok C No 1, Karangtengah - Cianjur Jawa Barat",
   mapEmbedQuery: "Sindangasih, Kec. Karangtengah, Kabupaten Cianjur, Jawa Barat 43281",
   mapEmbedUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d720.8569507475864!2d107.17049616945694!3d-6.831777067989851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6853bd4f0f60e5%3A0x829636d22de1a3dc!2sKarangtengah%2C%20Sindangasih%2C%20Kec.%20Karangtengah%2C%20Kabupaten%20Cianjur%2C%20Jawa%20Barat%2043281!5e1!3m2!1sid!2sid!4v1789873295095!5m2!1sid!2sid",

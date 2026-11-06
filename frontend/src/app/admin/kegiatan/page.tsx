@@ -1,10 +1,525 @@
-import AdminPlaceholder from "@/components/admin/Placeholder";
+"use client";
+
+import { FormEvent, useCallback, useEffect, useState } from "react";
+import { apiFetch, resolveAssetUrl } from "@/lib/api";
+import { useToast } from "@/components/ui/Toast";
+import RichTextEditor from "@/components/admin/RichTextEditor";
+import ImageUploadInput from "@/components/admin/ImageUploadInput";
+import Swal from "sweetalert2";
+
+interface Kegiatan {
+  id: number;
+  slug: string;
+  judul: string;
+  deskripsi: string;
+  excerpt: string | null;
+  gambar: string | null;
+  lokasi: string | null;
+  status: "draft" | "terbit";
+  tanggal: string | null;
+  tanggal_iso: string | null;
+  created_at: string | null;
+}
+
+interface Meta {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+}
+
+interface Stats {
+  total: number;
+  terbit: number;
+  draft: number;
+}
+
+interface FormState {
+  judul: string;
+  lokasi: string;
+  deskripsi: string;
+  gambar: string;
+  status: "draft" | "terbit";
+  tanggal: string;
+}
+
+const EMPTY_FORM: FormState = {
+  judul: "",
+  lokasi: "",
+  deskripsi: "",
+  gambar: "",
+  status: "terbit",
+  tanggal: "",
+};
+
+const STATUS_STYLE: Record<string, string> = {
+  terbit: "bg-emerald-100 text-emerald-700",
+  draft: "bg-gray-100 text-gray-600",
+};
+
+function StatCard({ label, value, accent }: { label: string; value: number | null; accent: string }) {
+  return (
+    <div className="rounded-xl border border-paper-line bg-white p-5 shadow-card">
+      <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">{label}</p>
+      <p className={`mt-2 text-3xl font-extrabold ${accent}`}>{value ?? "..."}</p>
+    </div>
+  );
+}
+
+const inputClass =
+  "btn-focus w-full rounded-lg border border-paper-line px-4 py-2.5 text-sm text-ink placeholder:text-ink-muted focus:border-primary";
+const labelClass = "text-sm font-semibold text-ink";
+
+function plainText(html: string): string {
+  return html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 export default function AdminKegiatanPage() {
+  const toast = useToast();
+  const [items, setItems] = useState<Kegiatan[]>([]);
+  const [meta, setMeta] = useState<Meta | null>(null);
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [appliedSearch, setAppliedSearch] = useState("");
+  const [status, setStatus] = useState("");
+  const [page, setPage] = useState(1);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState<Kegiatan | null>(null);
+  const [form, setForm] = useState<FormState>(EMPTY_FORM);
+  const [formError, setFormError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const loadData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({ page: String(page) });
+      if (appliedSearch) params.set("search", appliedSearch);
+      if (status) params.set("status", status);
+      const data = await apiFetch<{ kegiatan: Kegiatan[]; meta: Meta; stats: Stats }>(
+        `/api/kegiatan?${params.toString()}`
+      );
+      setItems(data.kegiatan);
+      setMeta(data.meta);
+      setStats(data.stats);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Gagal memuat data kegiatan.");
+    } finally {
+      setLoading(false);
+    }
+  }, [appliedSearch, status, page, toast]);
+
+  useEffect(() => {
+    void loadData();
+  }, [loadData]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [appliedSearch, status]);
+
+  function handleSearchSubmit(e: FormEvent) {
+    e.preventDefault();
+    setPage(1);
+    setAppliedSearch(search.trim());
+  }
+
+  function openCreate() {
+    setEditing(null);
+    setForm(EMPTY_FORM);
+    setFormError("");
+    setModalOpen(true);
+  }
+
+  function openEdit(item: Kegiatan) {
+    setEditing(item);
+    setForm({
+      judul: item.judul,
+      lokasi: item.lokasi ?? "",
+      deskripsi: item.deskripsi,
+      gambar: item.gambar ?? "",
+      status: item.status,
+      tanggal: item.tanggal_iso ?? "",
+    });
+    setFormError("");
+    setModalOpen(true);
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setFormError("");
+
+    if (!form.judul.trim() || !plainText(form.deskripsi)) {
+      setFormError("Judul dan deskripsi kegiatan wajib diisi.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const path = editing ? `/api/kegiatan/${editing.id}` : "/api/kegiatan";
+      const method = editing ? "PUT" : "POST";
+      const body = {
+        judul: form.judul.trim(),
+        lokasi: form.lokasi.trim() || null,
+        deskripsi: form.deskripsi.trim(),
+        gambar: form.gambar.trim() || null,
+        status: form.status,
+        tanggal: form.tanggal || null,
+      };
+
+      const data = await apiFetch<{ message: string }>(path, {
+        method,
+        body: JSON.stringify(body),
+      });
+
+      toast.success(data.message);
+      setModalOpen(false);
+      await loadData();
+    } catch (err) {
+      setFormError(err instanceof Error ? err.message : "Terjadi kesalahan.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleDelete(item: Kegiatan) {
+    const result = await Swal.fire({
+      title: `Hapus kegiatan "${item.judul}"?`,
+      text: "Kegiatan akan dihapus permanen.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#C62930",
+      cancelButtonColor: "#6B6764",
+      confirmButtonText: "Ya, Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      const data = await apiFetch<{ message: string }>(`/api/kegiatan/${item.id}`, {
+        method: "DELETE",
+      });
+      toast.success(data.message);
+      if (items.length === 1 && meta && page > 1) {
+        setPage(page - 1);
+      } else {
+        await loadData();
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Gagal menghapus kegiatan.");
+    }
+  }
+
+  const from = meta && meta.total > 0 ? (meta.current_page - 1) * meta.per_page + 1 : 0;
+  const to = meta ? Math.min(meta.current_page * meta.per_page, meta.total) : 0;
+
   return (
-    <AdminPlaceholder
-      title="Kelola Kegiatan"
-      description="Kelola agenda dan dokumentasi kegiatan organisasi, silaturahmi, dan pelatihan."
-    />
+    <div className="space-y-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-extrabold text-ink">Kelola Kegiatan</h1>
+          <p className="mt-1 text-sm text-ink-muted">
+            Unggah dokumentasi, tulis judul, dan susun deskripsi kegiatan untuk situs IKAPEKSI Cianjur.
+          </p>
+        </div>
+        <button
+          onClick={openCreate}
+          className="btn-focus inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+        >
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          Tambah Kegiatan
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+        <StatCard label="Total Kegiatan" value={stats?.total ?? null} accent="text-ink" />
+        <StatCard label="Terbit" value={stats?.terbit ?? null} accent="text-emerald-600" />
+        <StatCard label="Draft" value={stats?.draft ?? null} accent="text-gray-600" />
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <form onSubmit={handleSearchSubmit} className="flex w-full max-w-sm gap-2">
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Cari judul, deskripsi, lokasi..."
+            className={inputClass}
+          />
+          <button
+            type="submit"
+            className="btn-focus shrink-0 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+          >
+            Cari
+          </button>
+        </form>
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="btn-focus w-full rounded-lg border border-paper-line bg-white px-4 py-2.5 text-sm text-ink focus:border-primary sm:w-48"
+        >
+          <option value="">Semua Status</option>
+          <option value="terbit">Terbit</option>
+          <option value="draft">Draft</option>
+        </select>
+      </div>
+
+      <div className="overflow-hidden ">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="border-b border-paper-line bg-paper-warm text-xs uppercase tracking-wide text-ink-muted">
+                <th className="px-5 py-3.5 font-semibold">No</th>
+                <th className="px-5 py-3.5 font-semibold">Kegiatan</th>
+                <th className="px-5 py-3.5 font-semibold">Tanggal</th>
+                <th className="px-5 py-3.5 font-semibold">Lokasi</th>
+                <th className="px-5 py-3.5 font-semibold">Status</th>
+                <th className="px-5 py-3.5 text-right font-semibold">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={6} className="px-5 py-12 text-center text-ink-muted">
+                    <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                  </td>
+                </tr>
+              ) : items.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="px-5 py-12 text-center text-ink-muted">
+                    Belum ada kegiatan. Klik &quot;Tambah Kegiatan&quot; untuk membuat yang pertama.
+                  </td>
+                </tr>
+              ) : (
+                items.map((item, idx) => (
+                  <tr key={item.id} className="border-b border-paper-line last:border-0 hover:bg-paper-warm/60">
+                    <td className="px-5 py-4 text-ink-muted">
+                      {(meta?.current_page ?? 1) > 1
+                        ? (meta!.current_page - 1) * meta!.per_page + idx + 1
+                        : idx + 1}
+                    </td>
+                    <td className="px-5 py-4">
+                      <div className="flex items-center gap-3">
+                        {item.gambar ? (
+                          <img
+                            src={resolveAssetUrl(item.gambar)}
+                            alt={item.judul}
+                            className="h-10 w-14 shrink-0 rounded-md object-cover"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).style.display = "none";
+                            }}
+                          />
+                        ) : (
+                          <div className="flex h-10 w-14 shrink-0 items-center justify-center rounded-md bg-primary-tint text-primary">
+                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <p className="max-w-[320px] truncate font-semibold text-ink">{item.judul}</p>
+                          <p className="max-w-[320px] truncate text-xs text-ink-muted">
+                            {item.excerpt || "Tanpa deskripsi"}
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-5 py-4 text-ink-muted">
+                      {item.tanggal || "-"}
+                    </td>
+                    <td className="px-5 py-4 text-ink-muted">{item.lokasi || "-"}</td>
+                    <td className="px-5 py-4">
+                      <span
+                        className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold ${
+                          STATUS_STYLE[item.status]
+                        }`}
+                      >
+                        {item.status === "terbit" ? "Terbit" : "Draft"}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4">
+                      <div className="flex justify-end gap-2">
+                        <button
+                          onClick={() => openEdit(item)}
+                          aria-label="Edit"
+                          className="flex h-9 w-9 items-center justify-center rounded-lg text-ink-muted transition hover:bg-ink/5 hover:text-ink"
+                        >
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.4-9a2 2 0 112.8 2.8L11.4 17.2a2 2 0 01-1.1.6l-2.9.6.6-2.9a2 2 0 01.6-1.1L16.6 4.4z" />
+                          </svg>
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item)}
+                          aria-label="Hapus"
+                          className="flex h-9 w-9 items-center justify-center rounded-lg text-ink-muted transition hover:bg-primary/10 hover:text-primary"
+                        >
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {meta && meta.total > 0 && (
+          <div className="flex flex-col gap-3 border-t border-paper-line px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-ink-muted">
+              Menampilkan <span className="font-semibold text-ink">{from}</span>–
+              <span className="font-semibold text-ink">{to}</span> dari{" "}
+              <span className="font-semibold text-ink">{meta.total}</span> data
+            </p>
+            <div className="flex items-center gap-2">
+              <button
+                disabled={meta.current_page <= 1}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                className="btn-focus rounded-lg border border-paper-line bg-white px-3.5 py-2 text-sm font-semibold text-ink transition hover:bg-paper-warm disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Sebelumnya
+              </button>
+              <span className="px-2 text-sm font-semibold text-ink-muted">
+                {meta.current_page} / {meta.last_page}
+              </span>
+              <button
+                disabled={meta.current_page >= meta.last_page}
+                onClick={() => setPage((p) => Math.min(meta.last_page, p + 1))}
+                className="btn-focus rounded-lg border border-paper-line bg-white px-3.5 py-2 text-sm font-semibold text-ink transition hover:bg-paper-warm disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Berikutnya
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setModalOpen(false)} />
+          <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-extrabold text-ink">
+                {editing ? "Edit Kegiatan" : "Tambah Kegiatan"}
+              </h2>
+              <button
+                onClick={() => setModalOpen(false)}
+                aria-label="Tutup"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-ink-muted transition hover:bg-ink/5 hover:text-ink"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="judul" className={labelClass}>Judul Kegiatan *</label>
+                <input
+                  id="judul"
+                  type="text"
+                  value={form.judul}
+                  onChange={(e) => setForm((f) => ({ ...f, judul: e.target.value }))}
+                  placeholder="Contoh: Audiensi bersama Disnakertrans Kabupaten Cianjur"
+                  className={inputClass}
+                />
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="tanggal" className={labelClass}>Tanggal (opsional)</label>
+                  <input
+                    id="tanggal"
+                    type="date"
+                    value={form.tanggal}
+                    onChange={(e) => setForm((f) => ({ ...f, tanggal: e.target.value }))}
+                    className={inputClass}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="lokasi" className={labelClass}>Lokasi (opsional)</label>
+                  <input
+                    id="lokasi"
+                    type="text"
+                    value={form.lokasi}
+                    onChange={(e) => setForm((f) => ({ ...f, lokasi: e.target.value }))}
+                    placeholder="Contoh: Kabupaten Cianjur"
+                    className={inputClass}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="status" className={labelClass}>Status</label>
+                  <select
+                    id="status"
+                    value={form.status}
+                    onChange={(e) => setForm((f) => ({ ...f, status: e.target.value as FormState["status"] }))}
+                    className={inputClass}
+                  >
+                    <option value="terbit">Terbit</option>
+                    <option value="draft">Draft</option>
+                  </select>
+                </div>
+                <ImageUploadInput
+                  label="Gambar Kegiatan (opsional)"
+                  value={form.gambar}
+                  onChange={(url) => setForm((f) => ({ ...f, gambar: url }))}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="deskripsi" className={labelClass}>Deskripsi Kegiatan *</label>
+                <RichTextEditor
+                  value={form.deskripsi}
+                  onChange={(html) => setForm((f) => ({ ...f, deskripsi: html }))}
+                  placeholder="Tulis deskripsi kegiatan di sini..."
+                />
+                <p className="text-xs text-ink-muted">
+                  Gunakan toolbar untuk memformat teks; gambar dapat disisipkan langsung di dalam deskripsi.
+                </p>
+              </div>
+
+              {formError && (
+                <p className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm text-primary">
+                  {formError}
+                </p>
+              )}
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(false)}
+                  className="flex-1 rounded-lg border border-paper-line px-4 py-2.5 text-sm font-semibold text-ink-soft transition hover:bg-ink/5"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="btn-shine flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark disabled:cursor-wait disabled:opacity-70"
+                >
+                  {submitting
+                    ? "Menyimpan..."
+                    : editing
+                      ? "Simpan Perubahan"
+                      : form.status === "terbit"
+                        ? "Terbitkan"
+                        : "Simpan Draft"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

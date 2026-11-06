@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AlumniController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BeritaController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\KegiatanController;
 use App\Http\Controllers\Api\PendaftaranController;
 use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\UserController;
@@ -18,6 +19,9 @@ Route::post('/pendaftaran', [PendaftaranController::class, 'store']);
 
 Route::get('/berita-publik', [BeritaController::class, 'publik']);
 Route::get('/berita-publik/{berita}', [BeritaController::class, 'publikShow']);
+
+Route::get('/kegiatan-publik', [KegiatanController::class, 'publik']);
+Route::get('/kegiatan-publik/{kegiatan}', [KegiatanController::class, 'publikShow']);
 
 Route::get('/wilayah/provinces', [WilayahController::class, 'provinces']);
 Route::get('/wilayah/regencies/{provinceId}', [WilayahController::class, 'regencies']);
@@ -36,6 +40,12 @@ Route::middleware('auth.api_token')->group(function () {
     Route::get('/berita/{berita}', [BeritaController::class, 'show']);
     Route::put('/berita/{berita}', [BeritaController::class, 'update']);
     Route::delete('/berita/{berita}', [BeritaController::class, 'destroy']);
+
+    Route::get('/kegiatan', [KegiatanController::class, 'index']);
+    Route::post('/kegiatan', [KegiatanController::class, 'store']);
+    Route::get('/kegiatan/{kegiatan}', [KegiatanController::class, 'show']);
+    Route::put('/kegiatan/{kegiatan}', [KegiatanController::class, 'update']);
+    Route::delete('/kegiatan/{kegiatan}', [KegiatanController::class, 'destroy']);
 
     Route::get('/users', [UserController::class, 'index']);
     Route::post('/users', [UserController::class, 'store']);

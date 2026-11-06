@@ -7,8 +7,8 @@ export interface Statistic {
 }
 
 export const statistics: Statistic[] = [
-  { id: 1, label: "Kecamatan Cianjur", value: 32, suffix: "+", subLabel: "Terdata di direktori wilayah" },
-  { id: 2, label: "Jalur Legal", value: 100, suffix: "%", subLabel: "Terverifikasi & bebas calo" },
-  { id: 3, label: "Pilar Pemberdayaan", value: 4, suffix: "", subLabel: "Berkelanjutan bagi alumni" },
-  { id: 4, label: "Resmi", value: 1, suffix: "", subLabel: "Struktur Sah, Di bawah DPD Jabar & DPP" },
+  { id: 1, label: "32 Kecamatan", value: 32, suffix: "", subLabel: "" },
+  { id: 2, label: "354 Desa", value: 354, suffix: "", subLabel: "" },
+  { id: 3, label: "4 Pilar Pemberdayaan", value: 4, suffix: "", subLabel: "Berkelanjutan bagi Anggota" },
+  { id: 4, label: "Struktur Sah", value: 1, suffix: "", subLabel: "Di bawah Pengurus Jawabarat & Pengurus Pusat" },
 ];

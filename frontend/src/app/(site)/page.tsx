@@ -4,6 +4,7 @@ import AboutPreview from "@/components/home/AboutPreview";
 import WhyIkapeksi from "@/components/home/WhyIkapeksi";
 import VisionMissionPreview from "@/components/home/VisionMissionPreview";
 import ProgramSection from "@/components/home/ProgramSection";
+import OrganizationCommitment from "@/components/home/OrganizationCommitment";
 import ProgramPreview from "@/components/home/ProgramPreview";
 import AlumniPreview from "@/components/home/AlumniPreview";
 import ActivityPreview from "@/components/home/ActivityPreview";
@@ -13,6 +14,11 @@ import Testimonial from "@/components/home/Testimonial";
 import Reveal from "@/components/ui/Reveal";
 import JoinSection from "@/components/home/JoinSection";
 import { buildMetadata } from "@/lib/seo";
+import { apiFetch } from "@/lib/api";
+import { FALLBACK_KEGIATAN, type KegiatanCard } from "@/lib/kegiatan";
+
+// Konten kegiatan dikelola dari admin, jadi halaman selalu mengambil data terbaru.
+export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata({
   title: { absolute: "DPC IKAPEKSI KABUPATEN CIANJUR | Merajut Alumni, Membangun Cianjur" },
@@ -21,7 +27,18 @@ export const metadata = buildMetadata({
   path: "/",
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  let kegiatan: KegiatanCard[] = FALLBACK_KEGIATAN;
+
+  try {
+    const data = await apiFetch<{ kegiatan: KegiatanCard[] }>(
+      "/api/kegiatan-publik?per_page=12"
+    );
+    kegiatan = data.kegiatan;
+  } catch {
+    // Tampilkan data cadangan bila API belum dapat diakses.
+  }
+
   return (
     <>
       <Reveal>
@@ -33,9 +50,11 @@ export default function HomePage() {
       </Reveal>
       <Reveal>
         <div className="bg-[#070707]">
-          <WhyIkapeksi />
+          {/* <WhyIkapeksi /> */}
           <VisionMissionPreview />
           <ProgramSection />
+          <OrganizationCommitment />
+          <ProgramPreview items={kegiatan} />
           <JoinSection />
         </div>
       </Reveal>

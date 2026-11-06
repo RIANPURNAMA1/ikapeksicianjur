@@ -105,7 +105,7 @@ export default function AboutPreview() {
                 Tentang IKAPEKSI DPC Cianjur
               </span>
 
-              <h2 className="mt-5 text-[32px] font-semibold leading-[40px] tracking-[-0.04em] text-[#0A0304] sm:text-[44px] sm:leading-[52px]">
+              <h2 className="mt-5 text-[32px] font-bold leading-[40px] tracking-[-0.04em] text-[#0A0304] sm:text-[44px] sm:leading-[52px]">
                 Membangun Kemandirian Berbasis Disiplin &amp;{" "}
                 <span className="text-[#E3202B]">Pengalaman Jepang</span>
               </h2>

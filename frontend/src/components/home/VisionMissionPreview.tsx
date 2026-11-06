@@ -54,29 +54,25 @@ export default function VisionMissionPreview() {
                     Visi Kami
                   </span>
                   <span className="text-[11px] font-bold uppercase leading-4 tracking-[0.04em] text-[#D1D5DB]">
-                    DPC Cianjur 2024-2029
+                    DPC IKA PEKSI Cianjur 2026-2031
                   </span>
                 </div>
 
                 {/* Judul visi */}
-                <h2 className="mt-8 text-[44px] font-semibold leading-[52px] tracking-[-0.04em] text-[#FFFFFF] sm:text-[48px] sm:leading-[56px]">
-                  Masyarakat Cianjur yang{" "}
-                  <span className="text-[#FEDC00]">Mandiri</span> dan{" "}
-                  <span className="text-[#FFDAD6]">Berdaya Saing.</span>
+                <h2 className="mt-8 text-[44px] font-bold leading-[52px] tracking-[-0.04em] text-[#FFFFFF] sm:text-[48px] sm:leading-[56px]">
+                  Rumah Alumni Jepang yang Berdaya dan Memberdayakan
                 </h2>
 
                 {/* Paragraf */}
                 <p className="mt-6 text-[16px] font-normal leading-[26px] tracking-[-0.02em] text-[#E5E7EB]">
-                  Membangun ekosistem alumni yang kuat, adaptif, dan
-                  berintegritas tinggi untuk mengoptimalkan potensi setiap
-                  insan kenshusei dalam menjawab tantangan revolusi industri
-                  dan ekonomi global.
+                  Tempat pulang bagi para pejuang Indonesia-Jepang. Untuk
+                  saling menguatkan, berbagi ilmu dan bersama memajukan Cianjur.
                 </p>
 
                 {/* Footer */}
                 <div className="mt-auto flex items-center justify-between pt-16">
                   <span className="text-[11px] font-bold tracking-[0.02em] text-[#FFFFFF]">
-                    Integritas · Sinergi · Mandiri
+                    Bergerak. Berdampak. Berdaya.
                   </span>
                   <svg
                     className="h-[18px] w-[18px] text-[#FEDC00]"

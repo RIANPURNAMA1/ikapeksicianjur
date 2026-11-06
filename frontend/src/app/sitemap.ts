@@ -1,8 +1,12 @@
 import type { MetadataRoute } from "next";
 import { apiFetch } from "@/lib/api";
 import type { BeritaCard } from "@/lib/news";
+import type { KegiatanCard } from "@/lib/kegiatan";
 import { siteUrl } from "@/lib/seo";
 import { alumniList } from "@/data/alumni";
+
+// Segarkan sitemap secara berkala agar kegiatan baru ikut terindeks.
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteUrl();
@@ -43,6 +47,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   } catch {
     // Sitemap tetap valid walau berita gagal dimuat.
+  }
+
+  try {
+    const data = await apiFetch<{ kegiatan: KegiatanCard[] }>(
+      "/api/kegiatan-publik?per_page=100"
+    );
+    data.kegiatan.forEach((item) => {
+      entries.push({
+        url: `${base}/kegiatan/${item.slug}`,
+        lastModified: item.tanggal_iso ? new Date(item.tanggal_iso) : now,
+        changeFrequency: "monthly",
+        priority: 0.5,
+      });
+    });
+  } catch {
+    // Sitemap tetap valid walau kegiatan gagal dimuat.
   }
 
   alumniList.forEach((alumni) => {

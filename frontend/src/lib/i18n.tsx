@@ -164,7 +164,7 @@ const id: TranslationMessages = {
 
   // ===== FOOTER =====
   "footer.description":
-    "Wadah silaturahmi dan pemberdayaan alumni pemagangan kerja luar negeri asal Kabupaten Cianjur.",
+    "Tempat pulang bagi para pejuang Indonesia-Jepang. Untuk saling menguatkan, berbagi ilmu dan bersama memajukan Cianjur.",
   "footer.navigasi": "Navigasi",
   "footer.lainnya": "Lainnya",
   "footer.kontak": "Kontak",
@@ -318,7 +318,7 @@ const ja: TranslationMessages = {
 
   // ===== FOOTER =====
   "footer.description":
-    "チアンジュール県出身の海外研修同窓生の交流とエンパワーメントの場です。",
+    "インドネシア-日本の戦士たちの帰る場所。互いに力を合わせ、知識を共有し、チアンジュールを共に発展させる場所です。",
   "footer.navigasi": "ナビゲーション",
   "footer.lainnya": "その他",
   "footer.kontak": "お問い合わせ",

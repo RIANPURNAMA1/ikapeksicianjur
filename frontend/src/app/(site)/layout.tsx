@@ -1,6 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import { LanguageProvider } from "@/lib/i18n";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -9,7 +8,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Navbar />
       <main>{children}</main>
       <Footer />
-      <WhatsAppButton />
     </LanguageProvider>
   );
 }
